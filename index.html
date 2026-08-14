@@ -38,7 +38,13 @@ const MUSEUM = {
       B13:[7,6], B14:[4,6], B15:[0,7], B16:[9,7],
       C1:[5,9],  C2:[4,10], C3:[6,10], C4:[3,11]
     },
-    spare: [[1,8],[3,8],[6,8],[8,8],[0,9],[9,9],[2,10],[7,10],[1,10],[0,11],[9,11],[5,11]]
+    spare: [[1,8],[3,8],[6,8],[8,8],[0,9],[9,9],[2,10],[7,10],[1,10],[0,11],[9,11],[5,11]],
+    /* 两座长安（7.1）：汉长安城斗城轮廓（16 顶点，与唐城矩形逐点插值）+ 未央/长乐两宫。
+       坐标系同 mini-map 视框；汉城居西北，约唐城 0.6 倍。换馆省略 morph 即整体停用。 */
+    morph: {
+      han: [[12,158],[5,120],[10,88],[4,52],[14,18],[58,26],[104,8],[150,24],[196,12],[203,58],[197,96],[204,132],[192,166],[146,152],[98,168],[52,154]],
+      hanRects: [[22,96,58,54],[102,100,72,58]]
+    }
   },
 
   blocks: [
@@ -398,8 +404,9 @@ main#list { padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px)); }
 .chip[aria-pressed="true"] i { opacity:1; }
 
 /* ============ mini-map SVG（网格线是画作本体，保留） ============ */
-#mm .cell { fill:transparent; stroke:var(--grid); stroke-width:.5; }
+#mm .cell { fill:transparent; stroke:var(--grid); stroke-width:.5; opacity:var(--cellfade, 1); }
 #mm .cell.lit { fill:var(--cobalt); opacity:.95; }
+#mm .ghost { fill:none; stroke:var(--grid); stroke-width:.5; }
 #mm .cell.pulse { animation:breath 1.5s ease-out 1; }
 @keyframes breath { 0%{opacity:.15} 45%{opacity:1} 100%{opacity:.95} }
 #mm .wall { fill:none; stroke:var(--grid); stroke-width:.75; }
@@ -1127,6 +1134,19 @@ function addCellRect(g, id, c, r) {
   return rect;
 }
 var mmGrid = null;
+var MORPH = { p:-1, active:false, raf:0, hanPts:null, tangPts:null, els:{} };
+function rectPts(x, y, w, h) {
+  /* 与汉城 16 顶点同一走向：西南起，西墙北上 → 北墙东行 → 东墙南下 → 南墙西行 */
+  return [
+    [x, y + h], [x, y + h * .75], [x, y + h * .5], [x, y + h * .25],
+    [x, y], [x + w * .25, y], [x + w * .5, y], [x + w * .75, y],
+    [x + w, y], [x + w, y + h * .25], [x + w, y + h * .5], [x + w, y + h * .75],
+    [x + w, y + h], [x + w * .75, y + h], [x + w * .5, y + h], [x + w * .25, y + h]
+  ];
+}
+function ptsD(pts) {
+  return 'M' + pts.map(function (q) { return q[0] + ' ' + q[1]; }).join('L') + 'Z';
+}
 function buildMinimap() {
   var mm = $('#mm');
   var W = colX(HERO.cols - 1) + 32 + 6;
@@ -1136,14 +1156,36 @@ function buildMinimap() {
   mmGrid = g;
   mm.appendChild(g);
   var P = HERO.palace;
-  g.appendChild(svgEl('rect', { x:2.5, y:2.5, width:W-5, height:H-5, 'class':'wall', 'vector-effect':'non-scaling-stroke' }));
-  g.appendChild(svgEl('rect', {
+  var MO = HERO.morph;
+  var tangPts = rectPts(2.5, 2.5, W - 5, H - 5);
+  /* 叠印幽灵层：两城真实足迹，过渡中段才显形 */
+  var gGhost = null, gHan = null;
+  if (MO) {
+    gGhost = svgEl('g', {});
+    gGhost.style.opacity = '0';
+    gGhost.appendChild(svgEl('path', { d:ptsD(MO.han), 'class':'ghost', 'vector-effect':'non-scaling-stroke' }));
+    gGhost.appendChild(svgEl('path', { d:ptsD(tangPts), 'class':'ghost', 'vector-effect':'non-scaling-stroke' }));
+    g.appendChild(gGhost);
+    gHan = svgEl('g', {});
+    MO.hanRects.forEach(function (rc) {
+      gHan.appendChild(svgEl('rect', { x:rc[0], y:rc[1], width:rc[2], height:rc[3], 'class':'pal', 'vector-effect':'non-scaling-stroke' }));
+    });
+    g.appendChild(gHan);
+  }
+  var gTang = svgEl('g', {});
+  gTang.appendChild(svgEl('rect', {
     x:colX(P[0]), y:rowY(P[2]),
     width:colX(P[1]) + 32 - colX(P[0]), height:rowY(P[3]) + 22 - rowY(P[2]),
     'class':'pal', 'vector-effect':'non-scaling-stroke'
   }));
   var axisX = (colX(HERO.cols / 2 - 1) + 32 + colX(HERO.cols / 2)) / 2;
-  g.appendChild(svgEl('line', { x1:axisX, y1:rowY(P[3]) + 22, x2:axisX, y2:H - 3, 'class':'axis', 'vector-effect':'non-scaling-stroke' }));
+  gTang.appendChild(svgEl('line', { x1:axisX, y1:rowY(P[3]) + 22, x2:axisX, y2:H - 3, 'class':'axis', 'vector-effect':'non-scaling-stroke' }));
+  g.appendChild(gTang);
+  var wall = svgEl('path', { d:ptsD(MO ? MO.han : tangPts), 'class':'wall', 'vector-effect':'non-scaling-stroke' });
+  g.appendChild(wall);
+  MORPH.hanPts = MO ? MO.han : null;
+  MORPH.tangPts = tangPts;
+  MORPH.els = { wall:wall, han:gHan, tang:gTang, ghost:gGhost };
   var cellOf = {};
   for (var id in HERO.cells) cellOf[HERO.cells[id][0] + ',' + HERO.cells[id][1]] = id;
   for (var r = 0; r < HERO.rows; r++) {
@@ -1164,6 +1206,67 @@ function buildMinimap() {
 function nextSpare() {
   var used = S.custom.filter(function (x) { return x.cell; }).length;
   return HERO.spare[used] || null;
+}
+
+/* ================= 两座长安（7.1）滚动插值 =================
+   A 区在视野内=汉长安（斗城居西北），滚进 B 区=城墙 16 顶点插值展开成唐城棋盘，
+   中段两城足迹叠印。IntersectionObserver 门控被动 scroll 监听，不用 scroll-timeline。 */
+var RM_Q = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
+function morphD(t) {
+  var pts = MORPH.hanPts.map(function (h, i) {
+    var g = MORPH.tangPts[i];
+    return [(h[0] + (g[0] - h[0]) * t).toFixed(1), (h[1] + (g[1] - h[1]) * t).toFixed(1)];
+  });
+  return 'M' + pts.map(function (q) { return q[0] + ' ' + q[1]; }).join('L') + 'Z';
+}
+function applyMorph(p) {
+  var e = MORPH.els;
+  if (!e.wall || !MORPH.hanPts) return;
+  p = Math.max(0, Math.min(1, p));
+  if (RM_Q && RM_Q.matches) p = p < 0.5 ? 0 : 1;   // 减少动效：只取两端，不给中间态
+  if (Math.abs(p - MORPH.p) < 0.004) return;
+  MORPH.p = p;
+  e.wall.setAttribute('d', morphD(p));
+  e.wall.style.opacity = (0.45 + 0.55 * Math.abs(2 * p - 1)).toFixed(3);
+  e.han.style.opacity = Math.max(0, 1 - p / 0.4).toFixed(3);
+  e.tang.style.opacity = Math.max(0, (p - 0.6) / 0.4).toFixed(3);
+  e.ghost.style.opacity = (Math.sin(Math.PI * p) * 0.4).toFixed(3);
+  $('#mm').style.setProperty('--cellfade', (0.3 + 0.7 * p).toFixed(3));
+}
+function morphScroll() {
+  if (MORPH.raf) return;
+  MORPH.raf = requestAnimationFrame(function () {
+    MORPH.raf = 0;
+    var zb = $('#z-B');
+    if (!zb) return;
+    var top = zb.getBoundingClientRect().top;
+    var hdB = $('#hd').getBoundingClientRect().bottom;
+    var span = Math.min(360, window.innerHeight * 0.5);
+    applyMorph((hdB + span - top) / span);
+  });
+}
+function bindMorphDriver() {
+  if (!MORPH.hanPts) return;
+  var za = $('#z-A');
+  if (!za || !('IntersectionObserver' in window)) { applyMorph(1); return; }
+  var io = new IntersectionObserver(function (ents) {
+    var e = ents[0];
+    if (e.isIntersecting) {
+      if (!MORPH.active) {
+        MORPH.active = true;
+        window.addEventListener('scroll', morphScroll, { passive:true });
+      }
+      morphScroll();
+    } else {
+      if (MORPH.active) {
+        MORPH.active = false;
+        window.removeEventListener('scroll', morphScroll);
+      }
+      applyMorph(e.boundingClientRect.bottom <= 0 ? 1 : 0);
+    }
+  });
+  io.observe(za);
+  morphScroll();
 }
 
 /* ================= 渲染 ================= */
@@ -2433,6 +2536,7 @@ document.addEventListener('click', function (ev) {
       var zone = el.closest('.zone');
       var closed = zone.classList.toggle('closed');
       el.setAttribute('aria-expanded', !closed);
+      morphScroll();   // 折叠改变布局，刷新两座长安的插值进度
       break;
     }
     case 'photo': photoTarget = item; $('#photoIn').click(); break;
@@ -2699,6 +2803,7 @@ function boot() {
     renderQref();
     buildIndex();
     bindSheetDrag();
+    bindMorphDriver();
     S.doubts.forEach(function (d) {
       var btn = $('#it-' + d.item + ' .a-doubt');
       if (btn) btn.classList.add('on');
