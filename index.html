@@ -44,6 +44,32 @@ const MUSEUM = {
     morph: {
       han: [[12,158],[5,120],[10,88],[4,52],[14,18],[58,26],[104,8],[150,24],[196,12],[203,58],[197,96],[204,132],[192,166],[146,152],[98,168],[52,154]],
       hanRects: [[22,96,58,54],[102,100,72,58]]
+    },
+    /* 「序」开场（7.13 第 8 项）：标注三点明天陕历博还要用；腾空马为手绘线稿 path，
+       最后一条闭合路径是骑者的袍子，末尾填钴蓝。换馆整块替换或删除。 */
+    intro: {
+      title: '三彩挂蓝，价值不凡',
+      sub: '西安博物院',
+      marks: [
+        [252, 10, '大明宫', 252, 30, 'middle'],
+        [74, 101, '西市', 86, 105, 'start'],
+        [158, 137, '兴化坊 · 何家村', 168, 152, 'start']
+      ],
+      horse: [
+        'M350,124 C344,114 338,108 331,104 L333,92 L326,101 L322,89 L318,100 C305,97 293,102 284,111 C277,117 272,122 269,127 C259,132 248,135 238,135 C225,136 212,133 201,129 C191,126 183,129 178,135 C175,140 174,145 175,150 C176,155 179,158 183,160',
+        'M350,126 C344,133 337,139 329,143 C321,147 314,151 309,156 C303,162 297,166 291,170 C284,175 279,179 276,183 C264,188 251,189 239,187 C227,185 216,181 207,177 C203,175 199,173 196,171 C192,168 189,166 186,163',
+        'M290,168 C302,168 314,169 325,171 C336,173 346,176 355,180 L364,183 L368,189',
+        'M282,175 C292,179 302,184 312,189 C320,193 328,196 336,199 L346,202 L348,208',
+        'M182,156 C176,163 169,169 161,174 C152,179 142,182 132,184 C122,185 112,185 104,184 L94,183 L88,187',
+        'M188,163 C182,171 174,179 164,185 C156,190 146,194 136,196 L122,198 L116,204',
+        'M175,140 C165,131 154,124 144,120 C138,118 133,117 130,118',
+        'M278,88 m-8.5,0 a8.5,8.5 0 1,0 17,0 a8.5,8.5 0 1,0 -17,0',
+        'M271,95 C265,101 259,107 255,114 C251,120 248,126 246,131',
+        'M284,97 C280,103 276,109 271,114 C267,118 262,122 257,126',
+        'M267,102 C275,106 283,110 291,114 L302,119',
+        'M253,129 C259,135 264,141 267,148 C268,155 265,161 260,166 L255,170',
+        'M271,94 C279,96 283,102 282,110 C280,118 273,125 264,130 C259,134 253,136 247,136 C239,137 230,134 225,128 C220,122 221,114 228,110 C235,106 244,103 251,99 C257,95 263,92 267,91 C269,90 270,92 271,94 Z'
+      ]
     }
   },
 
@@ -796,6 +822,103 @@ body.kb .bar { display:none; }
 }
 #toast.on { transform:translate(-50%, 0); opacity:1; }
 
+/* ============ 序 · 开场（火力全开区，展厅规则不管这里） ============ */
+body.lock { overflow:hidden; }
+#intro {
+  position:fixed; inset:0; z-index:100;
+  background:#000; overflow:hidden;
+}
+#intro.leave { background:transparent; pointer-events:none; transition:background .5s ease; }
+#intro #mm { position:absolute; left:50%; top:11vh; transform:translateX(-50%); height:auto; }
+#mm .gmain { transition:opacity .8s ease; }
+#mm.bg .gmain { opacity:.16; }
+#mm .marks { transition:opacity .4s ease; }
+#mm.bg .marks { opacity:.3; }
+#mm .axisfall, #mm .axisglow { transition:opacity .8s ease; }
+#mm.bg .axisfall { opacity:.2; }
+#mm.bg .axisglow { opacity:.05; }
+#intro.leave .axisfall, #intro.leave .axisglow, #intro.leave .marks { opacity:0 !important; }
+
+/* 分镜 1-3：朱雀落线 → 外郭自绘 → 坊格自中轴交错展开 */
+#mm.cine .axis { opacity:0; }
+#mm.cine .axisglow { animation:drawv .95s cubic-bezier(.25,.6,.25,1) .15s both; }
+#mm.cine .axisfall { animation:drawv .95s cubic-bezier(.25,.6,.25,1) .15s both; }
+#mm.cine .wall { animation:drawv 1.5s cubic-bezier(.4,.1,.3,.9) 1.05s both; }
+#mm.cine .pal  { animation:drawv .7s ease 2.3s both; }
+#mm .cell { transform-box:fill-box; transform-origin:center; }
+#mm.cine .cell { animation:cellin .5s cubic-bezier(.2,.7,.3,1) both; animation-delay:var(--d); }
+@keyframes drawv { from { stroke-dashoffset:var(--len); } to { stroke-dashoffset:0; } }
+@keyframes cellin { from { opacity:0; transform:scale(.5); } to { opacity:1; transform:none; } }
+
+/* 分镜 4：三点亮起 */
+#mm .mark { transform-box:fill-box; transform-origin:center; }
+#mm .mlab { fill:#C6CFDC; font-size:11.5px; letter-spacing:.06em; font-family:inherit; }
+#mm.cine .mark { animation:markin .55s cubic-bezier(.2,.8,.3,1.3) both; }
+#mm.cine .mlab { animation:labin .55s ease both; }
+@keyframes markin { from { opacity:0; transform:scale(.2); } to { opacity:1; transform:none; } }
+@keyframes labin { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+
+/* 分镜 5：腾空马线稿自绘，袍子最后填钴蓝 */
+#horse {
+  position:absolute; left:50%; top:29vh;
+  width:min(78vw, 300px); height:calc(min(78vw, 300px) * .7619);
+  transform:translateX(-50%) rotate(-7deg);
+  transition:opacity .55s ease, transform .6s ease;
+}
+#horse path { fill:none; stroke:#E3DCCC; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+#horse .robe { fill:#2E56E0; fill-opacity:0; }
+#intro.leave #horse { opacity:0; transform:translateX(-50%) rotate(-7deg) translateY(-36px); }
+@keyframes draw { to { stroke-dashoffset:0; } }
+@keyframes robein { to { fill-opacity:.92; } }
+
+/* 分镜 6-7：标题字距收拢 + 进馆 */
+.ititle {
+  position:absolute; left:0; right:0; top:67vh;
+  text-align:center; font-size:20px; font-weight:400; color:#E8E2D3;
+  letter-spacing:.08em; white-space:nowrap;
+  animation:titlein 1.15s cubic-bezier(.2,.6,.2,1) 11s both;
+}
+@keyframes titlein { from { opacity:0; letter-spacing:.55em; } to { opacity:1; letter-spacing:.08em; } }
+.isub {
+  position:absolute; left:0; right:0; top:calc(67vh + 44px);
+  text-align:center; font-size:13px; letter-spacing:.42em; text-indent:.42em; color:#6E6759;
+  animation:fadein .8s ease 11.7s both;
+}
+@keyframes fadein { from { opacity:0; } to { opacity:1; } }
+.enter {
+  position:absolute; left:50%; bottom:calc(6vh + env(safe-area-inset-bottom, 0px));
+  width:176px; min-height:52px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--r-card);
+  background:rgba(62,102,234,.16);
+  color:#E6E9F4; font-size:17px; letter-spacing:.5em; text-indent:.5em;
+  animation:btnin .7s cubic-bezier(.2,.7,.3,1) 11.85s both;
+}
+@keyframes btnin {
+  from { opacity:0; visibility:hidden; transform:translate(-50%, 14px); }
+  to   { opacity:1; visibility:visible; transform:translate(-50%, 0); }
+}
+.skip {
+  position:absolute; top:calc(8px + env(safe-area-inset-top, 0px)); right:8px;
+  padding:16px; font-size:13px; letter-spacing:.2em; color:#6E6759;
+  animation:fadein .8s ease .9s both;
+}
+#intro.leave .ititle, #intro.leave .isub, #intro.leave .enter, #intro.leave .skip { opacity:0; transition:opacity .35s ease; }
+
+/* 跳过 → 一步落定到终态 */
+#intro.settle .skip { display:none; }
+#intro.settle #mm .wall, #intro.settle #mm .pal,
+#intro.settle #mm .axisfall, #intro.settle #mm .axisglow,
+#intro.settle #horse path { animation:none !important; stroke-dashoffset:0 !important; }
+#intro.settle #mm .cell, #intro.settle #mm .mark, #intro.settle #mm .mlab { animation:none !important; opacity:1 !important; transform:none !important; }
+#intro.settle #horse .robe { fill-opacity:.92 !important; }
+#intro.settle .ititle { animation:none !important; opacity:1; letter-spacing:.08em; }
+#intro.settle .isub { animation:none !important; opacity:1; }
+#intro.settle .enter { animation:none !important; opacity:1; visibility:visible; transform:translate(-50%, 0); }
+
+/* 转场：同一个 SVG 连续变形收进顶栏（FLIP，只动 transform） */
+#mm.fly { transition:transform .56s cubic-bezier(.3,.75,.25,1); }
+
 /* ============ 动效约束 ============ */
 @media (prefers-reduced-motion: reduce) {
   * { animation:none !important; transition:none !important; }
@@ -1152,7 +1275,7 @@ function buildMinimap() {
   var W = colX(HERO.cols - 1) + 32 + 6;
   var H = rowY(HERO.rows - 1) + 22 + 6;
   mm.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-  var g = svgEl('g', {});
+  var g = svgEl('g', { 'class':'gmain' });
   mmGrid = g;
   mm.appendChild(g);
   var P = HERO.palace;
@@ -1224,7 +1347,7 @@ function applyMorph(p) {
   if (!e.wall || !MORPH.hanPts) return;
   p = Math.max(0, Math.min(1, p));
   if (RM_Q && RM_Q.matches) p = p < 0.5 ? 0 : 1;   // 减少动效：只取两端，不给中间态
-  if (Math.abs(p - MORPH.p) < 0.004) return;
+  if (Math.abs(p - MORPH.p) < 0.004 && p !== 0 && p !== 1) return;
   MORPH.p = p;
   e.wall.setAttribute('d', morphD(p));
   e.wall.style.opacity = (0.45 + 0.55 * Math.abs(2 * p - 1)).toFixed(3);
@@ -1233,16 +1356,19 @@ function applyMorph(p) {
   e.ghost.style.opacity = (Math.sin(Math.PI * p) * 0.4).toFixed(3);
   $('#mm').style.setProperty('--cellfade', (0.3 + 0.7 * p).toFixed(3));
 }
+function currentScrollP() {
+  var zb = $('#z-B');
+  if (!zb) return 1;
+  var top = zb.getBoundingClientRect().top;
+  var hdB = $('#hd').getBoundingClientRect().bottom;
+  var span = Math.min(360, window.innerHeight * 0.5);
+  return Math.max(0, Math.min(1, (hdB + span - top) / span));
+}
 function morphScroll() {
   if (MORPH.raf) return;
   MORPH.raf = requestAnimationFrame(function () {
     MORPH.raf = 0;
-    var zb = $('#z-B');
-    if (!zb) return;
-    var top = zb.getBoundingClientRect().top;
-    var hdB = $('#hd').getBoundingClientRect().bottom;
-    var span = Math.min(360, window.innerHeight * 0.5);
-    applyMorph((hdB + span - top) / span);
+    applyMorph(currentScrollP());
   });
 }
 function bindMorphDriver() {
@@ -2791,6 +2917,193 @@ function applyClock() {
 applyClock();
 setInterval(applyClock, 60000);
 
+/* ================= 序 · 开场 + FLIP 转场（7.13 第 8 项） =================
+   只在零勾选时播（地铁上/排队时=还没开始逛）；馆内重开秒进展厅。
+   序演的是唐城（applyMorph(1)），进馆 FLIP 落定后补间回当前滚动位置的
+   morph 状态——城在你眼前退回汉代，顺手展示了第 7 项的机制。 */
+var introEl = null, mmEl = null, introTimers = [], inHall = false, hallDone = false;
+function drawable(el, len) {
+  el.setAttribute('stroke-dasharray', len);
+  el.setAttribute('stroke-dashoffset', 0);
+  el.style.setProperty('--len', len);
+  return el;
+}
+function introAxisX() {
+  return (colX(HERO.cols / 2 - 1) + 32 + colX(HERO.cols / 2)) / 2;
+}
+function prepDraw() {
+  var vb = mmEl.getAttribute('viewBox').split(' ');
+  var H = parseFloat(vb[3]);
+  var ax = introAxisX();
+  mmEl.appendChild(drawable(svgEl('line', { x1:ax, y1:2, x2:ax, y2:H - 2, 'class':'axisglow', stroke:'#3E66EA', 'stroke-width':5, opacity:.22, 'vector-effect':'non-scaling-stroke' }), Math.ceil(H)));
+  mmEl.appendChild(drawable(svgEl('line', { x1:ax, y1:2, x2:ax, y2:H - 2, 'class':'axisfall', stroke:'#6C8CF5', 'stroke-width':1, 'vector-effect':'non-scaling-stroke' }), Math.ceil(H)));
+  var wall = $('.wall', mmEl);
+  drawable(wall, Math.ceil(wall.getTotalLength()));
+  var pal = $('rect.pal', MORPH.els.tang);
+  if (pal) drawable(pal, Math.ceil(2 * (parseFloat(pal.getAttribute('width')) + parseFloat(pal.getAttribute('height')))));
+  $$('.cell', mmEl).forEach(function (cell) {
+    var x = parseFloat(cell.getAttribute('x'));
+    cell.style.setProperty('--d', (2.55 + Math.abs(x + 16 - ax) / 155 * 1.75).toFixed(2) + 's');
+  });
+}
+function buildMarks() {
+  var marks = svgEl('g', { 'class':'marks' });
+  HERO.intro.marks.forEach(function (m, i) {
+    var c = svgEl('circle', { cx:m[0], cy:m[1], r:3, 'class':'mark', fill:'#6C8CF5' });
+    c.style.animationDelay = (5.3 + i * 0.72) + 's';
+    var t = svgEl('text', { x:m[3], y:m[4], 'class':'mlab', 'text-anchor':m[5] });
+    t.textContent = m[2];
+    t.style.animationDelay = (5.45 + i * 0.72) + 's';
+    marks.appendChild(c);
+    marks.appendChild(t);
+  });
+  mmEl.appendChild(marks);
+}
+function buildHorse() {
+  var horse = svgEl('svg', { id:'horse', viewBox:'0 0 420 320', 'aria-hidden':'true' });
+  var paths = HERO.intro.horse;
+  paths.forEach(function (d, j) {
+    var p = svgEl('path', { d:d });
+    if (j === paths.length - 1) p.setAttribute('class', 'robe');
+    horse.appendChild(p);
+  });
+  introEl.insertBefore(horse, introEl.querySelector('.ititle'));
+  var RM = RM_Q && RM_Q.matches;
+  $$('path', horse).forEach(function (p, j) {
+    var L = Math.ceil(p.getTotalLength());
+    p.setAttribute('stroke-dasharray', L);
+    p.setAttribute('stroke-dashoffset', L);
+    if (!RM) {
+      var anim = 'draw .8s cubic-bezier(.45,.05,.3,.95) ' + (7.5 + j * 0.18).toFixed(2) + 's both';
+      if (j === paths.length - 1) anim += ', robein .6s ease 10.4s both';
+      p.style.animation = anim;
+    }
+  });
+}
+function layoutIntro() {
+  if (inHall || !introEl) return;
+  var vb = mmEl.getAttribute('viewBox').split(' ');
+  var ratio = parseFloat(vb[3]) / parseFloat(vb[2]);
+  var w = Math.min(window.innerWidth * 0.86, 336);
+  mmEl.style.width = w + 'px';
+  mmEl.style.height = (w * ratio) + 'px';
+}
+function setupIntro() {
+  applyMorph(1);
+  mmEl = $('#mm');
+  introEl = document.createElement('div');
+  introEl.id = 'intro';
+  introEl.innerHTML =
+    '<p class="ititle">' + esc(HERO.intro.title) + '</p>' +
+    '<p class="isub">' + esc(HERO.intro.sub) + '</p>' +
+    '<button class="enter">进馆</button>' +
+    '<button class="skip" aria-label="跳过开场动画">跳过</button>';
+  document.body.appendChild(introEl);
+  introEl.insertBefore(mmEl, introEl.firstChild);
+  mmEl.classList.add('cine');
+  prepDraw();
+  buildMarks();
+  buildHorse();
+  layoutIntro();
+  window.addEventListener('resize', layoutIntro);
+  document.body.classList.add('lock');
+  $('#app').setAttribute('aria-hidden', 'true');
+  if (RM_Q && RM_Q.matches) {
+    introEl.classList.add('settle');
+    mmEl.classList.add('bg');
+  } else {
+    introTimers.push(setTimeout(function () { mmEl.classList.add('bg'); }, 7300));
+  }
+  introEl.querySelector('.skip').addEventListener('click', skipIntro);
+  introEl.querySelector('.enter').addEventListener('click', enterHall);
+}
+function skipIntro() {
+  introTimers.forEach(clearTimeout);
+  introTimers = [];
+  introEl.classList.add('settle');
+  mmEl.classList.add('bg');
+}
+function morphHandoff() {
+  var target = currentScrollP();
+  if ((RM_Q && RM_Q.matches) || Math.abs(target - 1) < 0.02) {
+    applyMorph(target);
+    bindMorphDriver();
+    return;
+  }
+  var t0 = performance.now(), dur = 700, settled = false;
+  function settle() {
+    if (settled) return;
+    settled = true;
+    applyMorph(currentScrollP());
+    bindMorphDriver();
+  }
+  requestAnimationFrame(function step(now) {
+    if (settled) return;
+    var k = Math.min(1, (now - t0) / dur);
+    var e2 = 1 - Math.pow(1 - k, 3);
+    applyMorph(1 + (target - 1) * e2);
+    if (k < 1) requestAnimationFrame(step);
+    else settle();
+  });
+  setTimeout(settle, dur + 500);   // rAF 被节流时的兜底
+}
+function finalizeHall() {
+  if (hallDone) return;
+  hallDone = true;
+  mmEl.classList.remove('fly');
+  mmEl.style.cssText = '';
+  $('#mmslot').appendChild(mmEl);
+  $$('.marks, .axisfall, .axisglow', mmEl).forEach(function (k) { k.parentNode.removeChild(k); });
+  ['.wall', 'rect.pal', '.axis'].forEach(function (sel) {
+    $$(sel, mmEl).forEach(function (n) {
+      n.removeAttribute('stroke-dasharray');
+      n.removeAttribute('stroke-dashoffset');
+    });
+  });
+  if (introEl && introEl.parentNode) introEl.parentNode.removeChild(introEl);
+  introEl = null;
+  document.body.classList.remove('lock');
+  $('#app').removeAttribute('aria-hidden');
+  window.removeEventListener('resize', layoutIntro);
+  syncHd();
+  morphHandoff();
+}
+function enterHall() {
+  if (inHall) return;
+  inHall = true;
+  introTimers.forEach(clearTimeout);
+  introTimers = [];
+  var first = mmEl.getBoundingClientRect();
+  window.scrollTo(0, 0);
+  var last = $('#mmslot').getBoundingClientRect();
+  mmEl.classList.remove('cine');
+  mmEl.classList.remove('bg');
+  /* FLIP：按目标几何摆好，用 transform 从旧几何出发归零（不动 layout 属性） */
+  var s = mmEl.style;
+  s.position = 'fixed';
+  s.left = last.left + 'px';
+  s.top = last.top + 'px';
+  s.width = last.width + 'px';
+  s.height = last.height + 'px';
+  s.margin = '0';
+  s.zIndex = '130';
+  s.transformOrigin = '0 0';
+  s.transform = 'translate(' + (first.left - last.left) + 'px,' + (first.top - last.top) + 'px) ' +
+    'scale(' + (first.width / last.width) + ',' + (first.height / last.height) + ')';
+  introEl.classList.add('leave');
+  if (RM_Q && RM_Q.matches) { finalizeHall(); return; }
+  void mmEl.getBoundingClientRect();
+  mmEl.classList.add('fly');
+  s.transform = 'none';
+  mmEl.addEventListener('transitionend', function te(e) {
+    if (e.target === mmEl && e.propertyName === 'transform') {
+      mmEl.removeEventListener('transitionend', te);
+      finalizeHall();
+    }
+  });
+  setTimeout(finalizeHall, 800);
+}
+
 /* ================= 启动 ================= */
 function boot() {
   document.title = MUSEUM.name + ' · 展厅导览';
@@ -2803,7 +3116,8 @@ function boot() {
     renderQref();
     buildIndex();
     bindSheetDrag();
-    bindMorphDriver();
+    if (HERO.intro && Object.keys(S.checks).length === 0) setupIntro();
+    else bindMorphDriver();
     S.doubts.forEach(function (d) {
       var btn = $('#it-' + d.item + ' .a-doubt');
       if (btn) btn.classList.add('on');
