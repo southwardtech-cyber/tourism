@@ -760,6 +760,22 @@ body.kb .bar { display:none; }
 @keyframes recblink { 50%{opacity:.25} }
 .recpill span { color:var(--ink3); font-size:13px; }
 
+.bellask {
+  position:fixed; left:16px; right:16px; bottom:calc(76px + env(safe-area-inset-bottom, 0px)); z-index:60;
+  max-width:528px; margin:0 auto;
+  background:var(--float); border-radius:var(--r-card); padding:16px;
+  animation:rise var(--dur) var(--ease);
+}
+.bellask p { font-size:13px; color:var(--ink2); line-height:1.7; }
+.bellask .xrow { display:flex; gap:8px; margin-top:12px; }
+.bellask .xrow button {
+  flex:1; min-height:44px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--lift); border-radius:var(--r-ctl);
+  font-size:13px; color:var(--ink2);
+}
+.bellask .xrow button.primary { color:var(--ink); font-weight:600; }
+
 #toast {
   position:fixed; left:50%; bottom:calc(76px + env(safe-area-inset-bottom, 0px)); z-index:90;
   transform:translate(-50%, 8px); opacity:0;
@@ -1066,16 +1082,19 @@ var S = {
   filters:{}
 };
 var TOTAL = 0;
+var doneState = null;   // 全勾完状态的边沿检测
 var mediaURL = {};   // media id -> objectURL（缩略图或音频）
 
 function hydrate() {
   return Promise.all([
     dbGet('state', 'checks'), dbGet('state', 'found'), dbGet('state', 'seen'),
-    dbAll('notes'), dbAll('media'), dbAll('doubts'), dbAll('custom')
+    dbAll('notes'), dbAll('media'), dbAll('doubts'), dbAll('custom'),
+    dbGet('state', 'sound')
   ]).then(function (r) {
     S.checks = r[0] || {};
     S.found = r[1] || {};
     S.seen = !!r[2];
+    SOUND.pref = r[7] === 'on' || r[7] === 'off' ? r[7] : null;
     S.notes = {};
     r[3].forEach(function (n) { S.notes[n.id] = n; });
     S.media = r[4].sort(function (a, b) { return a.t - b.t; });
@@ -1301,6 +1320,9 @@ function updateCounts() {
   var done = TOTAL > 0 && n === TOTAL;
   mm.classList.toggle('done', done);
   $('#cntlab').textContent = done ? '全看完了' : '看过了';
+  /* 全馆点亮的上升沿才鸣三记（带恢复态启动不响） */
+  if (doneState === false && done) bellAll();
+  doneState = done;
   var fn = Object.keys(S.found).length;
   $('#insbadge').textContent = fn ? fn + '/' + MUSEUM.insights.length : '';
   $('#insheadsm').textContent = '找到 ' + fn + '/' + MUSEUM.insights.length + ' · 集齐三件今天就算值了';
@@ -1350,6 +1372,7 @@ function toggleCheck(id) {
   dbPut('state', S.checks, 'checks');
   applyCheckUI(id, on, true);
   updateCounts();
+  if (on) bellOnCheck();
 }
 
 /* ================= 输入层：照片 ================= */
@@ -1588,6 +1611,7 @@ function doubtText(id, txt) {
 /* ================= 反直觉 ================= */
 function toggleFound(rid) {
   var on = !S.found[rid];
+  var nBefore = Object.keys(S.found).length;
   if (on) S.found[rid] = Date.now();
   else delete S.found[rid];
   dbPut('state', S.found, 'found');
@@ -1597,8 +1621,131 @@ function toggleFound(rid) {
     if (b) b.textContent = on ? '已找到 · ' + tfmt(S.found[rid]) : '找到了';
   });
   updateCounts();
-  var n = Object.keys(S.found).length;
-  if (on && n === 3) toast('三件集齐——今天已经值了');
+  if (on && nBefore === 2) {
+    toast('三件集齐——今天已经值了');
+    bellThree();
+  }
+}
+
+/* ================= 钟声（7.3 雁塔晨钟 · Web Audio 合成） =================
+   零音频文件。铜钟音色的来源是分音不成整数比：hum 0.5×、tierce 1.19×、
+   quint 1.56×、2.66× 等，加一对微失谐分音产生大钟的慢拍频。
+   打勾一记极短；集齐三件反直觉一记长的带混响；全馆点亮三记。
+   默认静音，首次打勾问一次。 */
+var SOUND = { pref:null, ctx:null, conv:null, master:null };
+var BELL_PARTIALS = [
+  [0.5,   0.9, 1.9],
+  [1.0,   1.0, 1.0],
+  [1.003, 0.6, 1.0],
+  [1.19,  0.55, 0.55],
+  [1.56,  0.35, 0.4],
+  [2.0,   0.3, 0.3],
+  [2.66,  0.18, 0.2],
+  [3.36,  0.1, 0.12]
+];
+var bellIdleTimer = null;
+function soundCtx() {
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  if (!SOUND.ctx) {
+    SOUND.ctx = new AC();
+    SOUND.master = SOUND.ctx.createGain();
+    SOUND.master.connect(SOUND.ctx.destination);
+    /* 程序生成的脉冲响应：双声道指数衰减噪声，轻低通让尾音发暗 */
+    var sr = SOUND.ctx.sampleRate, len = Math.floor(sr * 1.6);
+    var ir = SOUND.ctx.createBuffer(2, len, sr);
+    for (var ch = 0; ch < 2; ch++) {
+      var d = ir.getChannelData(ch), lp = 0;
+      for (var i = 0; i < len; i++) {
+        lp += 0.12 * ((Math.random() * 2 - 1) - lp);
+        d[i] = lp * Math.pow(1 - i / len, 2.2);
+      }
+    }
+    SOUND.conv = SOUND.ctx.createConvolver();
+    SOUND.conv.buffer = ir;
+    var wet = SOUND.ctx.createGain();
+    wet.gain.value = 0.5;
+    SOUND.conv.connect(wet);
+    wet.connect(SOUND.master);
+  }
+  if (SOUND.ctx.state === 'suspended') SOUND.ctx.resume();
+  return SOUND.ctx;
+}
+function scheduleBellIdle(tailSec) {
+  clearTimeout(bellIdleTimer);
+  bellIdleTimer = setTimeout(function () {
+    if (SOUND.ctx && SOUND.ctx.state === 'running') SOUND.ctx.suspend();
+  }, (tailSec + 2) * 1000);
+}
+function strike(vol, dur, reverb, when) {
+  if (SOUND.pref !== 'on') return;
+  var ctx = soundCtx();
+  if (!ctx) return;
+  var t0 = ctx.currentTime + (when || 0) + 0.01;
+  var bus = ctx.createGain();
+  bus.connect(SOUND.master);
+  if (reverb) bus.connect(SOUND.conv);
+  var f0 = 196;
+  BELL_PARTIALS.forEach(function (p) {
+    var o = ctx.createOscillator();
+    o.type = 'sine';
+    o.frequency.value = f0 * p[0];
+    var g = ctx.createGain();
+    var pk = Math.max(0.0002, vol * p[1]);
+    var pdur = Math.max(0.08, dur * p[2]);
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(pk, t0 + 0.004);
+    g.gain.exponentialRampToValueAtTime(pk * 0.001, t0 + pdur);
+    o.connect(g);
+    g.connect(bus);
+    o.start(t0);
+    o.stop(t0 + pdur + 0.05);
+  });
+  /* 敲击接触的一瞬：20ms 带通噪声 */
+  var nlen = Math.floor(ctx.sampleRate * 0.02);
+  var nb = ctx.createBuffer(1, nlen, ctx.sampleRate);
+  var nd = nb.getChannelData(0);
+  for (var i = 0; i < nlen; i++) nd[i] = (Math.random() * 2 - 1) * (1 - i / nlen);
+  var ns = ctx.createBufferSource();
+  ns.buffer = nb;
+  var nf = ctx.createBiquadFilter();
+  nf.type = 'bandpass';
+  nf.frequency.value = f0 * 2.6;
+  nf.Q.value = 1.2;
+  var ng = ctx.createGain();
+  ng.gain.value = vol * 0.7;
+  ns.connect(nf);
+  nf.connect(ng);
+  ng.connect(bus);
+  ns.start(t0);
+}
+function bellCheck() { strike(0.05, 0.25, false, 0); scheduleBellIdle(1); }
+function bellThree() { strike(0.11, 3.2, true, 0); scheduleBellIdle(5); }
+function bellAll() {
+  strike(0.10, 2.2, true, 0);
+  strike(0.10, 2.2, true, 0.8);
+  strike(0.11, 3.2, true, 1.6);
+  scheduleBellIdle(7);
+}
+function showBellAsk() {
+  if ($('#bellask')) return;
+  var d = document.createElement('div');
+  d.className = 'bellask';
+  d.id = 'bellask';
+  d.innerHTML = '<p>打勾配一记钟声吗？合成的雁塔晨钟（长安八景那口），很轻。</p>' +
+    '<div class="xrow"><button data-cmd="bell-no">不要</button>' +
+    '<button class="primary" data-cmd="bell-yes">要的</button></div>';
+  document.body.appendChild(d);
+}
+function bellOnCheck() {
+  if (SOUND.pref === null) { showBellAsk(); return; }
+  bellCheck();
+}
+function setBellPref(v) {
+  SOUND.pref = v;
+  dbPut('state', v, 'sound');
+  var card = $('#bellask');
+  if (card) card.parentNode.removeChild(card);
 }
 
 /* ================= 层栈：返回手势接管 =================
@@ -1998,6 +2145,11 @@ function renderMine() {
     });
   }
   out.push('</div>');
+  out.push('<div class="msec"><h3>钟声</h3>' +
+    '<button class="mrow" data-cmd="bell-toggle"><span>雁塔晨钟：' + (SOUND.pref === 'on' ? '开' : '关') + '</span>' +
+    '<small>打勾轻响一记 · 合成音，零资源</small></button>' +
+    (SOUND.pref === 'on' ? '<p class="mhint">手机侧边的静音拨片开着时，iOS 可能整段不响。</p>' : '') +
+    '</div>');
   var st = offlineStatusText();
   out.push('<div class="msec"><h3>导出 · App 是工具，参观志才是纪念品</h3>' +
     '<button class="mrow" data-cmd="export-journal">导出参观志<small>自包含 HTML · 照片笔记动线全在里面</small></button>' +
@@ -2320,6 +2472,14 @@ document.addEventListener('click', function (ev) {
         renderMine();
         updateCounts();
       });
+      break;
+    }
+    case 'bell-yes': setBellPref('on'); soundCtx(); bellCheck(); break;
+    case 'bell-no': setBellPref('off'); break;
+    case 'bell-toggle': {
+      setBellPref(SOUND.pref === 'on' ? 'off' : 'on');
+      renderMine();
+      if (SOUND.pref === 'on') { soundCtx(); bellCheck(); }
       break;
     }
     case 'export-journal': exportJournal(); break;
