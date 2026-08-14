@@ -1,0 +1,2317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12100E">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="西博导览">
+<title>展厅导览</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi6KW/5a6J5Y2a54mp6ZmiIMK3IOWxleWOheWvvOiniCIsInNob3J0X25hbWUiOiLopb/ljZrlr7zop4giLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMTIxMDBFIiwidGhlbWVfY29sb3IiOiIjMTIxMDBFIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTUFBQUFEQUNBSUFBQURkdnZ0UUFBQUNZa2xFUVZSNDJ1M2N3UW5DTUJTQTRVNGc0a0FPNE1tYkd3aWVPMER2VHVBS3J0WXBMR1FDazVhOEpCLzhWMHZhZnZBOFBEcGR6aWNwdThrakVFQUNTQUFKSUFrZ0FTU0FCSkFFa0FBU1FBSklBa2dBQ1NBQkpBRWtnQVNRQUJKQUVrQUNTQUFKSUFrZ0FTU0FCRkJXcjNsUmtBREs2ZjM1YmpsRDI0QktybkM3UDdheWY1NWVYc1VEbEoraC9BQUFBUVFRUUFBQkJCQkFBQUVFRUVBQUFRUVFRQUFCQkJCQUFBRUVFRUFBQVFRUVFBQUJCQkJBQUFFRUVFQmhBS1ZIVUtYMDhpb2VJTUlaQUFKb2JFQkdtQkVHRUVBQUFRUVFRQUFCQkJCQUFBRUVFRUFBQVFRUVFBQUJCQkJBQUFFRUVFQUFBUVFRUUFBQkJKQ054TjJXdVNKa29Rd2dnTVliWWRVSFVJUmJBQWdnZ0FBQ0NDQ0FBQUlJSUlBQUFnZ2dnQUFDQ0NDQUFBSUlJSUFBQWdnZ2dBQUNDQ0NBQUFJSUlJQUFzcEhZeTFjV3JiUUNCSkFSWm9RMURlajZYUDhOSUlBQUFnZ2dnQUFDQ0NDQUFBSUlJSUFBQWdnZ2dBQUNDQ0NBQUFJSUlJQUFBZ2dnZ0FDeXpnR1FoVElMWlFBQlpJUVpZZjREQVFRUVFBQUJCQkJBQUFFRUVFQUFBUVFRUUFBQkJCQkFBQUVFRUVBQUFRUVFRQUFCQkJCQUFBRUVFRUEyRW0wa1dta0ZDQ0FqekFnRENDQ0FBQUlJSUlBQUFnZ2dnQUFDQ0NDQUFBSUlJSUFBQWdnZ2dBQUNDQ0NBQUFJSUlJQUFBc2hHb29VeUMyVUFBV1NFR1dFQUFRUVFRQUFCQkJCQUFBRUVFRUFBQVFRUVFBQUJCQkJBQUFFRUVFQUFBUVFRUUFBQkJCQkFBQUVFRUVBSEFHcTZCS2lER3dGSTR3SFNDQUVrZ0FTUUFCSkFFa0FDU0FBSklBa2dBU1NBQkpBRWtBQVNRQUpJQWtnQUNTQUJKSUFrZ0FTUUFCSkFFa0FDU0FDcDYzNGVoMW8vN2xLRkdnQUFBQUJKUlU1RXJrSmdnZz09Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FJQUFBQjdHa090QUFBT2xVbEVRVlI0MnUzWnNRM0NNQkNHMFV5QUVBTXhBQlVkR3lCUk13QTlFN0FDcXpFRlhmZ0xDbEFnY254UCtnYXd6dkc5SXNObXZaSWtGV3d3QWtrQ2dDUUpBSklrQUVpU0FDQkpBb0FrQ1FDU0pBQklrZ0FnU1FLQUpBa0FraVFBU0pJQUlFa0NnQ1FKQUpJa0FFaVNBQ0JKQW9Ba0NRQ1NKQUJJa2dBZ1NRS0FKQWtBa2lRQVNCSUFKRWtBa0NRQlFKSUVBRWtTQUNSSkFKQWtBVUNTQkFCSkVnQWtTUUNRSkFGQWtnUUFTUklBSkVrQWtDUUJRSklFQUVrU0FDUkpBSkFrQVVDU0JBQkpFZ0FrU1FDUUpBRkFrZ0JnQ3BJRUFFa1NBQ1JKQUpBa0FVQ1NCQUJKRWdBa1NRQ1FKQUZBa2dRQVNSSUFKRWtBa0NRQlFKSUVBRWtTQUNSSkFKQWtBVUNTQkFCSkVnQWtTUUNRSkFGQWtnUUFTUklBSkVrQWtDUUFTSklBSUVrQ2dDUUpBSklrQUVpU0FDQkpBb0FrQ1FDU0pBQTAxK2w4a2FTM0FRQUFrZ0FBQUFEb202NjMrNWhwbUMwQUFBQUFTMHBtQ3dBQXRBZEErNmZkN1E5ajdaODJsNVRabXUxU1pnc0FBSGhJbHBUWkFnQUFBUENRTENtekJRQUFBT0FoV1ZKbUN3QUFBTUJEc3FUTUZnQUFBSUNIWkVtWkxRQUFBQUFQeVpJeVd3QUFBQUFla2lWbHRnQUFnTXUycEN3cHN3VUFBRnkySldXMlptc25BTUJsVzFKbWE3WjJBZ0JjdGlWbHRtWnJKd0RBWlZ0U1ptdTJkZ0lBWExZbFpiWm1heWNBd0dWYlVtWnJ0bllDQUFCZ1NabXQyZG9KQUFDQUpXVzJaZ3NBQUFEQWtqSmJzd1VBQUFCZ1NabXQyUUlBQUFDd3BNeldiQUVBQUFCWVVtWnJ0Z0FBQUFBc0tiTTFXd0FBQUFDV2xObWFMUUFBQUFCTHltek5GZ0FBOEpBc0tiTUZBQUFBNENGWlVtWUxBQUFBd0VPeXBNd1dBQUFBZ0lka1Naa3RBQUFBQUEvSmtqSmJBQUFBQUI2U0pXVzJBQUFBQUR3a1M4cHNBUUFBQUZoU2xwVFpBZ0FBTHR1U01sdXpCUUFBWExZbFpiWm1heWNBd0dWYlVtWnJ0bllDQUZ5MkpXVzJabXNuQU1CbFcxSm1hN1oyQWdCY3RpVmx0bVpySndEQVpWdFNabXUyZGdJQUFHQkptYTNaMmdrQUFJQWxaYlptQ3dBQUFNQ1NNbHV6QlFBQUFHQkptYTNaQWdBQUFMQ2t6TlpzQVFBQUFGaFNabXUyQUFBQUFDd3BzelZiQUFEZ2RkbjVtV3A2dWFSTXcyeVhFZ0FBSUV2S2JBRUFBQURJa2pKYkFBQUFBTEtrekJZQUFQQVQyTTgwUHlyTjFrOWdBQURBUTdLa3pCWUFBQUNBaDJSSm1TMEFBQUFBRDhtU01sc0FBTUJsVzFLV2xOa0NBQUF1MjVJeVc3TzFFd0Rnc2kwcHN6VmJPd0VBTHR1U01sdXp0Uk1BNExJdEtiTTFXenNCQUM3YmtqSmJzN1VUQU9DeUxTbXpOVnM3QVFBQXNLVE0xbXp0QkFBQXdKSXlXN01GQUFBQVlFbVpyZGtDQUFBQXNLVE0xbXdCQUFBQVdGSm1hN1lBQUFBQUxDbXpOVnNBQUFBQWxwVFptaTBBQUFBQVM4cHN6UllBQUFDQUpXVzJaZ3NBQUhoSWxwVFpBZ0FBQVBDUUxDbXpCUUFBQU9BaFdWSm1Dd0FBQU1CRHNxVE1GZ0FBQUlDSFpFbVpMUUFBQUFBUHlaSXlXd0FBQUFBZWtpVmx0Z0FBQUFBc0tVdktiQUVBQUpkdFNabXQyUUlBQUM3YmtqSmJzN1VUQU9DeUxTbXpOVnM3QVFBdTI1SXlXN08xRXdEZ3NpMHBzelZiT3dFQUx0dVNNbHV6dFJNQTRMSXRLYk0xV3pzQkFBQ3dwTXpXYk8wRUFBREFrakpic3dVQUFBQmdTWm10MlFJQUFBQ3dwTXpXYkFFQUFBQllVbVpydGdBQUFBQXNLYk0xV3dBQUFBQ1dsTm1hTFFBQUFBQkx5bXpORmdBQThKQXNLYk1GQUFBQTRDRlpVbVlMQUFBVUFpQS9VMDB2bDVUK2x5L3R0d0VBQUFJQUFBQUFBQUFJQUFBQUFBQUFJQUFBQUFBQThCUFl6elMvVmMzV1QyQUFBTUJEQW9EWkFnQUFBUENRQUdDMkFBQUFBRHdrQUpndEFBRGdzajE3QVBnU0FBQUFsKzNaQThDWFlDY0F3R1Y3OWdEd0pkZ0pBSERabmowQWZBbDJBZ0JjdG1jUEFGK0NuUUFBbCszWkE4Q1hZQ2NBd0dWNzlnRHdKZGdKQUFDQVp3OEFYNEtkQUFBQU9DMEFmQWtBQUFBQW5CWUFUZ3NBQUFEQWFRSGd0QUFBQUFDY0ZnQk9Dd0FBQU1CcEFlQzBBQUFBQUp3V0FFNExBQUFBd0drQjRMUUFBQUFBQUFBQXB3VUFBRHdrQUpndEFBQUFBQThKQUdZTEFBQUF3RU1DZ05rQ0FBQUE4SkFBWUxZQUFBQUFQQ1FBbUMwQUFBQUFEd2tBWmdzQUFBREFRd0tBMlFJQUFBRHc3QUZndGdBQWdNdjI3QUhnU3dBQUFGeTJadzhBWDRLZEFBQ1g3ZGtEd0pkZ0p3REFaWHYyQVBBbDJBa0FjTm1lUFFCOENYWUNBRnkyWnc4QVg0S2RBQUNYN2RrRHdKZGdKd0FBQUo0OUFId0pkZ0lBQU9DMEFIQmFBQUFBQUU0TEFLY0ZBQUFBNExRQWNGb0FBQUFBVGdzQXB3VUFBQURndEFCd1dnQUFBQUJPQ3dDbkJRQUFBT0MwQUhCYUFBREFRd0lBQUFBQUFBQjRTQUF3V3dBQUFBQWVFZ0RNRmdBQTZCMkEvRXhWclFUQU5Db0hBQUFJQUFJQUFBQWdBQWdBQUFDQUFDQUFBTUJQWUQvVC9BUTJXeitCQVFBQUR3a0FaZ3NBQUFEQVF3S0EyUUlBQUFDWTd5RnRqNCttQW9DVkNnQUFBQUFBQUxCU0FRQUFsdzBBQUFBQUFBQncyUUFBQUFEc0JBQzRiQUFBQUFCMkFnQmNOZ0FBQUFBN0FRQXVHd0FBQUlDZEFBQ1hEUUFBQU1CT0FJRExCZ0FBQUdBbkFBQUFBQUFBQU93RUFBQUFBQUFBQUFBQUFBQUFBTUJwQVFBQUFBQUFBRTRMQUFBQUFBQUFjRm9BQUFBQUFBQ0Ewd0lBQUFBQUFBQ2NGZ0FBQUFBQUFPQzBBQUFBQUFBQUFLY0ZBQUFBQUFBckZRQUFBQUFBQUdDbEFnQUFBQUFBQUt4VUFBQUFBQUFBZ0pVS0FBQUFBQUFBc0ZJQkFBQUFBQUFBVmlvQUFBQUFBQURBU2dVQUFGdzJBQUFBQUFBQXdHVURBQUFBc0JNQTRMSUJBQUFBMkFrQWNOa0FBQUFBN0FRQXVHd0FBQUFBZGdJQVhEWUFBQUFBT3dFQUxoc0FBQUNBblFBQUFBQUFBQUN3RXdBQUFBQUFBQUIyQWdBQUFBQUFPQzBBQUFBQUFBREFhUUVBQUFBQUFBQk9Dd0FBQUFBQUFIQmFBQUFBQUFBQWdOTUNBQUFBQUFBQW5CWUFBRmcyQUU0TEFLY0ZBQUFBNExRQWNGb0FBQUFBVGdzQXB3VUFBRDYvN1B4TVZhMEV3RFFxQndBQUNBQUNBQUFBSUFBSUFBQUFnQUFnQUFEQVQyQS8wL3dFTmxzL2dRRUFBQThKQUdZTEFBQUF3RU1DZ05rQ0FBQUE4SkFBWUxZQUFJREw5dXdCNEVzQUFBQmN0bWNQQUYrQ25RQUFsKzNaQThDWFlDY0F3R1Y3OWdEd0pkZ0pBSERabmowQWZBbDJBZ0JjdG1jUEFGK0NuUUFBbCszWkE4Q1hZQ2NBQUFDZVBRQjhDWFlDQUFEZ3RBRHdKUUFBQUFCd1dnQTRMUUFBQUFDbkJZRFRBZ0FBQUhCYUFEZ3RBQUFBQUtjRmdOTUNBQUFBY0ZvQU9DMEFBQUFBcHdXQTB3SUFBQUFBQUFDY0ZnQUE4SkFBWUxZQUFBQUFQQ1FBbUMwQUFBQUFEd2tBWmdzQUFBREFRd0tBMlFJQUFBRHdrQUJndGdBQUFBQThKQUNZTFFBQUFBQVBDUUJtQ3dBQUFNQ3pCNERaQWdBQUx0dXpCNEF2QVFBQWNObWVQUUI4Q1hZQ0FGeTJadzhBWDRLZEFBQ1g3ZGtEd0pkZ0p3REFaWHYyQVBBbDJBa0FjTm1lUFFCOENYWUNBRnkyWnc4QVg0S2RBQUFBZVBZQThDWFlDUUFBZ05NQ3dHa0JBQUFBT0MwQW5CWUFBQUNBMHdMQWFRRUFBQUE0TFFDY0ZnQUFBSURUQXNCcEFRQUFBRGd0QUp3V0FBQUFnTk1Dd0drQkFBQVBDUUFBQUFBQUFPQWhBY0JzQVFBQUFIaElBREJiQUFDZ2R3RHlNMVcxRWdEVHFCd0FBQ0FBQ0FBQUFJQUFJQUFBQUFBQ2dBQUFBRCtCL1V6ekU5aHMvUVFHQUFBOEpBQ1lMUUFBQUFBUENRQm1Dd0FBQU1CREFvRFpBZ0FBTHR1ekI0QXZBUUFBY05tZVBRQjhDWFlDQUZ5Mlp3OEFYNEtkQUFDWDdka0R3SmRnSndEQVpYdjJBUEFsMkFrQWNObWVQUUI4Q1hZQ0FGeTJadzhBWDRLZEFBQUFlUFlBOENYWUNRQUFnTk1Dd0pjQUFBQUF3R2tCNExRQUFBQUFuQllBVGdzQUFBREFhUUhndEFBQUFBQ2NGZ0JPQ3dBQUFNQnBBZUMwQUFBQUFKd1dBRTRMQUFBQUFBQUFjRm9BQU1CREFvRFpBZ0FBQVBDUUFHQzJBQUFBQUR3a0FKZ3RBQUFBQUE4SkFHWUxBQUFBd0VNQ2dOa0NBQUFBOEpBQVlMWUFBQUFBUENRQW1DMEFBQUFBeng0QVpnc0FBTGhzeng0QXZnUUFBTUJsZS9ZQThDWFlDUUJ3Mlo0OUFId0pkZ0lBWExabkR3QmZncDBBQUpmdDJRUEFsMkFuQU1CbGUvWUE4Q1hZQ1FCdzJaNDlBSHdKZGdJQUFPRFpBOENYWUNjQUFBQk9Dd0NuQlFBQUFPQzBBSEJhQUFBQUFFNExBS2NGQUFBQTRMUUFjRm9BQUFBQVRnc0Fwd1VBQUFEZ3RBQndXZ0FBQUFCT0N3Q25CUUFBUENRQUFBQUFBQUNBaHdRQXN3VUFBQW9Ca0orcHFwVUFtRWJsQUFBQUFVQUFBQUFBQkFBQkFBQUFFQUFFQUFENENleG5tcC9BWnVzbk1BQUE0Q0VCd0d3QkFBQUFlRWdBTUZzQUFBQUFIaElBekJZQUFIRFpuajBBZkFrQUFJREw5dXdCNEV1d0V3RGdzajE3QVBnUzdBUUF1R3pQSGdDK0JEc0JBQzdic3dlQUw4Rk9BSURMOXV3QjRFdXdFd0Rnc2oxN0FQZ1M3QVFBQU1DekI0QXZ3VTRBQUFDY0ZnQytCQUFBQUFCT0N3Q25CUUFBQU9DMEFIQmFBQUFBQUU0TEFLY0ZBQUFBNExRQWNGb0FBQUFBVGdzQXB3VUFBQURndEFCd1dnQUFBQUFBQUlEVEFnQUFIaElBekJZQUFBQ0Fod1FBc3dVQUFBRGdJUUhBYkFFQUFBQjRTQUF3V3dBQUFBQWVFZ0RNRmdBQUFJQ0hCQUN6QlFBQUFPQWhBY0JzQVFBQUFIajJBREJiQUFEQVpYdjJBUEFsQUFBQUx0dXpCNEF2d1U0QWdNdjI3QUhnUzdBVEFPQ3lQWHNBK0JMc0JBQzRiTThlQUw0RU93RUFMdHV6QjRBdndVNEFnTXYyN0FIZ1M3QVRBQUFBeng0QXZnUTdBUUFBY0ZvQU9DMEFBQUFBcHdXQTB3SUFBQUJ3V2dBNExRQUFBQUNuQllEVEFnQUFBSEJhQURndEFBQUFBS2NGZ05NQ0FBQUFjRm9BT0MwQUFPQWhBUUFBQUFBQUFEd2tBSmd0QUFBQUFBOEpBR1lMQUFEMERvQXFsd0NZaGdBQUFBRkFBQUFBQUNRQkFBQUFrQVFBQUVpU0FDQkpBb0FrQ1FDU0pBQklrZ0FnU1FLQUpBa0FraVFBU0pJQUlFa0NnQ1FKQUpJa0FFaVNBQ0JKQW9Ba0NRQ1NKQUJJa2dBZ1NRS0FKQWtBa2dRQVNSSUFKRWtBa0NRQlFKSUVBRWtTQUNSSkFKQWtBVUNTQkFCSkVnQWtTUUNRSkFGQWtnUUFTUklBSkVrQWtDUUJRSklFQUVrU0FDUkpBSkFrQVVDU0JBQkpFZ0FrU1FDUUpBQ1lnaVFCUUpJRUFFa1NBQ1JKQUpBa0FVQ1NCQUJKRWdBa1NRQ1FKQUZBa2dRQVNSSUFKRWtBa0NRQlFKSUVBRWtTQUNSSkFKQWtBVUNTQkFCSkVnQWtTUUNRSkFGQWtnUUFTUklBSkFrQWtpUUFTSklBSUVrQ2dDUUpBSklrQUVpU0FDQkpBb0FrQ1FDU0pBQklrZ0FnU1FLQUpBa0FrcVFaZXdMTllVN0RWblBoUWdBQUFBQkpSVTVFcmtKZ2dnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6ImFueSBtYXNrYWJsZSJ9XX0=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACMklEQVR42u3cwQnCQBBA0VQQxIJSgCdvdiB4TgHercAWbC1VuLCeRIgksJvJPvhX2WgeTCCD3fHQSz/r/ASCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASH4BAcahDHbbyrcHDM93i+Uu2cGxXHss+ezpfU4qPzTSp/9JpzVx4NBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHF+Xm79w4fJNaufcFBxw7AuHsWKswAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQccln0+Sze1suwDBxwxx0qt0VDxsuGAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOOCAAw444IBjC/scQf+dx7IPHHAYK8YKHHDUxDFcp/+DAw444IADDjjggAMOOOCAAw444IADDjjggAMOOODw4s2LNzjgsAlm2ceyDxxwGCvGChxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHPY57HPAAYdlH2PFMwcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwGHZx7IPHHAYK8YKHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcczeIIV8YR9OLhUHwc2kdwCA7BITgEh+AQHIJDcAgOwSHBITgEh+AQHIJDcAgOwSE4JDgEh+AQHIJDcGjjvQElmd5grVetXAAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACMklEQVR42u3cwQnCQBBA0VQQxIJSgCdvdiB4TgHercAWbC1VuLCeRIgksJvJPvhX2WgeTCCD3fHQSz/r/ASCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASH4BAcahDHbbyrcHDM93i+Uu2cGxXHss+ezpfU4qPzTSp/9JpzVx4NBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHF+Xm79w4fJNaufcFBxw7AuHsWKswAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQccln0+Sze1suwDBxwxx0qt0VDxsuGAAw444IADDjjggAMOOOCAAw444IADDjjggAMOOOCAAw444IBjC/scQf+dx7IPHHAYK8YKHHDUxDFcp/+DAw444IADDjjggAMOOOCAAw444IADDjjggAMOOODw4s2LNzjgsAlm2ceyDxxwGCvGChxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHPY57HPAAYdlH2PFMwcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwGHZx7IPHHAYK8YKHHDAAQcccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcczeIIV8YR9OLhUHwc2kdwCA7BITgEh+AQHIJDcAgOwSHBITgEh+AQHIJDcAgOwSE4JDgEh+AQHIJDcGjjvQElmd5grVetXAAAAABJRU5ErkJggg==">
+<script>
+/* ================================================================
+   数据层 · MUSEUM
+   全部展品内容只允许出现在这个常量里（含反直觉线、速查层、页脚文案）。
+   换馆只改这里，外壳代码一行不动。
+   ================================================================ */
+const MUSEUM = {
+  name: '西安博物院',
+  date: '2026-08-15',
+  dateLabel: '2026年8月15日',
+  dateShort: '8·15',
+  hours: '延时开放至 19:00',
+
+  /* 主视觉：长安城里坊网格。cells: 条目id -> [列,行]；palace: [c0,c1,r0,r1] 宫城占位 */
+  hero: {
+    cols: 10, rows: 12,
+    palace: [3, 6, 0, 2],
+    cells: {
+      A1:[1,0],  A2:[8,0],  A3:[0,1],  A4:[9,1],  A5:[2,2],
+      B1:[2,3],  B2:[4,4],  B3:[5,4],  B4:[0,3],  B5:[9,3],  B6:[7,4],
+      B7:[1,4],  B8:[8,5],  B9:[0,5],  B10:[3,5], B11:[6,5], B12:[2,6],
+      B13:[7,6], B14:[4,6], B15:[0,7], B16:[9,7],
+      C1:[5,9],  C2:[4,10], C3:[6,10], C4:[3,11]
+    },
+    spare: [[1,8],[3,8],[6,8],[8,8],[0,9],[9,9],[2,10],[7,10],[1,10],[0,11],[9,11],[5,11]]
+  },
+
+  blocks: [
+    {
+      id: 'A', title: '汉并天下（特展）', loc: '一楼特展厅 · 展期至 8·18',
+      alert: '今天基本是最后机会——进门先来这里，别按楼层顺序走。',
+      meta: '西安博物院＋咸阳博物院联展，近 150 件/套。三个单元：雄师·安邦 / 典制·强国 / 同心·铸魂。',
+      items: [
+        { id:'A1', nm:'「汉并天下」瓦当',
+          why:'策展人明确说这是整个展览的叙事起点',
+          look:'四个字在圆瓦当上怎么分格排布',
+          tags:['must'], conf:'ok' },
+        { id:'A2', nm:'杨家湾西汉兵马俑',
+          why:'1965 年出土，比秦兵马俑早 9 年，是中国最早发现的大型兵马俑，出自汉高祖长陵陪葬区',
+          look:'俑群总数近 2500 件：骑兵 500 余、步兵 1900 余，约 1:4。看阵列里骑兵被摆在什么位置——这是兵种协同的实物证据',
+          tags:['must','mat'], conf:'ok' },
+        { id:'A3', nm:'汉齐郡太守虎符',
+          why:'已出土虎符绝大多数只剩半只（秦杜虎符、汉鎏金鲁王虎符都是），这件左右两半成合出土，极罕见',
+          look:'找脊背上的错银篆书铭文和内部两组榫卯，看两半怎么扣死',
+          tags:['must','ctr'], conf:'ok' },
+        { id:'A4', nm:'铁制农具与陶仓', sub:'典制·强国单元',
+          why:'军事强盛背后是农业和财政',
+          look:'陶仓的形制和通风口；铁农具的刃口磨损',
+          tags:['mat'], conf:'ok' },
+        { id:'A5', nm:'甲胄 · 玉舞人 · 金器',
+          why:'同单元精品，顺路扫一眼',
+          look:null,
+          tags:['must'], conf:'ok' },
+        { type:'note', id:'A6',
+          lab:'⚠ 避坑 · 图板非实物',
+          tx:'第三单元「同心·铸魂」里的「五星出东方利中国」锦护臂、「中国大宁」博局纹镜是展览图板，不是实物——别在展柜里找原件，找不到的。' }
+      ]
+    },
+    {
+      id: 'B', title: '古都西安（基本陈列）', loc: '负一层',
+      items: [
+        { id:'B1', nm:'唐长安城复原模型',
+          why:'明天陕历博的地图底稿。长安城约 84 平方公里，是同期世界最大城市；一百多个坊，坊有墙有门，入夜闭坊',
+          look:'找出三个点：兴化坊（何家村窖藏出土地，明天要用）、大明宫（北）、西市（西）。再看坊门开在哪几面',
+          tags:['must','mat','ctr'], conf:'verify', vnote:'位置待现场确认——找不到就划掉，别浪费时间。' },
+        { id:'B2', nm:'唐三彩腾空马', era:'唐 · 1966 西安莲湖区制药厂唐墓出土 · 高 38 厘米，长 52 厘米', treasure:true,
+          why:'首批禁止出境文物，三大镇馆之宝之一。骑手是身着蓝袍的胡人少年，马四蹄腾空——这个题材在唐三彩里仅此一见。蓝釉的钴料来自波斯，行话「三彩挂蓝，价值不凡」，贵在料',
+          look:'四蹄全离地怎么支撑住重量；数一数全馆还有几件带蓝釉的',
+          tags:['must','mat','ctr'], conf:'ok' },
+        { id:'B3', nm:'蓝釉点彩驮骡', era:'唐 · 1966 西安莲湖区制药厂出土——和腾空马同一处墓',
+          why:'骡身驮沉重行囊。丝路的想象是骆驼和胡商，实际大量货运靠的是最普通的骡马',
+          look:'看驮架结构和货物捆法，比看骡子本身有意思。注意它和腾空马同出一墓，是同一批随葬品里的两种「运输观」',
+          tags:['mat','ctr'], conf:'ok' },
+        { id:'B4', nm:'秦云纹玉高足杯', era:'秦 · 1976 西安东张村阿房宫遗址出土 · 国家一级文物', treasure:true,
+          why:'三大镇馆之宝之一，秦代唯一一件玉杯。原为青玉，埋藏受沁呈焦黄色。直口深腹，喇叭形高圈足',
+          look:'腹外壁分四层纹饰：柿蒂纹、流云纹、卷云纹、如意纹，数那四层的分界；看高足的比例——高足杯这个器形本身带外来色彩',
+          warn:['别搞混：馆里另有一组西汉玉杯（2010 年汉宣帝杜陵遗址出土，3 件，杯身包金），功能是承接露水服玉屑求仙，跟这件不是一回事。'],
+          tags:['must','ctr'], conf:'ok' },
+        { id:'B5', nm:'西汉鎏金凤鸟锺', era:'西汉 · 2003 西安未央区枣园村出土 · 通高 78.4 厘米',
+          why:'目前发现的最大的西汉鎏金铜锺。盖顶铸一只口衔珠、昂首翘尾的朱雀，肩腹有凸箍纹，腹侧双环供手提。出土时器内盛 26 公斤西汉酒，两千年后仍有香气，是迄今保存最好、存量最多的古酒',
+          look:'看口沿的密封结构——它能存住酒两千年，靠的就是这里',
+          warn:['「锺」（zhōng）是贮酒器，不是敲打的「钟」，繁简合并造成的常见误写。说明牌若写「铜钟」属通行写法，但器物性质是酒器。',
+                '数据分歧：酒精含量有 0.10% 和 0.01% 两种流传说法，以现场说明牌为准。'],
+          tags:['must','ctr'], conf:'ok' },
+        { id:'B6', nm:'汉鎏金羊形铜灯', era:'汉',
+          why:'羊背与腹部分开铸造：羊背可翻起充当灯盘，用完的灯油经流嘴倒回羊腹内储存。造型与功能是同一套结构',
+          look:'找铰接处、找流嘴、想一下烟往哪走。汉代照明本质是个工程问题',
+          tags:['mat'], conf:'ok' },
+        { id:'B7', nm:'董钦造鎏金弥陀（弥勒）像', era:'隋开皇四年（584）· 1974 西安雁塔区八里村出土 · 通高 41 厘米，铜铸鎏金', treasure:true,
+          why:'三大镇馆之宝之一。方形座基上一佛二菩萨二力士共五尊，正中置香炉，四周围栏，其下二蹲狮。所有构件均单独铸造，以插榫孔眼相接，可拆卸。座基刻铭文一百一十八字，落款「宁远将军、武强县丞董钦」',
+          look:'数一铺共几尊、找插榫接缝、读铭文里的年份和供养人名',
+          twist:'董钦是河北武强人，所以这件在长安出土的造像带明显北齐风格（苗条秀美），与本地北周的健硕路数完全两样。一件器物的风格跟着出资人的籍贯走，不跟着出土地走。',
+          tags:['must','ctr'], conf:'ok' },
+        { id:'B8', nm:'北周史君墓石椁', era:'北周',
+          why:'墓主是凉州萨宝——萨宝（萨保）是专门管理粟特胡人聚落的官职。石椁前端雕神灵形象、祭司点火场面，是祆教（拜火教）图像，充满粟特风俗',
+          look:'找祭司点火的画面，找人物的服饰和面部特征',
+          twist:'外国人在长安不只是劳动力或景观，帝国为他们设了专门的官职建制。这把「胡人俑群」那条推进了一层。',
+          tags:['must','ctr'], conf:'ok' },
+        { id:'B9', nm:'新莽九鼎', era:'新莽 · 五件铜鼎＋四件釉陶鼎',
+          why:'九鼎形制纹饰完全相同，饰窃曲纹（流行于西周晚期至春秋早期的纹样）。保存完好且无使用痕迹，非实用器',
+          look:'数铜鼎和陶鼎各几件，看纹饰是否真的一模一样',
+          twist:'两汉墓葬本已不随葬青铜礼器，这套九鼎是王莽托古改制的产物——一个新朝在用一千年前的纹样给自己找合法性。按周礼「天子九鼎八簋」，但墓葬规模不大，墓主推测只是卿大夫或诸侯级。',
+          tags:['ctr'], conf:'ok' },
+        { id:'B10', nm:'三彩凤首壶', era:'唐',
+          why:'小口、细颈、平底、喇叭形高足——胡瓶的造型，配中国本土的龙凤装饰。一件器物上两套文化系统直接拼在一起',
+          look:'把它和秦玉高足杯对照看，都是外来器形本土化的例子',
+          tags:['mat','ctr'], conf:'ok' },
+        { id:'B11', nm:'商周青铜器组', sub:'永盂 · 大鼎 · 饕餮纹鬲 · 鸟纹盉',
+          why:'西周永盂、勾连云雷纹大鼎、商代晚期饕餮纹鬲、西周鸟纹盉',
+          look:'鬲和鼎的区别：鼎的足与腹不通，鬲的足与腹连通且足部空心——空心足增大受热面积，是烹饪效率的设计。盉用来调和酒的浓淡或盛水加热',
+          tags:['mat'], conf:'ok' },
+        { id:'B12', nm:'汉奇华宫五足炉', era:'汉 · 沿口下铭刻「奇华宫」',
+          why:'铜炉最初用于取暖，后转为香薰焚香',
+          look:'找「奇华宫」那三个字刻在哪',
+          twist:'器身刻宫名，等于官方资产标签——皇家器物有编号管理制度。',
+          tags:['ctr'], conf:'ok' },
+        { id:'B13', nm:'三眼行灶与明器组', sub:'陶灶 · 陶井 · 陶仓 · 陶磨', era:'汉',
+          why:'灰扑扑的小陶模型，完全不像宝物，但它们是随葬的理想生活配置清单，等于汉代样板房',
+          look:'当一套户型图看：灶在哪、井在哪、仓多大。三眼灶找主眼与副眼的大小差别和排烟口——多灶眼是热效率设计，一次燃料主火烧饭、余火温水。陶仓找通风口，粮储的核心技术是防霉不是防偷',
+          tags:['mat','ctr'], conf:'verify', vnote:'位置待现场确认——找不到就划掉，别浪费时间。' },
+        { id:'B14', nm:'胡人俑群', era:'唐',
+          why:'别看长相，看职业',
+          look:'一件件找他们手里在干什么：牵马、驮货、奏乐、执笏、还是调弄小鸟。看完再回头想史君墓那位萨宝',
+          tags:['ctr'], conf:'ok' },
+        { id:'B15', nm:'铜镜', sub:'含瑞兽葡萄镜一类', era:'唐',
+          why:'铸造、抛光、金银加工三道工艺叠在一件小东西上',
+          look:'找有没有哪面镜子正面朝外。再数一天下来在几种材质上见过葡萄纹',
+          tags:['mat','ctr'], conf:'ok' },
+        { id:'B16', nm:'秦封泥', sub:'相家巷出土 · 含「严道橘丞」一类', era:'秦',
+          why:'封泥是按在公文绳结上的防拆封条，拆了就毁。严道在今四川荥经，离长安上千里',
+          look:'看泥背面的绳痕和简牍捆扎压印',
+          warn:['读断代标签：相家巷出的是秦封泥，不是汉，别记错朝代。'],
+          tags:['ctr'], conf:'ok' }
+      ]
+    },
+    {
+      id: 'C', title: '荐福寺 · 小雁塔', loc: '地面院落',
+      items: [
+        { id:'C1', nm:'小雁塔',
+          why:'世界文化遗产，「博物院」不只是展厅',
+          look:'塔身的历史裂痕。不开放登塔，别排队',
+          tags:['must'], conf:'ok' },
+        { id:'C2', nm:'荐福寺铁钟（雁塔晨钟）',
+          why:'长安八景之一的实物',
+          look:'钟体铸造铭文',
+          tags:['must'], conf:'ok' },
+        { id:'C3', nm:'千年古槐',
+          why:'院子本身值得慢慢走',
+          look:null,
+          tags:[], conf:'ok' },
+        { id:'C4', nm:'XR《国宝迷踪之寻迹大唐》', sub:'暑期沉浸展',
+          why:'以三彩镇墓兽为向导的沉浸体验',
+          look:'可选：看排队情况决定，别为它挤掉 A 区时间',
+          tags:[], conf:'ok' }
+      ]
+    }
+  ],
+
+  /* 自建条目区块的外壳文案 */
+  customBlock: { id:'X', title:'我的发现', loc:'导览之外 · 现场添加' },
+
+  /* 反直觉线：seem=3 秒走过的样子, twist=反转, act=现场怎么验证, link=对应条目 */
+  insights: [
+    { id:'R1', link:'B16', nm:'秦封泥「严道橘丞」',
+      seem:'一小坨干泥巴',
+      twist:'它不只是「有个管橘子的官」。封泥是防拆封条——按在绳结上，拆了就毁。它证明的是帝国日常在跑一套需要防伪的公文流转系统。',
+      act:'找泥背面的绳痕和竹简捆扎压印。另外读断代标签：相家巷出的是秦封泥，不是汉。' },
+    { id:'R2', link:'A3', nm:'汉齐郡太守虎符',
+      seem:'一只巴掌大的小铜老虎',
+      twist:'本质是离线双因子认证。而且它主要防的不是敌人，是自己人——防的是矫诏。',
+      act:'找脊背错银铭文和内部榫卯，看两半怎么严丝合缝。这件左右两半都在，已出土虎符绝大多数只剩半只。' },
+    { id:'R3', link:'B2', nm:'腾空马身上那抹蓝',
+      seem:'三彩里一块颜色',
+      twist:'钴料来自波斯。一件长安陶器的颜色，是跨几千公里矿物贸易的直接物证。行话「三彩挂蓝，价值不凡」，贵就贵在料。',
+      act:'对比展厅里其他三彩：黄、绿、白很常见，蓝很少。数一数有几件带蓝。' },
+    { id:'R4', link:'B3', nm:'蓝釉点彩驮骡',
+      seem:'又一件动物俑',
+      twist:'丝路的想象是骆驼和胡商，但大量货运其实靠最普通的骡马。',
+      act:'看驮架结构和货物捆法，比看骡子本身有意思。' },
+    { id:'R5', link:'B15', nm:'铜镜',
+      seem:'背面纹饰漂亮',
+      twist:'博物馆永远展的是背面。古人天天用的是被磨到能照人的正面——那才是这件器物存在的理由，而它恰恰是你看不到的一面。',
+      act:'找展柜里有没有哪面镜子是正面朝外的。顺便看葡萄纹（见 R6）。' },
+    { id:'R6', link:'B15', nm:'葡萄纹',
+      seem:'装饰花纹',
+      twist:'今天最普通的水果，在唐代器物上是跨大陆传播的植物、饮食和视觉符号三合一。',
+      act:'数一天下来在几种不同材质上见过葡萄纹：铜、陶、金银、织物。' },
+    { id:'R7', link:'B13', nm:'陶灶 · 陶井 · 陶仓 · 陶磨',
+      seem:'灰扑扑的小陶模型，完全不像宝物',
+      twist:'它们是随葬的理想生活配置清单，等于汉代样板房。比黄金更能说明普通家庭怎么做饭、存粮、取水。',
+      act:'把一组明器当一套户型图看：灶在哪、井在哪、仓多大。' },
+    { id:'R8', link:'B13', nm:'三眼行灶',
+      seem:'一个陶灶',
+      twist:'多个灶眼是热效率设计——一次燃料，主火烧饭、余火温水。',
+      act:'找主眼和副眼的大小差别，看排烟口在哪。' },
+    { id:'R9', link:'B13', nm:'陶仓',
+      seem:'一个陶罐子',
+      twist:'粮食储存的核心技术是防霉，不是防偷。',
+      act:'找通风口的位置和数量。', conf:'verify' },
+    { id:'R10', link:'B14', nm:'胡人俑',
+      seem:'外国人长什么样',
+      twist:'别看长相，看职业。外国人在长安可能不是景观，而是城市劳动体系的一部分。',
+      act:'一件件找他们手里在干什么：牵马、驮货、奏乐、还是执笏。' },
+    { id:'R11', link:'A1', nm:'「汉并天下」瓦当',
+      seem:'屋檐上的一块陶片',
+      twist:'建筑构件被用来做政治宣示——国家级的户外广告，抬头就看见。',
+      act:'看四个字怎么在圆形上分格，这是设计问题。' },
+    { id:'R12', link:'A2', nm:'杨家湾兵马俑的阵列',
+      seem:'一大堆小兵',
+      twist:'骑兵 500 余、步兵 1900 余，约 1:4。这是对匈奴战争前夜的军种结构快照，骑兵在汉初还是稀缺资源。',
+      act:'看骑兵被摆在阵列的什么位置——前锋、两翼、还是后方。' },
+    { id:'R13', link:'B7', nm:'董钦造鎏金弥勒佛像',
+      seem:'一尊小铜佛',
+      twist:'它带确切纪年和造像人姓名，本质是一件有署名和日期的定制品，相当于一千四百年前的订单回执。',
+      act:'读底座铭文，找「开皇四年」和供养人名字。再数一铺共几尊、哪些部件是可拆的。', conf:'verify' },
+    { id:'R14', link:'B1', nm:'唐长安城模型的坊墙',
+      seem:'一张城市规划图',
+      twist:'坊有墙、有门、有宵禁。长安不是开放城市，是一百多个夜间上锁的封闭社区。',
+      act:'找坊门开在哪几面，再找出兴化坊（何家村窖藏出土地）、大明宫、西市。' },
+    { id:'R15', link:null, nm:'玻璃器、贝壳、蚌饰这类小料',
+      seem:'边角配料',
+      twist:'看到就多停 10 秒。一个不起眼的材料可能直接说明这件东西的供应链跨了上千公里。',
+      act:'读标签找产地或「疑似进口」字样。' },
+    { id:'R16', link:'C1', nm:'小雁塔的裂缝',
+      seem:'一道旧伤',
+      twist:'民间传「三离三合」。真正的看点是它的夯土基础形制与地震响应的关系——古建抗震未必靠刚，可能靠沉。',
+      act:'绕塔一周找裂痕走向。此条属传说与解释并存，现场以说明牌为准。', conf:'verify' }
+  ],
+  insightsNote: '凡说明牌与本表冲突，以说明牌为准，随手点「存疑」记下来。集齐三件，今天就算值了。',
+
+  /* 速查层 */
+  quickref: {
+    dynasties: [
+      { dy:'西周', py:'xz', span:'前 1046–前 771', cap:'丰镐' },
+      { dy:'秦',   py:'q',  span:'前 221–前 207',  cap:'咸阳（阿房宫在今西安西）' },
+      { dy:'西汉', py:'xh', span:'前 202–公元 8',  cap:'汉长安城（今西安西北）' },
+      { dy:'新莽', py:'xm', span:'9–23',           cap:'同上' },
+      { dy:'东汉', py:'dh', span:'25–220',         cap:'洛阳' },
+      { dy:'北周', py:'bz', span:'557–581',        cap:'长安' },
+      { dy:'隋',   py:'s',  span:'581–618',        cap:'大兴城（唐长安城前身）' },
+      { dy:'唐',   py:'t',  span:'618–907',        cap:'长安城（今西安东南）' }
+    ],
+    dynastyNote: '汉长安和唐长安不是同一座城，位置几乎不重叠——今天最该记住的一件事。',
+    terms: [
+      { t:'锺', py:'z zhong', d:'zhōng · 贮酒器。与敲打的「钟」是两个字，繁简合并后常被混写' },
+      { t:'鬲', py:'l li', d:'lì · 三足炊器，足与腹连通、足部空心，受热面积大' },
+      { t:'盉', py:'h he', d:'hé · 调和酒味浓淡或盛水加热的器皿' },
+      { t:'盂', py:'y yu', d:'yú · 盛水或盛食的敞口器' },
+      { t:'萨宝／萨保', py:'sb sabao', d:'管理粟特胡人聚落的官职，源自粟特语' },
+      { t:'明器', py:'mq mingqi', d:'专为随葬制作、不作实用的器物' },
+      { t:'封泥', py:'fn fengni', d:'按在公文绳结上的泥质封条，防拆' },
+      { t:'鎏金', py:'lj liujin', d:'金汞齐涂布后加热使汞挥发，金留器表' },
+      { t:'窃曲纹', py:'qqw qiequwen', d:'西周晚期至春秋早期流行的带状卷曲纹样' },
+      { t:'柿蒂纹', py:'sdw shidiwen', d:'四瓣放射状纹样，秦汉常见' },
+      { t:'幞头', py:'ft futou', d:'唐代男子包头的软巾' },
+      { t:'结跏趺坐', py:'jjfz jiejiafuzuo', d:'双足交叠置于两腿的坐姿' },
+      { t:'束腰须弥座', py:'syxmz shuyaoxumizuo', d:'中部内收的佛像底座' }
+    ],
+    changan: [
+      '唐长安城约 84 平方公里，同期世界最大城市',
+      '一百多个里坊，坊设围墙与坊门，入夜闭坊宵禁',
+      '中轴朱雀大街，东市西市分列',
+      '兴化坊＝何家村窖藏出土地（明天陕历博要用）'
+    ],
+    disputes: [
+      '鎏金凤鸟锺内酒精含量：0.10% ／ 0.01%，两说并存',
+      '董钦造像主尊定名：弥陀 ／ 弥勒，来源写法不一，铭文作「弥陀像一区」',
+      '小雁塔「三离三合」是传说与地震记载的叠加，非严格结论'
+    ]
+  },
+
+  /* 页脚 */
+  notes: [
+    '出发前：公众号「西安博物院」确认今天下午的票（周六暑期日限 1.5 万，13:00 时段最热；约不上就到门口扫码现约，旺季不保证）。',
+    '装好「云观博」小程序——这份导览只精确到展厅，展柜级找展品靠它。',
+    '停止检票时间以当天公众号公告为准。'
+  ]
+};
+</script>
+<style>
+/* ============ 基础 ============ */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+[hidden] { display:none !important; }
+html { color-scheme:dark; -webkit-text-size-adjust:100%; }
+body {
+  background:#12100E;
+  color:var(--ink);
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size:17px; line-height:1.7; letter-spacing:.01em;
+}
+:root {
+  --bg:#12100E;
+  --bg2:#171512;
+  --ink:#D9D3C7;
+  --ink2:#A89F8E;
+  --ink3:#6E6759;
+  --hair:rgba(217,211,199,.13);
+  --hair2:rgba(217,211,199,.24);
+  --silver:#9FB0C4;
+  --grid:rgba(159,176,196,.34);
+  --amber:#B9893F;
+  --cobalt:#3E66EA;
+  --cobalt-hi:#6C8CF5;
+  --must:#DAD4C8;
+  --hdh:120px;
+}
+button { font:inherit; color:inherit; background:none; border:0; text-align:inherit; cursor:pointer; touch-action:manipulation; }
+input, textarea { font:inherit; color:var(--ink); background:none; border:0; outline:none; }
+ul { list-style:none; }
+#app { max-width:560px; margin:0 auto; }
+main#list { padding-bottom:calc(84px + env(safe-area-inset-bottom, 0px)); }
+
+/* ============ 顶条（随页面滚走） ============ */
+.topline {
+  padding:calc(10px + env(safe-area-inset-top, 0px)) 16px 6px;
+  font-size:11px; letter-spacing:.18em; color:var(--ink3);
+  display:flex; justify-content:space-between;
+}
+
+/* ============ file:// 警告条 ============ */
+.warnbar {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px 8px 16px;
+  background:rgba(185,137,63,.12);
+  border-bottom:.5px solid rgba(185,137,63,.35);
+}
+.warnbar p { flex:1; font-size:12px; line-height:1.55; color:var(--amber); }
+.warnbar button {
+  flex:none; min-height:44px; padding:0 14px;
+  border:.5px solid rgba(185,137,63,.55); border-radius:8px;
+  font-size:13px; letter-spacing:.08em; color:var(--amber);
+}
+
+/* ============ 首次提示 ============ */
+.banner { padding:12px 16px; border-bottom:.5px solid var(--hair); }
+.banner .bx {
+  border:.5px solid rgba(108,140,245,.35); border-radius:10px;
+  background:rgba(62,102,234,.08); padding:12px 14px;
+}
+.banner p { font-size:13px; line-height:1.7; color:var(--ink2); }
+.banner button {
+  margin-top:8px; min-height:44px; width:100%;
+  border:.5px solid rgba(108,140,245,.5); border-radius:8px;
+  color:#E6E9F4; font-size:14px; letter-spacing:.2em;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ============ 吸顶：mini-map + 线路标签 ============ */
+.hd {
+  position:sticky; top:0; z-index:20;
+  background:var(--bg);
+  padding-top:env(safe-area-inset-top, 0px);
+  border-bottom:.5px solid var(--hair);
+}
+.mmrow { display:flex; align-items:center; gap:12px; padding:8px 16px 4px; height:56px; }
+#mmslot { flex:1; height:44px; }
+#mm { width:100%; height:44px; display:block; }
+.mmcount { flex:none; width:52px; text-align:right; line-height:1.3; }
+.mmnum { font-size:15px; font-variant-numeric:tabular-nums; color:var(--ink); }
+.mmnum b { font-weight:600; }
+.mmlab { font-size:10px; letter-spacing:.12em; color:var(--ink3); }
+.chips { display:flex; gap:8px; padding:4px 16px 10px; }
+.chip {
+  flex:1; min-height:44px;
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  border:.5px solid var(--hair2); border-radius:8px;
+  font-size:14px; letter-spacing:.06em; color:var(--ink2);
+}
+.chip i { width:7px; height:7px; border-radius:50%; flex:none; opacity:.75; }
+.chip[data-tag="must"] i { background:var(--must); }
+.chip[data-tag="mat"]  i { background:var(--amber); }
+.chip[data-tag="ctr"]  i { background:var(--silver); }
+.chip[aria-pressed="true"] { color:var(--ink); }
+.chip[aria-pressed="true"] i { opacity:1; }
+.chip[data-tag="must"][aria-pressed="true"] { border-color:var(--must); }
+.chip[data-tag="mat"][aria-pressed="true"]  { border-color:var(--amber); }
+.chip[data-tag="ctr"][aria-pressed="true"]  { border-color:var(--silver); }
+
+/* ============ mini-map SVG ============ */
+#mm .cell { fill:transparent; stroke:var(--grid); stroke-width:.5; }
+#mm .cell.lit { fill:var(--cobalt); opacity:.95; }
+#mm .cell.pulse { animation:breath 1.5s ease-out 1; }
+@keyframes breath { 0%{opacity:.15} 45%{opacity:1} 100%{opacity:.95} }
+#mm .wall { fill:none; stroke:var(--grid); stroke-width:.75; }
+#mm .pal  { fill:rgba(159,176,196,.10); stroke:var(--grid); stroke-width:.5; }
+#mm .axis { stroke:rgba(159,176,196,.5); stroke-width:.75; }
+#mm.done .cell {
+  fill:var(--cobalt);
+  animation:cellon .6s ease-out both;
+  animation-delay:calc(var(--c) * 30ms);
+}
+@keyframes cellon { 0%{opacity:.08} 60%{opacity:1} 100%{opacity:.88} }
+#mm.done .wall, #mm.done .axis { stroke:var(--cobalt-hi); }
+#mm.done .pal { stroke:var(--cobalt-hi); fill:rgba(62,102,234,.18); }
+
+/* ============ 区块 ============ */
+.zone { border-top:.5px solid var(--hair); }
+.zhead {
+  position:sticky; top:var(--hdh); z-index:10;
+  background:var(--bg);
+  width:100%; min-height:56px;
+  display:flex; align-items:center; gap:12px;
+  padding:10px 16px;
+  border-bottom:.5px solid var(--hair);
+}
+.zglyph {
+  flex:none; width:26px; height:26px;
+  display:flex; align-items:center; justify-content:center;
+  border:.5px solid var(--ink3); color:var(--ink3);
+  font-size:13px;
+}
+.z-A .zglyph { color:var(--silver); border-color:rgba(159,176,196,.55); }
+.z-B .zglyph { color:var(--amber);  border-color:rgba(185,137,63,.55); }
+.z-X .zglyph { color:var(--cobalt-hi); border-color:rgba(108,140,245,.5); }
+.ztit { flex:1; min-width:0; line-height:1.35; }
+.zh2 { display:block; font-size:16px; font-weight:600; letter-spacing:.02em; }
+.zloc { display:block; font-size:11px; letter-spacing:.14em; color:var(--ink3); margin-top:2px; }
+.zcount { flex:none; font-size:12px; color:var(--ink3); font-variant-numeric:tabular-nums; }
+.zchev {
+  flex:none; width:9px; height:9px; margin:0 2px;
+  border-right:1.5px solid var(--ink3); border-bottom:1.5px solid var(--ink3);
+  transform:rotate(-135deg) translate(-2px,-2px);
+  transition:transform .18s;
+}
+.zone.closed .zchev { transform:rotate(45deg); }
+.zone.closed .zbody { display:none; }
+.zalert { font-size:13px; line-height:1.6; color:var(--amber); padding:10px 16px 0; }
+.zmeta  { font-size:12px; line-height:1.6; color:var(--ink3); padding:4px 16px 6px; }
+
+/* ============ 条目 ============ */
+.it { display:flex; align-items:stretch; border-bottom:.5px solid var(--hair); transition:opacity .2s; }
+.it:last-child { border-bottom:0; }
+.it-check {
+  flex:none; width:52px;
+  display:flex; justify-content:center; align-items:flex-start;
+  padding-top:16px;
+}
+.box { position:relative; width:21px; height:21px; border:1.5px solid var(--ink3); border-radius:3px; }
+.it.done .box { background:var(--cobalt); border-color:var(--cobalt); }
+.it.done .box::after {
+  content:''; position:absolute; left:6.5px; top:2.5px;
+  width:5px; height:10px;
+  border:solid #EAF0FF; border-width:0 2px 2px 0;
+  transform:rotate(42deg);
+}
+.it-main { flex:1; min-width:0; padding:0 16px 14px 0; }
+.it-hd { display:block; width:100%; padding-top:13px; }
+.row1 { display:flex; gap:8px; align-items:flex-start; }
+.nm { flex:1; min-width:0; font-size:17px; font-weight:600; line-height:1.5; }
+.sub { font-size:12px; font-weight:400; color:var(--ink3); margin-left:6px; letter-spacing:.03em; }
+.ich {
+  flex:none; width:8px; height:8px; margin:9px 3px 0 0;
+  border-right:1.2px solid var(--ink3); border-bottom:1.2px solid var(--ink3);
+  transform:rotate(45deg);
+  transition:transform .18s;
+}
+.it.open .ich { transform:rotate(-135deg) translate(-2px,-2px); }
+.meta { display:flex; flex-wrap:wrap; gap:10px; margin-top:3px; font-size:11px; letter-spacing:.05em; line-height:1.6; }
+.tg-must { color:var(--must); }
+.tg-mat  { color:var(--amber); }
+.tg-ctr  { color:var(--silver); }
+.tg-tre  { color:var(--cobalt-hi); }
+.cf { color:var(--ink3); border-bottom:.5px dashed var(--ink3); }
+.usermk { color:var(--ink3); }
+.era { margin-top:2px; font-size:12px; color:var(--ink3); letter-spacing:.02em; }
+.why { margin-top:4px; color:var(--ink2); font-size:17px; line-height:1.65; }
+.it:not(.open) .why {
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden;
+}
+.more { display:none; }
+.it.open .more { display:block; margin-top:10px; }
+.look-lab { font-size:11px; letter-spacing:.22em; color:var(--ink3); margin-bottom:3px; }
+.look { color:var(--ink); font-size:17px; line-height:1.65; border-left:1px solid var(--hair2); padding-left:11px; }
+.z-B .look { border-left-color:rgba(185,137,63,.4); }
+.z-A .look { border-left-color:rgba(159,176,196,.4); }
+.z-X .look { border-left-color:rgba(108,140,245,.4); }
+.twist-lab { font-size:11px; letter-spacing:.22em; color:var(--silver); margin:10px 0 3px; }
+.twist { color:var(--ink); font-size:16px; line-height:1.65; border-left:1px solid rgba(159,176,196,.4); padding-left:11px; }
+.warnp { margin-top:10px; font-size:13px; line-height:1.65; color:var(--amber); }
+.vhint { margin-top:8px; font-size:13px; color:var(--ink3); }
+.it.done .it-main { opacity:.4; }
+.dim { opacity:.25 !important; }
+.it.flash { animation:flashbg 1.4s ease-out 1; }
+@keyframes flashbg { 0%{background:rgba(62,102,234,.22)} 100%{background:transparent} }
+
+/* ============ 反直觉块 ============ */
+.ins {
+  margin-top:12px; padding:11px 12px 6px;
+  border:.5px solid rgba(159,176,196,.3); border-radius:10px;
+}
+.ins.got { border-color:rgba(62,102,234,.55); }
+.inshd { display:flex; gap:10px; align-items:baseline; margin-bottom:4px; }
+.insid { font-size:11px; letter-spacing:.18em; color:var(--silver); }
+.ins .inm { font-size:14px; font-weight:600; color:var(--ink); }
+.seem { font-size:13px; color:var(--ink3); }
+.seem b { font-weight:400; color:var(--ink2); }
+.ins .tw { margin-top:2px; font-size:15px; line-height:1.65; color:var(--ink); }
+.ins .ac { margin-top:6px; font-size:14px; line-height:1.6; color:var(--ink2); border-left:1px solid rgba(62,102,234,.45); padding-left:10px; }
+.foundbtn {
+  margin-top:8px; width:100%; min-height:44px;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  border-top:.5px solid var(--hair);
+  font-size:13px; letter-spacing:.2em; color:var(--ink3);
+}
+.ins.got .foundbtn { color:var(--cobalt-hi); }
+.inslink { font-size:12px; color:var(--ink3); text-decoration:underline; text-underline-offset:3px; }
+
+/* ============ 输入层 ============ */
+.acts { display:flex; gap:6px; margin-top:12px; }
+.act {
+  flex:1; min-height:44px;
+  display:flex; align-items:center; justify-content:center;
+  border:.5px solid var(--hair2); border-radius:8px;
+  font-size:13px; letter-spacing:.04em; color:var(--ink2);
+  user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+}
+.act.on { color:var(--cobalt-hi); border-color:rgba(108,140,245,.5); }
+.act.rec { color:#E88; border-color:rgba(230,110,110,.6); }
+.act.off { opacity:.35; }
+.thumbs { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.thumbs:empty { display:none; }
+.th {
+  width:64px; height:64px; flex:none;
+  border:.5px solid var(--hair2); border-radius:6px;
+  background-size:cover; background-position:center;
+  padding:0;
+}
+.au {
+  display:flex; align-items:stretch; height:44px;
+  border:.5px solid var(--hair2); border-radius:8px; overflow:hidden;
+}
+.aup {
+  display:flex; align-items:center; gap:6px; padding:0 12px;
+  font-size:13px; color:var(--ink2); font-variant-numeric:tabular-nums;
+}
+.au.playing .aup { color:var(--cobalt-hi); }
+.aux { width:40px; display:flex; align-items:center; justify-content:center; color:var(--ink3); border-left:.5px solid var(--hair); }
+.notewrap { margin-top:10px; position:relative; }
+.notewrap textarea {
+  width:100%; min-height:72px; resize:none;
+  border:.5px solid var(--hair2); border-radius:8px;
+  padding:10px 12px; font-size:16px; line-height:1.6; color:var(--ink);
+  background:rgba(217,211,199,.03);
+}
+.notewrap .saved {
+  position:absolute; right:8px; bottom:8px;
+  font-size:11px; color:var(--ink3); opacity:0; transition:opacity .3s;
+}
+.notewrap .saved.on { opacity:1; }
+.doubtwrap { margin-top:8px; display:flex; gap:6px; }
+.doubtwrap input {
+  flex:1; min-height:44px; padding:0 12px; font-size:16px;
+  border:.5px solid var(--hair2); border-radius:8px;
+  background:rgba(217,211,199,.03);
+}
+.doubtwrap .dok {
+  flex:none; min-height:44px; padding:0 14px;
+  border:.5px solid var(--hair2); border-radius:8px;
+  font-size:13px; color:var(--ink2);
+}
+.xdel {
+  margin-top:10px; width:100%; min-height:44px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; letter-spacing:.15em; color:var(--ink3);
+}
+.nrow {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; min-height:52px;
+  font-size:14px; letter-spacing:.1em; color:var(--ink3);
+  border-bottom:.5px solid var(--hair);
+}
+.nrow i { font-style:normal; color:var(--cobalt-hi); }
+
+/* ============ 避坑注记 ============ */
+.nt { padding:12px 16px 14px 52px; border-bottom:.5px solid var(--hair); transition:opacity .2s; }
+.ntlab { font-size:12px; letter-spacing:.1em; color:var(--amber); }
+.nttx { margin-top:3px; font-size:15px; line-height:1.65; color:var(--ink2); }
+
+/* ============ 页脚 ============ */
+footer {
+  padding:22px 16px 30px;
+  font-size:12px; line-height:1.9; color:var(--ink3);
+  border-top:.5px solid var(--hair);
+}
+footer p + p { margin-top:8px; }
+
+/* ============ 底栏 ============ */
+.bar {
+  position:fixed; left:0; right:0; bottom:0; z-index:40;
+  display:flex;
+  background:#141210;
+  border-top:.5px solid var(--hair2);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+body.kb .bar { display:none; }
+.bar > button {
+  flex:1; min-height:54px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  color:var(--ink3); font-size:11px; letter-spacing:.1em;
+}
+.bar > button svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.bar > button .blab { display:flex; gap:5px; align-items:baseline; }
+.bar > button b { font-weight:400; font-size:10px; color:var(--cobalt-hi); font-variant-numeric:tabular-nums; }
+.bar > button.cur { color:var(--ink); }
+
+/* ============ 底部抽屉 ============ */
+.sheet { position:fixed; inset:0; z-index:50; visibility:hidden; }
+.sheet.on { visibility:visible; }
+.sheet .veil { position:absolute; inset:0; background:rgba(0,0,0,.55); opacity:0; transition:opacity .25s; }
+.sheet.on .veil { opacity:1; }
+.sheet .panel {
+  position:absolute; left:0; right:0; bottom:0;
+  max-width:560px; margin:0 auto;
+  max-height:86vh;
+  background:var(--bg2);
+  border:.5px solid var(--hair2); border-bottom:0;
+  border-radius:14px 14px 0 0;
+  transform:translateY(103%);
+  transition:transform .3s cubic-bezier(.25,.7,.3,1);
+  display:flex; flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+.sheet.on .panel { transform:none; }
+.grip { width:100%; min-height:30px; display:flex; align-items:center; justify-content:center; flex:none; }
+.grip i { width:36px; height:4px; border-radius:2px; background:var(--hair2); }
+.shead { flex:none; padding:0 16px 10px; display:flex; align-items:baseline; gap:10px; }
+.shead h2 { font-size:15px; font-weight:600; letter-spacing:.06em; }
+.shead .sm { font-size:11px; color:var(--ink3); letter-spacing:.08em; }
+.sbody { overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:0 16px 24px; }
+
+.srch {
+  display:flex; align-items:center; gap:8px;
+  margin:0 16px 10px; padding:0 12px;
+  border:.5px solid var(--hair2); border-radius:10px; flex:none;
+}
+.srch svg { width:15px; height:15px; stroke:var(--ink3); fill:none; stroke-width:1.5; flex:none; }
+.srch input { flex:1; min-height:46px; font-size:16px; }
+.srch input::placeholder { color:var(--ink3); }
+
+.qsec { margin-top:14px; }
+.qsec h3 { font-size:11px; letter-spacing:.24em; color:var(--ink3); margin-bottom:8px; }
+.qtable { width:100%; border-collapse:collapse; }
+.qtable td { padding:7px 8px 7px 0; border-top:.5px solid var(--hair); font-size:14px; vertical-align:top; line-height:1.55; }
+.qtable td.dy { width:3.2em; font-weight:600; color:var(--ink); white-space:nowrap; }
+.qtable td.sp { width:7.2em; color:var(--ink2); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.qtable td.cp { color:var(--ink2); }
+.callout {
+  margin-top:10px; padding:10px 12px;
+  border:.5px solid rgba(108,140,245,.4); border-radius:8px;
+  font-size:13px; line-height:1.6; color:#C6CFDC;
+  background:rgba(62,102,234,.07);
+}
+.qrow { padding:8px 0; border-top:.5px solid var(--hair); }
+.qrow .qt { font-size:15px; font-weight:600; }
+.qrow .qd { font-size:13px; color:var(--ink2); line-height:1.6; margin-top:1px; }
+.qli { padding:7px 0 7px 14px; border-top:.5px solid var(--hair); font-size:14px; color:var(--ink2); line-height:1.6; position:relative; }
+.qli::before { content:''; position:absolute; left:2px; top:16px; width:4px; height:4px; border-radius:50%; background:var(--ink3); }
+
+.sres button {
+  display:block; width:100%; min-height:48px;
+  padding:9px 0; border-bottom:.5px solid var(--hair);
+}
+.sres .rk { font-size:10px; letter-spacing:.14em; color:var(--ink3); margin-right:8px; }
+.sres .rn { font-size:15px; color:var(--ink); }
+.sres .rs { display:block; font-size:12px; color:var(--ink3); margin-top:1px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sres .rs b { color:var(--cobalt-hi); font-weight:400; }
+.snone { padding:20px 0; font-size:13px; color:var(--ink3); text-align:center; }
+
+.mrow {
+  display:flex; align-items:center; gap:10px;
+  width:100%; min-height:50px; padding:8px 0;
+  border-bottom:.5px solid var(--hair);
+  font-size:15px; color:var(--ink);
+}
+.mrow small { flex:1; text-align:right; font-size:11px; color:var(--ink3); letter-spacing:.04em; }
+.msec { margin-top:16px; }
+.msec h3 { font-size:11px; letter-spacing:.24em; color:var(--ink3); margin-bottom:4px; }
+.mhint { font-size:12px; color:var(--ink3); line-height:1.7; margin-top:8px; }
+.dq { padding:9px 0; border-bottom:.5px solid var(--hair); display:flex; gap:10px; align-items:flex-start; }
+.dq .dqt { flex:1; min-width:0; }
+.dq .dqn { font-size:14px; color:var(--ink); }
+.dq .dqx { font-size:13px; color:var(--ink2); margin-top:1px; }
+.dq .dtime { font-size:11px; color:var(--ink3); font-variant-numeric:tabular-nums; padding-top:3px; }
+.dq .ddel { flex:none; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; color:var(--ink3); }
+
+.xform { margin-top:10px; padding:12px; border:.5px solid var(--hair2); border-radius:10px; }
+.xform input[type=text] {
+  width:100%; min-height:44px; padding:0 12px; font-size:16px;
+  border:.5px solid var(--hair2); border-radius:8px;
+  background:rgba(217,211,199,.03);
+}
+.xform textarea {
+  width:100%; min-height:60px; margin-top:8px; padding:10px 12px; resize:none;
+  font-size:16px; line-height:1.6;
+  border:.5px solid var(--hair2); border-radius:8px;
+  background:rgba(217,211,199,.03);
+}
+.xform .xrow { display:flex; gap:8px; margin-top:8px; }
+.xform .xrow button {
+  flex:1; min-height:44px;
+  display:flex; align-items:center; justify-content:center;
+  border:.5px solid var(--hair2); border-radius:8px;
+  font-size:14px; color:var(--ink2);
+}
+.xform .xrow button.primary { color:#E6E9F4; border-color:rgba(108,140,245,.5); background:rgba(62,102,234,.13); }
+.xform .thumbs { margin-top:8px; }
+
+/* ============ 灯箱 / 录音 / toast ============ */
+.lightbox { position:fixed; inset:0; z-index:70; background:rgba(0,0,0,.94); display:flex; flex-direction:column; }
+.lightbox .lbtop { flex:none; display:flex; justify-content:space-between; padding:calc(6px + env(safe-area-inset-top,0px)) 8px 6px; }
+.lightbox .lbtop button { min-height:44px; min-width:44px; padding:0 16px; font-size:14px; color:var(--ink2); letter-spacing:.1em; }
+.lightbox .lbimg { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:0 8px calc(20px + env(safe-area-inset-bottom,0px)); }
+.lightbox img { max-width:100%; max-height:100%; border-radius:4px; }
+.lightbox .lbcap { flex:none; text-align:center; font-size:12px; color:var(--ink3); padding-bottom:calc(14px + env(safe-area-inset-bottom,0px)); }
+
+.recpill {
+  position:fixed; left:50%; top:38%; transform:translateX(-50%); z-index:80;
+  display:flex; align-items:center; gap:10px;
+  padding:14px 22px; border-radius:14px;
+  background:rgba(23,21,18,.96); border:.5px solid rgba(230,110,110,.5);
+  font-size:15px; color:var(--ink); font-variant-numeric:tabular-nums;
+}
+.recpill i { width:10px; height:10px; border-radius:50%; background:#E66; animation:recblink 1s ease infinite; }
+@keyframes recblink { 50%{opacity:.25} }
+.recpill span { color:var(--ink3); font-size:12px; }
+
+#toast {
+  position:fixed; left:50%; bottom:calc(74px + env(safe-area-inset-bottom, 0px)); z-index:90;
+  transform:translate(-50%, 8px); opacity:0;
+  transition:transform .25s, opacity .25s;
+  background:rgba(30,27,23,.97); border:.5px solid var(--hair2); border-radius:10px;
+  padding:10px 18px; font-size:13px; color:var(--ink); letter-spacing:.03em;
+  pointer-events:none; max-width:86vw; text-align:center;
+}
+#toast.on { transform:translate(-50%, 0); opacity:1; }
+
+/* ============ 动效约束 ============ */
+@media (prefers-reduced-motion: reduce) {
+  * { animation:none !important; transition:none !important; }
+  #mm.done .cell { opacity:.88; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topline"><span id="tl-l"></span><span id="tl-r"></span></div>
+
+  <div id="bannerslot"></div>
+
+  <header class="hd" id="hd">
+    <div class="warnbar" id="warnbar" hidden>
+      <p id="warntx"></p>
+      <button data-cmd="export-journal">导出</button>
+    </div>
+    <div class="mmrow">
+      <div id="mmslot"><svg id="mm" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+      <div class="mmcount">
+        <div class="mmnum"><b id="cnt">0</b>/<span id="total">0</span></div>
+        <div class="mmlab" id="cntlab">看过了</div>
+      </div>
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip" data-tag="must" aria-pressed="false"><i></i>必看</button>
+      <button class="chip" data-tag="mat"  aria-pressed="false"><i></i>物质</button>
+      <button class="chip" data-tag="ctr"  aria-pressed="false"><i></i>反直觉</button>
+    </div>
+  </header>
+
+  <main id="list"></main>
+
+  <footer id="foot"></footer>
+
+</div>
+
+<nav class="bar" id="bar">
+  <button data-cmd="sheet" data-sheet="qref">
+    <svg viewBox="0 0 20 20"><path d="M3.5 4.5h13M3.5 9.5h13M3.5 14.5h8"/></svg>
+    <span class="blab">速查</span>
+  </button>
+  <button data-cmd="sheet" data-sheet="search">
+    <svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="M12.5 12.5l4.5 4.5"/></svg>
+    <span class="blab">搜索</span>
+  </button>
+  <button data-cmd="sheet" data-sheet="ins">
+    <svg viewBox="0 0 20 20"><path d="M4 6.5h10.5l-3-3M16 13.5H5.5l3 3"/></svg>
+    <span class="blab">反直觉<b id="insbadge"></b></span>
+  </button>
+  <button data-cmd="sheet" data-sheet="mine">
+    <svg viewBox="0 0 20 20"><path d="M4 16.5l1-4 8.5-8.5a1.4 1.4 0 0 1 2 0l1 1a1.4 1.4 0 0 1 0 2L8 15.5l-4 1z"/></svg>
+    <span class="blab">手记<b id="minebadge"></b></span>
+  </button>
+</nav>
+
+<section class="sheet" id="sh-qref" aria-label="速查">
+  <div class="veil" data-cmd="close"></div>
+  <div class="panel">
+    <button class="grip" data-cmd="close" aria-label="收起"><i></i></button>
+    <div class="shead"><h2>速查</h2><span class="sm">一次都不用掏手机搜</span></div>
+    <div class="srch"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="M12.5 12.5l4.5 4.5"/></svg><input id="qrefin" type="search" placeholder="朝代 / 名词，支持拼音首字母（lj → 鎏金）" autocomplete="off"></div>
+    <div class="sbody" id="qrefbody"></div>
+  </div>
+</section>
+
+<section class="sheet" id="sh-search" aria-label="搜索">
+  <div class="veil" data-cmd="close"></div>
+  <div class="panel">
+    <button class="grip" data-cmd="close" aria-label="收起"><i></i></button>
+    <div class="shead"><h2>搜索</h2><span class="sm">展品 · 反直觉 · 速查，全离线</span></div>
+    <div class="srch"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="M12.5 12.5l4.5 4.5"/></svg><input id="srchin" type="search" placeholder="名称、看点、标签……" autocomplete="off"></div>
+    <div class="sbody sres" id="srchbody"><p class="snone">看到一件东西不确定在不在清单上，输进来，三秒有答案。</p></div>
+  </div>
+</section>
+
+<section class="sheet" id="sh-ins" aria-label="反直觉线">
+  <div class="veil" data-cmd="close"></div>
+  <div class="panel">
+    <button class="grip" data-cmd="close" aria-label="收起"><i></i></button>
+    <div class="shead"><h2>反直觉线</h2><span class="sm" id="insheadsm"></span></div>
+    <div class="sbody" id="insbody"></div>
+  </div>
+</section>
+
+<section class="sheet" id="sh-mine" aria-label="手记与导出">
+  <div class="veil" data-cmd="close"></div>
+  <div class="panel">
+    <button class="grip" data-cmd="close" aria-label="收起"><i></i></button>
+    <div class="shead"><h2>手记</h2><span class="sm">自由条目 · 疑问队列 · 导出</span></div>
+    <div class="sbody" id="minebody"></div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lbtop">
+    <button data-cmd="lbdel">删除</button>
+    <button data-cmd="lbclose">关闭</button>
+  </div>
+  <div class="lbimg"><img id="lbimg" alt=""></div>
+  <p class="lbcap" id="lbcap"></p>
+</div>
+
+<div class="recpill" id="recpill" hidden><i></i><em id="rectime" style="font-style:normal">0:00</em><span>松开结束 · 太短不存</span></div>
+
+<div id="toast"></div>
+
+<input type="file" id="photoIn" accept="image/*" multiple hidden>
+<input type="file" id="importIn" accept=".json,application/json" hidden>
+
+<script>
+(function () {
+'use strict';
+
+/* ================= service worker 源码（托管时可另存为 sw.js 放同目录） ================= */
+var SW_SRC = "var C='mguide-v2';\n" +
+"self.addEventListener('install',function(e){self.skipWaiting();e.waitUntil(caches.open(C).then(function(c){return c.addAll([self.registration.scope]).then(function(){return c.add(self.registration.scope+'index.html').catch(function(){})})}))});\n" +
+"self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('mguide-')===0&&k!==C}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});\n" +
+"self.addEventListener('fetch',function(e){\n" +
+"  if(e.request.mode!=='navigate'&&!e.request.url.match(/\\.html(\\?|$)/))return;\n" +
+"  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(function(hit){\n" +
+"    var net=fetch(e.request).then(function(res){if(res&&res.ok){var cp=res.clone();caches.open(C).then(function(c){c.put(e.request,cp)})}return res}).catch(function(){return hit});\n" +
+"    return hit||net;\n" +
+"  }))\n" +
+"});";
+
+/* ================= 工具 ================= */
+function $(s, el) { return (el || document).querySelector(s); }
+function $$(s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); }
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+function tfmt(t) { var d = new Date(t); return pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function durfmt(ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + pad2(s % 60); }
+var toastTimer = null;
+function toast(msg) {
+  var el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { el.classList.remove('on'); }, 2200);
+}
+function blobDataURL(blob) {
+  return new Promise(function (res, rej) {
+    var r = new FileReader();
+    r.onload = function () { res(r.result); };
+    r.onerror = function () { rej(r.error); };
+    r.readAsDataURL(blob);
+  });
+}
+function dataURLBlob(u) {
+  var i = u.indexOf(','), meta = u.slice(5, i), b64 = u.slice(i + 1);
+  var mime = meta.split(';')[0] || 'application/octet-stream';
+  var bin = atob(b64), arr = new Uint8Array(bin.length);
+  for (var j = 0; j < bin.length; j++) arr[j] = bin.charCodeAt(j);
+  return new Blob([arr], { type: mime });
+}
+
+/* ================= 环境 ================= */
+var IS_FILE = location.protocol === 'file:';
+var IS_HTTP = /^https?:$/.test(location.protocol);
+var IS_IOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+var STANDALONE = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || !!navigator.standalone;
+/* 录音能力探测：iOS Safari 只认 mp4/aac，webm 是 Chrome/Android 的。
+   逐个 isTypeSupported，取第一个可用；全不可用则禁用录音并给出原因，不静默。 */
+var MIC_MIME = null, MIC_WHY = '', CAN_MIC = false;
+(function () {
+  if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+    MIC_WHY = '这个打开方式拿不到麦克风——要 https 地址或本地文件打开'; return;
+  }
+  if (!window.MediaRecorder) {
+    MIC_WHY = '此浏览器不支持录音（缺 MediaRecorder）'; return;
+  }
+  if (!MediaRecorder.isTypeSupported) {
+    MIC_WHY = '此浏览器无法探测录音格式，为稳妥起见已停用'; return;
+  }
+  var list = ['audio/mp4', 'audio/aac', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus'];
+  for (var i = 0; i < list.length; i++) {
+    if (MediaRecorder.isTypeSupported(list[i])) { MIC_MIME = list[i]; break; }
+  }
+  if (!MIC_MIME) { MIC_WHY = '录音格式探测全部失败（mp4 / aac / webm 都不支持）'; return; }
+  CAN_MIC = true;
+})();
+var swState = 'none'; // none | active | fail
+
+/* ================= 索引 ================= */
+var TAGNAME = { must:'必看', mat:'物质', ctr:'反直觉' };
+var ITEMS = {};          // id -> item（含 block id）
+var ORDER = [];          // 预置条目顺序
+MUSEUM.blocks.forEach(function (z) {
+  z.items.forEach(function (it) {
+    if (it.type === 'note') return;
+    it.block = z.id;
+    ITEMS[it.id] = it;
+    ORDER.push(it.id);
+  });
+});
+var INS_BY_ITEM = {};
+MUSEUM.insights.forEach(function (r) {
+  if (!r.link) return;
+  (INS_BY_ITEM[r.link] = INS_BY_ITEM[r.link] || []).push(r);
+});
+var INS_BY_ID = {};
+MUSEUM.insights.forEach(function (r) { INS_BY_ID[r.id] = r; });
+
+function nameOf(id) {
+  if (ITEMS[id]) return ITEMS[id].nm;
+  var c = S.custom.filter(function (x) { return x.id === id; })[0];
+  return c ? c.nm : id;
+}
+
+/* ================= IndexedDB ================= */
+var DB_NAME = 'mguide-' + MUSEUM.name + '-' + MUSEUM.date;
+var db = null, mem = null, memSeq = 1;
+
+function openDB() {
+  return new Promise(function (res) {
+    function fallback() {
+      if (!mem) mem = { state:new Map(), notes:new Map(), media:new Map(), doubts:new Map(), custom:new Map() };
+      db = null; res();
+    }
+    if (!('indexedDB' in window)) return fallback();
+    var done = false;
+    var timer = setTimeout(function () { if (!done) { done = true; fallback(); } }, 3000);
+    try {
+      var rq = indexedDB.open(DB_NAME, 1);
+      rq.onupgradeneeded = function () {
+        var d = rq.result;
+        d.createObjectStore('state');
+        d.createObjectStore('notes', { keyPath:'id' });
+        d.createObjectStore('media', { keyPath:'id', autoIncrement:true });
+        d.createObjectStore('doubts', { keyPath:'id', autoIncrement:true });
+        d.createObjectStore('custom', { keyPath:'id' });
+      };
+      rq.onsuccess = function () { if (!done) { done = true; clearTimeout(timer); db = rq.result; res(); } };
+      rq.onerror = function () { if (!done) { done = true; clearTimeout(timer); fallback(); } };
+    } catch (e) { if (!done) { done = true; clearTimeout(timer); fallback(); } }
+  });
+}
+function pReq(r) {
+  return new Promise(function (res, rej) {
+    r.onsuccess = function () { res(r.result); };
+    r.onerror = function () { rej(r.error); };
+  });
+}
+function dbGet(st, k) {
+  if (mem) return Promise.resolve(mem[st].get(k));
+  return pReq(db.transaction(st).objectStore(st).get(k));
+}
+function dbPut(st, v, k) {
+  if (mem) {
+    var key = k !== undefined ? k : (v && v.id !== undefined ? v.id : memSeq++);
+    if (v && typeof v === 'object' && v.id === undefined && k === undefined) v.id = key;
+    mem[st].set(key, v);
+    return Promise.resolve(key);
+  }
+  var os = db.transaction(st, 'readwrite').objectStore(st);
+  return pReq(k !== undefined ? os.put(v, k) : os.put(v));
+}
+function dbDel(st, k) {
+  if (mem) { mem[st].delete(k); return Promise.resolve(); }
+  return pReq(db.transaction(st, 'readwrite').objectStore(st).delete(k));
+}
+function dbAll(st) {
+  if (mem) return Promise.resolve(Array.from(mem[st].values()));
+  return pReq(db.transaction(st).objectStore(st).getAll());
+}
+function dbClear(st) {
+  if (mem) { mem[st].clear(); return Promise.resolve(); }
+  return pReq(db.transaction(st, 'readwrite').objectStore(st).clear());
+}
+
+/* ================= 状态 ================= */
+var S = {
+  checks:{},   // itemId -> ts
+  found:{},    // insightId -> ts
+  notes:{},    // itemId -> {id, text, t}
+  media:[],    // {id, item, kind:'photo'|'audio', blob, thumb?, mime?, dur?, t}
+  doubts:[],   // {id, item, nm, txt, t}
+  custom:[],   // {id, nm, cell, t}
+  filters:{}
+};
+var TOTAL = 0;
+var mediaURL = {};   // media id -> objectURL（缩略图或音频）
+
+function hydrate() {
+  return Promise.all([
+    dbGet('state', 'checks'), dbGet('state', 'found'), dbGet('state', 'seen'),
+    dbAll('notes'), dbAll('media'), dbAll('doubts'), dbAll('custom')
+  ]).then(function (r) {
+    S.checks = r[0] || {};
+    S.found = r[1] || {};
+    S.seen = !!r[2];
+    S.notes = {};
+    r[3].forEach(function (n) { S.notes[n.id] = n; });
+    S.media = r[4].sort(function (a, b) { return a.t - b.t; });
+    S.doubts = r[5].sort(function (a, b) { return a.t - b.t; });
+    S.custom = r[6].sort(function (a, b) { return a.t - b.t; });
+  });
+}
+
+/* ================= mini-map ================= */
+var SVGNS = 'http://www.w3.org/2000/svg';
+var HERO = MUSEUM.hero;
+function colX(c) { return 6 + c * 34 + (c >= HERO.cols / 2 ? 4 : 0); }
+function rowY(r) { return 6 + r * 24; }
+function svgEl(name, attrs) {
+  var e = document.createElementNS(SVGNS, name);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+function addCellRect(g, id, c, r) {
+  var rect = svgEl('rect', {
+    x: colX(c), y: rowY(r), width: 32, height: 22,
+    'class': 'cell', 'vector-effect': 'non-scaling-stroke'
+  });
+  rect.style.setProperty('--c', c);
+  rect.id = 'c-' + id;
+  g.appendChild(rect);
+  return rect;
+}
+var mmGrid = null;
+function buildMinimap() {
+  var mm = $('#mm');
+  var W = colX(HERO.cols - 1) + 32 + 6;
+  var H = rowY(HERO.rows - 1) + 22 + 6;
+  mm.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  var g = svgEl('g', {});
+  mmGrid = g;
+  mm.appendChild(g);
+  var P = HERO.palace;
+  g.appendChild(svgEl('rect', { x:2.5, y:2.5, width:W-5, height:H-5, 'class':'wall', 'vector-effect':'non-scaling-stroke' }));
+  g.appendChild(svgEl('rect', {
+    x:colX(P[0]), y:rowY(P[2]),
+    width:colX(P[1]) + 32 - colX(P[0]), height:rowY(P[3]) + 22 - rowY(P[2]),
+    'class':'pal', 'vector-effect':'non-scaling-stroke'
+  }));
+  var axisX = (colX(HERO.cols / 2 - 1) + 32 + colX(HERO.cols / 2)) / 2;
+  g.appendChild(svgEl('line', { x1:axisX, y1:rowY(P[3]) + 22, x2:axisX, y2:H - 3, 'class':'axis', 'vector-effect':'non-scaling-stroke' }));
+  var cellOf = {};
+  for (var id in HERO.cells) cellOf[HERO.cells[id][0] + ',' + HERO.cells[id][1]] = id;
+  for (var r = 0; r < HERO.rows; r++) {
+    for (var c = 0; c < HERO.cols; c++) {
+      if (r >= P[2] && r <= P[3] && c >= P[0] && c <= P[1]) continue;
+      var eid = cellOf[c + ',' + r];
+      if (eid) { addCellRect(g, eid, c, r); continue; }
+      var rect = svgEl('rect', {
+        x:colX(c), y:rowY(r), width:32, height:22,
+        'class':'cell', 'vector-effect':'non-scaling-stroke'
+      });
+      rect.style.setProperty('--c', c);
+      g.appendChild(rect);
+    }
+  }
+  S.custom.forEach(function (x) { if (x.cell) addCellRect(g, x.id, x.cell[0], x.cell[1]); });
+}
+function nextSpare() {
+  var used = S.custom.filter(function (x) { return x.cell; }).length;
+  return HERO.spare[used] || null;
+}
+
+/* ================= 渲染 ================= */
+function tagSpans(it) {
+  var out = (it.tags || []).map(function (t) {
+    return '<span class="tg-' + t + '">' + TAGNAME[t] + '</span>';
+  });
+  if (it.treasure) out.push('<span class="tg-tre">镇馆</span>');
+  if (it.conf === 'verify') out.push('<span class="cf">待确认</span>');
+  return out.join('');
+}
+function userMarks(id) {
+  var out = '';
+  if (S.notes[id] && S.notes[id].text) out += '<span class="usermk">✎</span>';
+  var nd = S.doubts.filter(function (d) { return d.item === id; }).length;
+  if (nd) out += '<span class="usermk">？×' + nd + '</span>';
+  return out;
+}
+function insBlock(r) {
+  var got = S.found[r.id];
+  return '<div class="ins' + (got ? ' got' : '') + '" data-rid="' + r.id + '">' +
+    '<div class="inshd"><span class="insid">反直觉 · ' + r.id + '</span>' +
+      '<span class="inm">' + esc(r.nm) + '</span>' +
+      (r.conf === 'verify' ? '<span class="cf">待现场确认</span>' : '') + '</div>' +
+    '<p class="seem">3 秒走过：<b>' + esc(r.seem) + '</b></p>' +
+    '<p class="tw">' + esc(r.twist) + '</p>' +
+    '<p class="ac">' + esc(r.act) + '</p>' +
+    '<button class="foundbtn" data-cmd="found" data-rid="' + r.id + '">' +
+      (got ? '已找到 · ' + tfmt(got) : '找到了') + '</button>' +
+  '</div>';
+}
+function itemHTML(zid, it) {
+  if (it.type === 'note') {
+    return '<div class="nt" data-tags="">' +
+      '<p class="ntlab">' + esc(it.lab) + '</p>' +
+      '<p class="nttx">' + esc(it.tx) + '</p></div>';
+  }
+  var custom = zid === MUSEUM.customBlock.id;
+  var ins = INS_BY_ITEM[it.id] || [];
+  var more = '';
+  if (it.era) more += '<p class="era">' + esc(it.era) + '</p>';
+  if (it.look) more += '<div class="look-lab">找什么</div><p class="look">' + esc(it.look) + '</p>';
+  if (it.twist) more += '<div class="twist-lab">反直觉点</div><p class="twist">' + esc(it.twist) + '</p>';
+  (it.warn || []).forEach(function (w) { more += '<p class="warnp">⚠ ' + esc(w) + '</p>'; });
+  if (it.conf === 'verify') more += '<p class="vhint">' + esc(it.vnote || '待现场确认——展厅里找不到就直接划掉，别浪费时间。') + '</p>';
+  ins.forEach(function (r) { more += insBlock(r); });
+  more +=
+    '<div class="acts" data-item="' + it.id + '">' +
+      '<button class="act a-photo" data-cmd="photo" data-item="' + it.id + '">拍照</button>' +
+      '<button class="act a-voice' + (CAN_MIC ? '' : ' off') + '" data-item="' + it.id + '"' +
+        (CAN_MIC ? '' : ' aria-disabled="true"') + '>语音</button>' +
+      '<button class="act a-note" data-cmd="note" data-item="' + it.id + '">笔记</button>' +
+      '<button class="act a-doubt" data-cmd="doubt" data-item="' + it.id + '">存疑</button>' +
+    '</div>' +
+    '<div class="notewrap" data-item="' + it.id + '"' + (S.notes[it.id] && S.notes[it.id].text ? '' : ' hidden') + '>' +
+      '<textarea placeholder="随手记…" data-item="' + it.id + '">' + esc(S.notes[it.id] ? S.notes[it.id].text : '') + '</textarea>' +
+      '<span class="saved">已存 ✓</span></div>' +
+    '<div class="doubtwrap" data-item="' + it.id + '" hidden>' +
+      '<input type="text" placeholder="疑点补一句（可不填）" data-item="' + it.id + '">' +
+      '<button class="dok" data-cmd="doubtok" data-item="' + it.id + '">记上</button></div>' +
+    (custom ? '<button class="xdel" data-cmd="xdel" data-item="' + it.id + '">删除这条</button>' : '');
+  return '<li class="it" id="it-' + it.id + '" data-id="' + it.id + '" data-tags="' + (it.tags || []).join(',') + '">' +
+    '<button class="it-check" data-cmd="check" data-item="' + it.id + '" role="checkbox" aria-checked="false" aria-label="看过了：' + esc(it.nm) + '"><span class="box"></span></button>' +
+    '<div class="it-main">' +
+      '<button class="it-hd" data-cmd="expand" data-item="' + it.id + '" aria-expanded="false">' +
+        '<span class="row1"><span class="nm">' + esc(it.nm) +
+          (it.sub ? '<span class="sub">' + esc(it.sub) + '</span>' : '') +
+        '</span><i class="ich"></i></span>' +
+        '<span class="meta" id="meta-' + it.id + '">' + tagSpans(it) + userMarks(it.id) + '</span>' +
+        '<p class="why">' + esc(it.why) + '</p>' +
+      '</button>' +
+      '<div class="thumbs" id="th-' + it.id + '"></div>' +
+      '<div class="more">' + more + '</div>' +
+    '</div></li>';
+}
+function zoneHTML(z, open) {
+  var out = [];
+  out.push('<section class="zone z-' + z.id + (open ? '' : ' closed') + '" id="z-' + z.id + '">');
+  out.push('<button class="zhead" data-cmd="zone" data-zone="' + z.id + '" aria-expanded="' + open + '">' +
+    '<span class="zglyph">' + z.id + '</span>' +
+    '<span class="ztit"><span class="zh2">' + esc(z.title) + '</span><span class="zloc">' + esc(z.loc) + '</span></span>' +
+    '<span class="zcount" id="zc-' + z.id + '"></span>' +
+    '<i class="zchev"></i></button>');
+  out.push('<div class="zbody">');
+  if (z.alert) out.push('<p class="zalert">' + esc(z.alert) + '</p>');
+  if (z.meta) out.push('<p class="zmeta">' + esc(z.meta) + '</p>');
+  out.push('<ul>');
+  z.items.forEach(function (it) { out.push(itemHTML(z.id, it)); });
+  out.push('</ul>');
+  if (z.id === MUSEUM.customBlock.id) {
+    out.push('<button class="nrow" data-cmd="newcustom"><i>＋</i>记一件导览外的（名称、照片、笔记）</button>');
+  }
+  out.push('</div></section>');
+  return out.join('');
+}
+function renderList() {
+  var out = [];
+  MUSEUM.blocks.forEach(function (z) { out.push(zoneHTML(z, z.id === 'A')); });
+  var zx = {
+    id: MUSEUM.customBlock.id,
+    title: MUSEUM.customBlock.title,
+    loc: MUSEUM.customBlock.loc,
+    items: S.custom
+  };
+  out.push(zoneHTML(zx, true));
+  $('#list').innerHTML = out.join('');
+  TOTAL = ORDER.length + S.custom.length;
+  $('#total').textContent = TOTAL;
+  ORDER.concat(S.custom.map(function (x) { return x.id; })).forEach(function (id) {
+    if (S.checks[id]) applyCheckUI(id, true, false);
+    renderThumbs(id);
+  });
+  applyFilters();
+  updateCounts();
+}
+function renderCustomZone() {
+  var zx = {
+    id: MUSEUM.customBlock.id,
+    title: MUSEUM.customBlock.title,
+    loc: MUSEUM.customBlock.loc,
+    items: S.custom
+  };
+  var old = $('#z-' + MUSEUM.customBlock.id);
+  var wrap = document.createElement('div');
+  wrap.innerHTML = zoneHTML(zx, true);
+  old.parentNode.replaceChild(wrap.firstChild, old);
+  TOTAL = ORDER.length + S.custom.length;
+  $('#total').textContent = TOTAL;
+  S.custom.forEach(function (x) {
+    if (S.checks[x.id]) applyCheckUI(x.id, true, false);
+    renderThumbs(x.id);
+  });
+  applyFilters();
+  updateCounts();
+}
+function renderFooter() {
+  var out = MUSEUM.notes.map(function (p) { return '<p>' + esc(p) + '</p>'; });
+  out.push('<p>进度、照片、笔记都存在这台手机的浏览器里（IndexedDB）。逛完在「手记」里导出参观志——App 是工具，它才是纪念品。</p>');
+  $('#foot').innerHTML = out.join('');
+}
+
+/* ================= 计数 / 筛选 ================= */
+function updateCounts() {
+  var n = Object.keys(S.checks).length;
+  $('#cnt').textContent = n;
+  MUSEUM.blocks.concat([{ id:MUSEUM.customBlock.id, items:S.custom }]).forEach(function (z) {
+    var c = 0, tot = 0;
+    z.items.forEach(function (it) {
+      if (it.type === 'note') return;
+      tot++;
+      if (S.checks[it.id]) c++;
+    });
+    var el = $('#zc-' + z.id);
+    if (el) el.textContent = c + '/' + tot;
+  });
+  var mm = $('#mm');
+  var done = TOTAL > 0 && n === TOTAL;
+  mm.classList.toggle('done', done);
+  $('#cntlab').textContent = done ? '全看完了' : '看过了';
+  var fn = Object.keys(S.found).length;
+  $('#insbadge').textContent = fn ? fn + '/' + MUSEUM.insights.length : '';
+  $('#insheadsm').textContent = '找到 ' + fn + '/' + MUSEUM.insights.length + ' · 集齐三件今天就算值了';
+  $('#minebadge').textContent = S.doubts.length ? '？' + S.doubts.length : '';
+}
+function applyFilters() {
+  var any = false, t;
+  for (t in S.filters) { any = true; break; }
+  $$('#list [data-tags]').forEach(function (el) {
+    var hit = !any;
+    if (any) {
+      var tags = el.getAttribute('data-tags').split(',');
+      for (var j = 0; j < tags.length; j++) {
+        if (S.filters[tags[j]]) { hit = true; break; }
+      }
+    }
+    el.classList.toggle('dim', !hit);
+  });
+}
+
+/* ================= 打勾 ================= */
+function applyCheckUI(id, on, pulse) {
+  var li = $('#it-' + id);
+  if (li) {
+    li.classList.toggle('done', on);
+    var cb = $('.it-check', li);
+    if (cb) cb.setAttribute('aria-checked', on);
+  }
+  var cell = $('#c-' + id);
+  if (cell) {
+    cell.classList.toggle('lit', on);
+    cell.classList.remove('pulse');
+    if (on && pulse) {
+      void cell.getBBox();
+      cell.classList.add('pulse');
+      cell.addEventListener('animationend', function h() {
+        cell.classList.remove('pulse');
+        cell.removeEventListener('animationend', h);
+      });
+    }
+  }
+}
+function toggleCheck(id) {
+  var on = !S.checks[id];
+  if (on) S.checks[id] = Date.now();
+  else delete S.checks[id];
+  dbPut('state', S.checks, 'checks');
+  applyCheckUI(id, on, true);
+  updateCounts();
+}
+
+/* ================= 输入层：照片 ================= */
+var photoTarget = null;      // 条目 id 或 '@form'（自由条目暂存）
+var formPending = [];        // {blob, thumb, url}
+function loadImg(file) {
+  return new Promise(function (res, rej) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () { res({ img:img, url:url }); };
+    img.onerror = function (e) { URL.revokeObjectURL(url); rej(e); };
+    img.src = url;
+  });
+}
+function cvBlob(cv, q) {
+  return new Promise(function (res, rej) {
+    cv.toBlob(function (b) { b ? res(b) : rej(new Error('toBlob null')); }, 'image/jpeg', q);
+  });
+}
+function processPhoto(file) {
+  return loadImg(file).then(function (r) {
+    var W = r.img.naturalWidth, H = r.img.naturalHeight;
+    var sc = Math.min(1, 1600 / Math.max(W, H));
+    var cv = document.createElement('canvas');
+    cv.width = Math.max(1, Math.round(W * sc));
+    cv.height = Math.max(1, Math.round(H * sc));
+    cv.getContext('2d').drawImage(r.img, 0, 0, cv.width, cv.height);
+    var T = 192, tc = document.createElement('canvas');
+    tc.width = T; tc.height = T;
+    var s = Math.max(T / cv.width, T / cv.height);
+    tc.getContext('2d').drawImage(cv, (T - cv.width * s) / 2, (T - cv.height * s) / 2, cv.width * s, cv.height * s);
+    URL.revokeObjectURL(r.url);
+    return Promise.all([cvBlob(cv, 0.82), cvBlob(tc, 0.7)]).then(function (bs) {
+      return { blob: bs[0], thumb: bs[1] };
+    });
+  });
+}
+function renderThumbs(id) {
+  var box = $('#th-' + id);
+  if (!box) return;
+  var out = [];
+  S.media.forEach(function (m) {
+    if (m.item !== id) return;
+    if (m.kind === 'photo') {
+      if (!mediaURL[m.id]) mediaURL[m.id] = URL.createObjectURL(m.thumb || m.blob);
+      out.push('<button class="th" data-cmd="view" data-mid="' + m.id + '" style="background-image:url(' + mediaURL[m.id] + ')" aria-label="查看照片"></button>');
+    } else {
+      out.push('<div class="au" data-mid="' + m.id + '">' +
+        '<button class="aup" data-cmd="play" data-mid="' + m.id + '">▶ ' + durfmt(m.dur || 0) + '</button>' +
+        '<button class="aux" data-cmd="delau" data-mid="' + m.id + '" aria-label="删除语音">✕</button></div>');
+    }
+  });
+  box.innerHTML = out.join('');
+  var meta = $('#meta-' + id);
+  if (meta && ITEMS[id]) meta.innerHTML = tagSpans(ITEMS[id]) + userMarks(id);
+  if (meta && !ITEMS[id]) meta.innerHTML = '<span class="tg-tre">自建</span>' + userMarks(id);
+}
+function onPhotoPicked(files) {
+  var arr = Array.prototype.slice.call(files || []);
+  if (!arr.length || !photoTarget) return;
+  var target = photoTarget;
+  var jobs = arr.map(function (f) { return processPhoto(f); });
+  Promise.all(jobs).then(function (rs) {
+    if (target === '@form') {
+      rs.forEach(function (r) {
+        r.url = URL.createObjectURL(r.thumb);
+        formPending.push(r);
+      });
+      renderFormPending();
+      return;
+    }
+    var t = Date.now();
+    return Promise.all(rs.map(function (r) {
+      var rec = { item: target, kind: 'photo', blob: r.blob, thumb: r.thumb, t: t };
+      return dbPut('media', rec).then(function (key) { rec.id = key; S.media.push(rec); });
+    })).then(function () {
+      renderThumbs(target);
+      toast('照片已存进这台手机');
+    });
+  }).catch(function () { toast('照片处理失败，换一张试试'); });
+}
+
+/* ================= 输入层：语音 ================= */
+var rec = null; // {mr, chunks, item, t0, timer, stream, released}
+function startRec(item, btn) {
+  if (rec) return;
+  var my = { item:item, btn:btn, chunks:[], t0:0, released:false };
+  rec = my;
+  /* 权限弹窗一直没答复时，别让语音按钮永久卡死 */
+  var guard = setTimeout(function () {
+    if (rec === my && !my.mr) {
+      rec = null;
+      toast('麦克风没响应——检查系统权限后再试');
+    }
+  }, 8000);
+  navigator.mediaDevices.getUserMedia({ audio:true }).then(function (stream) {
+    clearTimeout(guard);
+    if (rec !== my) { stream.getTracks().forEach(function (t) { t.stop(); }); return; }
+    if (my.released) {
+      stream.getTracks().forEach(function (t) { t.stop(); });
+      rec = null;
+      toast('麦克风已就绪——按住「语音」开始说');
+      return;
+    }
+    var mr;
+    try {
+      mr = new MediaRecorder(stream, { mimeType: MIC_MIME });
+    } catch (err) {
+      stream.getTracks().forEach(function (t) { t.stop(); });
+      rec = null;
+      toast('录音器启动失败（' + MIC_MIME + '）——这条先用笔记记吧');
+      return;
+    }
+    my.mr = mr; my.stream = stream; my.t0 = Date.now();
+    mr.ondataavailable = function (e) { if (e.data && e.data.size) my.chunks.push(e.data); };
+    /* 整段录，不用 timeslice：iOS Safari 分片 mp4 拼接后不可播放 */
+    mr.start();
+    btn.classList.add('rec');
+    $('#recpill').hidden = false;
+    $('#rectime').textContent = '0:00';
+    my.timer = setInterval(function () {
+      if (my.t0) $('#rectime').textContent = durfmt(Date.now() - my.t0);
+      if (my.t0 && Date.now() - my.t0 > 120000) stopRec();
+    }, 250);
+  }).catch(function () {
+    clearTimeout(guard);
+    if (rec === my) rec = null;
+    toast('用不了麦克风——需要 https 或本地打开，并允许权限');
+  });
+}
+function stopRec() {
+  if (!rec) return;
+  var r = rec;
+  if (!r.mr) { r.released = true; return; }
+  rec = null;
+  clearInterval(r.timer);
+  r.btn.classList.remove('rec');
+  $('#recpill').hidden = true;
+  var dur = Date.now() - r.t0;
+  r.mr.onstop = function () {
+    r.stream.getTracks().forEach(function (t) { t.stop(); });
+    if (dur < 600 || !r.chunks.length) { toast('太短了，没存'); return; }
+    var blob = new Blob(r.chunks, { type: r.mr.mimeType || MIC_MIME });
+    var t = Date.now();
+    var recd = { item:r.item, kind:'audio', blob:blob, mime:blob.type, dur:dur, t:t };
+    dbPut('media', recd).then(function (key) {
+      recd.id = key;
+      S.media.push(recd);
+      renderThumbs(r.item);
+      toast('语音已存 · ' + durfmt(dur));
+    });
+  };
+  try { r.mr.stop(); } catch (e) { r.stream.getTracks().forEach(function (t) { t.stop(); }); }
+}
+var player = new Audio();
+var playingMid = null;
+player.addEventListener('ended', function () { markPlaying(null); });
+player.addEventListener('error', function () {
+  if (playingMid == null) return;
+  markPlaying(null);
+  toast('这条录音本机解不了码——可能是在别的设备上录的');
+});
+function markPlaying(mid) {
+  if (playingMid != null) {
+    var old = $('.au[data-mid="' + playingMid + '"]');
+    if (old) old.classList.remove('playing');
+  }
+  playingMid = mid;
+  if (mid != null) {
+    var el = $('.au[data-mid="' + mid + '"]');
+    if (el) el.classList.add('playing');
+  }
+}
+function playAudio(mid) {
+  if (playingMid === mid) { player.pause(); markPlaying(null); return; }
+  var m = S.media.filter(function (x) { return x.id === mid; })[0];
+  if (!m) return;
+  var mime = m.mime || (m.blob && m.blob.type) || '';
+  if (mime && player.canPlayType && player.canPlayType(mime) === '') {
+    toast('这条录音（' + mime + '）本机放不了——可能是在别的设备上录的');
+    return;
+  }
+  if (!mediaURL[mid]) mediaURL[mid] = URL.createObjectURL(m.blob);
+  player.src = mediaURL[mid];
+  markPlaying(mid);
+  player.play().catch(function () { markPlaying(null); });
+}
+
+/* ================= 输入层：笔记 / 存疑 ================= */
+var noteTimers = {};
+function saveNote(id, text) {
+  clearTimeout(noteTimers[id]);
+  noteTimers[id] = setTimeout(function () {
+    var rec = { id:id, text:text, t:(S.notes[id] && S.notes[id].t) || Date.now() };
+    if (text) rec.tEdit = Date.now();
+    S.notes[id] = rec;
+    dbPut('notes', rec).then(function () {
+      var wrap = $('.notewrap[data-item="' + id + '"]');
+      if (wrap) {
+        var sv = $('.saved', wrap);
+        sv.classList.add('on');
+        setTimeout(function () { sv.classList.remove('on'); }, 1200);
+      }
+      var meta = $('#meta-' + id);
+      if (meta) renderThumbs(id);
+    });
+  }, 600);
+}
+function addDoubt(id) {
+  var t = Date.now();
+  var rec = { item:id, nm:nameOf(id), txt:'', t:t };
+  dbPut('doubts', rec).then(function (key) {
+    rec.id = key;
+    S.doubts.push(rec);
+    var wrap = $('.doubtwrap[data-item="' + id + '"]');
+    if (wrap) { wrap.hidden = false; $('input', wrap).value = ''; }
+    var btn = $('#it-' + id + ' .a-doubt');
+    if (btn) btn.classList.add('on');
+    renderThumbs(id);
+    updateCounts();
+    toast('记下了 · ' + tfmt(t) + ' · 回家拿去问');
+  });
+}
+function doubtText(id, txt) {
+  var mine = S.doubts.filter(function (d) { return d.item === id; });
+  var last = mine[mine.length - 1];
+  if (!last) return;
+  last.txt = txt;
+  dbPut('doubts', last).then(function () {
+    var wrap = $('.doubtwrap[data-item="' + id + '"]');
+    if (wrap) wrap.hidden = true;
+    toast('补上了');
+  });
+}
+
+/* ================= 反直觉 ================= */
+function toggleFound(rid) {
+  var on = !S.found[rid];
+  if (on) S.found[rid] = Date.now();
+  else delete S.found[rid];
+  dbPut('state', S.found, 'found');
+  $$('.ins[data-rid="' + rid + '"]').forEach(function (el) {
+    el.classList.toggle('got', on);
+    var b = $('.foundbtn', el);
+    if (b) b.textContent = on ? '已找到 · ' + tfmt(S.found[rid]) : '找到了';
+  });
+  updateCounts();
+  var n = Object.keys(S.found).length;
+  if (on && n === 3) toast('三件集齐——今天已经值了');
+}
+
+/* ================= 抽屉 ================= */
+var curSheet = null, lockY = 0;
+function lockScroll() {
+  lockY = window.scrollY || 0;
+  document.body.style.position = 'fixed';
+  document.body.style.top = -lockY + 'px';
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+}
+function unlockScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  window.scrollTo(0, lockY);
+}
+function openSheet(name) {
+  if (curSheet) closeSheet();
+  curSheet = name;
+  if (name === 'ins') renderIns();
+  if (name === 'mine') renderMine();
+  var sh = $('#sh-' + name);
+  sh.classList.add('on');
+  lockScroll();
+  $$('#bar > button').forEach(function (b) {
+    b.classList.toggle('cur', b.getAttribute('data-sheet') === name);
+  });
+  if (name === 'search') setTimeout(function () { $('#srchin').focus(); }, 250);
+}
+function closeSheet() {
+  if (!curSheet) return;
+  $('#sh-' + curSheet).classList.remove('on');
+  curSheet = null;
+  unlockScroll();
+  $$('#bar > button').forEach(function (b) { b.classList.remove('cur'); });
+}
+
+/* ================= 速查渲染 ================= */
+function renderQref() {
+  var q = MUSEUM.quickref;
+  var out = [];
+  out.push('<div class="qsec" data-qsec="dyn"><h3>年表</h3><table class="qtable">');
+  q.dynasties.forEach(function (d) {
+    out.push('<tr class="qrow-f" data-hay="' + esc((d.dy + ' ' + d.py + ' ' + d.cap).toLowerCase()) + '">' +
+      '<td class="dy">' + esc(d.dy) + '</td><td class="sp">' + esc(d.span) + '</td><td class="cp">' + esc(d.cap) + '</td></tr>');
+  });
+  out.push('</table><div class="callout">' + esc(q.dynastyNote) + '</div></div>');
+  out.push('<div class="qsec" data-qsec="terms"><h3>生僻字与名词</h3>');
+  q.terms.forEach(function (tm) {
+    out.push('<div class="qrow qrow-f" data-hay="' + esc((tm.t + ' ' + tm.py + ' ' + tm.d).toLowerCase()) + '">' +
+      '<p class="qt">' + esc(tm.t) + '</p><p class="qd">' + esc(tm.d) + '</p></div>');
+  });
+  out.push('</div>');
+  out.push('<div class="qsec" data-qsec="ca"><h3>长安城参数</h3>');
+  q.changan.forEach(function (s) { out.push('<p class="qli qrow-f" data-hay="' + esc(s.toLowerCase()) + '">' + esc(s) + '</p>'); });
+  out.push('</div>');
+  out.push('<div class="qsec" data-qsec="disp"><h3>已知数据分歧 · 以现场说明牌为准</h3>');
+  q.disputes.forEach(function (s) { out.push('<p class="qli qrow-f" data-hay="' + esc(s.toLowerCase()) + '">' + esc(s) + '</p>'); });
+  out.push('</div>');
+  $('#qrefbody').innerHTML = out.join('');
+}
+function filterQref(query) {
+  var qq = query.trim().toLowerCase();
+  $$('#qrefbody .qrow-f').forEach(function (el) {
+    el.hidden = !!qq && el.getAttribute('data-hay').indexOf(qq) < 0;
+  });
+  $$('#qrefbody .qsec').forEach(function (sec) {
+    var vis = $$('.qrow-f', sec).some(function (el) { return !el.hidden; });
+    sec.hidden = !vis;
+  });
+}
+
+/* ================= 反直觉渲染 ================= */
+function renderIns() {
+  var out = ['<p class="mhint" style="margin-top:4px">' + esc(MUSEUM.insightsNote) + '</p>'];
+  MUSEUM.insights.forEach(function (r) {
+    out.push(insBlock(r));
+    if (r.link) {
+      out.push('<button class="inslink" style="min-height:44px;padding:0 2px" data-cmd="jump" data-id="' + r.link + '">↓ 定位到条目：' + esc(nameOf(r.link)) + '</button>');
+    }
+  });
+  $('#insbody').innerHTML = out.join('');
+}
+
+/* ================= 搜索 ================= */
+var IDX = [];
+function buildIndex() {
+  IDX = [];
+  ORDER.forEach(function (id) {
+    var it = ITEMS[id];
+    var hay = [it.nm, it.sub, it.era, it.why, it.look, it.twist,
+      (it.warn || []).join(' '), (it.tags || []).map(function (t) { return TAGNAME[t]; }).join(' '),
+      it.treasure ? '镇馆之宝' : '', it.conf === 'verify' ? '待确认' : ''].join(' ').toLowerCase();
+    IDX.push({ k:'item', id:id, nm:it.nm, hay:hay });
+  });
+  S.custom.forEach(function (x) {
+    IDX.push({ k:'item', id:x.id, nm:x.nm, hay:(x.nm + ' 自建').toLowerCase() });
+  });
+  MUSEUM.insights.forEach(function (r) {
+    IDX.push({ k:'ins', id:r.id, link:r.link, nm:r.nm, hay:(r.nm + ' ' + r.seem + ' ' + r.twist + ' ' + r.act).toLowerCase() });
+  });
+  MUSEUM.quickref.terms.forEach(function (tm) {
+    IDX.push({ k:'q', id:tm.t, nm:tm.t, hay:(tm.t + ' ' + tm.py + ' ' + tm.d).toLowerCase(), d:tm.d });
+  });
+  MUSEUM.quickref.dynasties.forEach(function (d) {
+    IDX.push({ k:'q', id:d.dy, nm:d.dy + ' · ' + d.span, hay:(d.dy + ' ' + d.py + ' ' + d.cap).toLowerCase(), d:d.cap });
+  });
+}
+function snippet(hay, q) {
+  var i = hay.indexOf(q);
+  if (i < 0) return '';
+  var a = Math.max(0, i - 12);
+  var pre = (a > 0 ? '…' : '') + hay.slice(a, i);
+  var post = hay.slice(i + q.length, i + q.length + 24) + '…';
+  return esc(pre) + '<b>' + esc(hay.substr(i, q.length)) + '</b>' + esc(post);
+}
+function renderSearch() {
+  var q = $('#srchin').value.trim().toLowerCase();
+  var body = $('#srchbody');
+  if (!q) {
+    body.innerHTML = '<p class="snone">看到一件东西不确定在不在清单上，输进来，三秒有答案。</p>';
+    return;
+  }
+  var KN = { item:'条目', ins:'反直觉', q:'速查' };
+  var hits = IDX.filter(function (e) { return e.hay.indexOf(q) >= 0; }).slice(0, 40);
+  if (!hits.length) {
+    body.innerHTML = '<p class="snone">清单里没有——可能真不在展，也可能值得「＋记一件」。</p>';
+    return;
+  }
+  body.innerHTML = hits.map(function (e) {
+    var cmd, data;
+    if (e.k === 'item') { cmd = 'jump'; data = e.id; }
+    else if (e.k === 'ins') { cmd = e.link ? 'jump' : 'sheet-ins'; data = e.link || ''; }
+    else { cmd = 'jumpq'; data = e.id; }
+    return '<button data-cmd="' + cmd + '" data-id="' + esc(data) + '">' +
+      '<span class="rk">' + KN[e.k] + '</span><span class="rn">' + esc(e.nm) + '</span>' +
+      '<span class="rs">' + snippet(e.hay, q) + '</span></button>';
+  }).join('');
+}
+function jumpToItem(id) {
+  closeSheet();
+  var li = $('#it-' + id);
+  if (!li) return;
+  var zone = li.closest('.zone');
+  if (zone && zone.classList.contains('closed')) {
+    zone.classList.remove('closed');
+    $('.zhead', zone).setAttribute('aria-expanded', 'true');
+  }
+  li.classList.add('open');
+  $('.it-hd', li).setAttribute('aria-expanded', 'true');
+  setTimeout(function () {
+    li.scrollIntoView({ block:'center', behavior:'smooth' });
+    li.classList.remove('flash');
+    void li.offsetWidth;
+    li.classList.add('flash');
+  }, 60);
+}
+
+/* ================= 自由条目 ================= */
+function renderFormPending() {
+  var box = $('#xformthumbs');
+  if (!box) return;
+  box.innerHTML = formPending.map(function (p, i) {
+    return '<span class="th" style="background-image:url(' + p.url + ')"></span>';
+  }).join('');
+}
+function xformHTML() {
+  return '<div class="xform" id="xform">' +
+    '<input type="text" id="xnm" placeholder="名称（必填）——看到了什么" maxlength="60">' +
+    '<textarea id="xnote" placeholder="随手记一句（可不填）"></textarea>' +
+    '<div class="thumbs" id="xformthumbs"></div>' +
+    '<div class="xrow">' +
+      '<button data-cmd="xphoto">加照片</button>' +
+      '<button class="primary" data-cmd="xsave">保存条目</button>' +
+    '</div></div>';
+}
+function saveCustom() {
+  var nm = $('#xnm').value.trim();
+  if (!nm) { toast('先给它起个名字'); return; }
+  var t = Date.now();
+  var id = 'X' + t.toString(36);
+  var cell = nextSpare();
+  var rec = { id:id, nm:nm, cell:cell, t:t };
+  var note = $('#xnote').value.trim();
+  var pend = formPending.slice();
+  formPending = [];
+  dbPut('custom', rec).then(function () {
+    S.custom.push(rec);
+    var jobs = [];
+    if (note) {
+      var nrec = { id:id, text:note, t:t };
+      S.notes[id] = nrec;
+      jobs.push(dbPut('notes', nrec));
+    }
+    pend.forEach(function (p) {
+      URL.revokeObjectURL(p.url);
+      var mrec = { item:id, kind:'photo', blob:p.blob, thumb:p.thumb, t:t };
+      jobs.push(dbPut('media', mrec).then(function (key) { mrec.id = key; S.media.push(mrec); }));
+    });
+    return Promise.all(jobs);
+  }).then(function () {
+    if (rec.cell && mmGrid) addCellRect(mmGrid, rec.id, rec.cell[0], rec.cell[1]);
+    renderCustomZone();
+    buildIndex();
+    closeSheet();
+    jumpToItem(id);
+    toast('已加进「' + MUSEUM.customBlock.title + '」');
+  });
+}
+function deleteCustom(id) {
+  if (!confirm('删掉这条和它的照片、笔记？')) return;
+  var rec = S.custom.filter(function (x) { return x.id === id; })[0];
+  S.custom = S.custom.filter(function (x) { return x.id !== id; });
+  var jobs = [dbDel('custom', id), dbDel('notes', id)];
+  delete S.notes[id];
+  S.media.filter(function (m) { return m.item === id; }).forEach(function (m) {
+    if (mediaURL[m.id]) { URL.revokeObjectURL(mediaURL[m.id]); delete mediaURL[m.id]; }
+    jobs.push(dbDel('media', m.id));
+  });
+  S.media = S.media.filter(function (m) { return m.item !== id; });
+  S.doubts.filter(function (d) { return d.item === id; }).forEach(function (d) { jobs.push(dbDel('doubts', d.id)); });
+  S.doubts = S.doubts.filter(function (d) { return d.item !== id; });
+  if (S.checks[id]) { delete S.checks[id]; jobs.push(dbPut('state', S.checks, 'checks')); }
+  var cell = $('#c-' + id);
+  if (cell) cell.parentNode.removeChild(cell);
+  Promise.all(jobs).then(function () {
+    if (rec) toast('删了「' + rec.nm + '」');
+    renderCustomZone();
+    buildIndex();
+  });
+}
+
+/* ================= 手记抽屉 ================= */
+function offlineStatusText() {
+  if (IS_FILE) return ['本地文件模式', '断网天然可用；但 iOS 可能清掉本地数据，勤导出'];
+  if (swState === 'active') return ['离线已就绪 ✓', '断网也能打开这个页面'];
+  if (IS_HTTP) return ['未装离线缓存', '需同目录有 sw.js（下方可生成）；或把本文件存到手机本地打开'];
+  return ['未知环境', '逛完记得导出'];
+}
+function renderMine() {
+  var out = [];
+  out.push('<div class="msec"><h3>自由条目</h3>' +
+    '<p class="mhint" style="margin-top:2px">导览里没有、现场看到的东西——那 ' + ORDER.length + ' 条一定漏了。</p>' +
+    '<button class="mrow" data-cmd="newcustom-here"><span style="color:var(--cobalt-hi)">＋ 新条目</span><small>名称 · 照片 · 笔记</small></button>' +
+    '<div id="xformslot"></div></div>');
+  out.push('<div class="msec"><h3>疑问队列 · ' + S.doubts.length + '</h3>');
+  if (!S.doubts.length) {
+    out.push('<p class="mhint">条目里点「存疑」，说明牌和导览对不上的都记这里，回家拿去问。</p>');
+  } else {
+    S.doubts.slice().reverse().forEach(function (d) {
+      out.push('<div class="dq"><span class="dtime">' + tfmt(d.t) + '</span>' +
+        '<div class="dqt"><p class="dqn">' + esc(d.nm) + '</p>' +
+        (d.txt ? '<p class="dqx">' + esc(d.txt) + '</p>' : '') + '</div>' +
+        '<button class="ddel" data-cmd="deldoubt" data-did="' + d.id + '" aria-label="删除">✕</button></div>');
+    });
+  }
+  out.push('</div>');
+  var st = offlineStatusText();
+  out.push('<div class="msec"><h3>导出 · App 是工具，参观志才是纪念品</h3>' +
+    '<button class="mrow" data-cmd="export-journal">导出参观志<small>自包含 HTML · 照片笔记动线全在里面</small></button>' +
+    '<button class="mrow" data-cmd="export-json">导出数据备份<small>JSON · 含照片语音，可导入恢复</small></button>' +
+    '<button class="mrow" data-cmd="import-json">导入备份<small>会覆盖当前记录</small></button></div>');
+  out.push('<div class="msec"><h3>离线 · ' + st[0] + '</h3><p class="mhint">' + st[1] + '</p>');
+  if (IS_HTTP && swState !== 'active') {
+    out.push('<button class="mrow" data-cmd="gen-sw">生成 sw.js<small>放到本文件同目录后刷新</small></button>');
+  }
+  if (IS_IOS && !STANDALONE && !IS_FILE) {
+    out.push('<p class="mhint">还没加到主屏幕：Safari 分享 →「添加到主屏幕」，从主屏进来才是全屏，数据也更不容易被清。</p>');
+  }
+  if (!CAN_MIC) {
+    out.push('<p class="mhint">语音不可用：' + esc(MIC_WHY) + '</p>');
+  } else {
+    out.push('<p class="mhint">语音格式：' + esc(MIC_MIME) + '</p>');
+  }
+  out.push('</div>');
+  $('#minebody').innerHTML = out.join('');
+}
+
+/* ================= 导出 ================= */
+function collectMediaB64() {
+  return Promise.all(S.media.map(function (m) {
+    return blobDataURL(m.blob).then(function (u) {
+      return { id:m.id, item:m.item, kind:m.kind, mime:m.blob.type, dur:m.dur || 0, t:m.t, data:u };
+    });
+  }));
+}
+function backupData(withMedia) {
+  var base = {
+    app:'mguide', v:1,
+    museum:{ name:MUSEUM.name, date:MUSEUM.date },
+    exported:Date.now(),
+    checks:S.checks, found:S.found,
+    notes:S.notes,
+    doubts:S.doubts,
+    custom:S.custom
+  };
+  if (!withMedia) return Promise.resolve(base);
+  return collectMediaB64().then(function (ms) { base.media = ms; return base; });
+}
+function saveBlob(blob, name) {
+  var f = null;
+  try { f = new File([blob], name, { type: blob.type }); } catch (e) {}
+  if (IS_IOS && f && navigator.canShare && navigator.canShare({ files:[f] }) && navigator.share) {
+    navigator.share({ files:[f] }).catch(function (err) {
+      if (err && err.name === 'AbortError') return;
+      anchorSave(blob, name);
+    });
+    return;
+  }
+  anchorSave(blob, name);
+}
+function anchorSave(blob, name) {
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function () {
+    URL.revokeObjectURL(a.href);
+    a.parentNode.removeChild(a);
+  }, 4000);
+}
+var JCSS =
+  'body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif;background:#FDFCFA;color:#1C1A17;max-width:640px;margin:0 auto;padding:36px 22px 80px;font-size:16px;line-height:1.75;letter-spacing:.01em}' +
+  '*{box-sizing:border-box;margin:0;padding:0}' +
+  'header{border-bottom:2px solid #2B4BC8;padding-bottom:18px}' +
+  'h1{font-size:24px;font-weight:600;letter-spacing:.04em}' +
+  '.sub{margin-top:6px;font-size:13px;color:#8A8578;letter-spacing:.14em}' +
+  '.stats{margin-top:10px;font-size:13px;color:#55514A;font-variant-numeric:tabular-nums}' +
+  'h2{margin:40px 0 14px;font-size:13px;letter-spacing:.26em;color:#2B4BC8;border-top:1px solid #D8DCE2;padding-top:16px;font-weight:600}' +
+  '.ev{display:flex;gap:12px;padding:3px 0;font-size:14px}' +
+  '.ev time{color:#8A8578;font-variant-numeric:tabular-nums;flex:none}' +
+  '.ev i{font-style:normal;color:#2B4BC8;flex:none;width:1.4em}' +
+  '.itb{margin:22px 0;border:1px solid #E2DFD8;border-radius:10px;padding:16px;page-break-inside:avoid}' +
+  '.itb h3{font-size:17px;font-weight:600}' +
+  '.itb .tm{font-size:12px;color:#8A8578;margin-top:2px;font-variant-numeric:tabular-nums}' +
+  '.itb img{max-width:100%;border-radius:6px;margin-top:10px;display:block}' +
+  '.itb .note{margin-top:10px;padding:10px 12px;background:#F4F2EC;border-left:3px solid #B9893F;white-space:pre-wrap;font-size:15px}' +
+  '.itb audio{width:100%;margin-top:10px}' +
+  '.itb .dq{margin-top:8px;font-size:14px;color:#7A4F16}' +
+  '.insb{margin:16px 0;border-left:3px solid #2B4BC8;padding:4px 0 4px 14px;page-break-inside:avoid}' +
+  '.insb .s{font-size:13px;color:#8A8578}' +
+  '.insb .tw{margin-top:2px;font-size:15px}' +
+  '.insb .tmm{font-size:12px;color:#8A8578;margin-top:3px;font-variant-numeric:tabular-nums}' +
+  '.dql{padding:6px 0;border-bottom:1px dashed #D8DCE2;font-size:15px}' +
+  '.dql time{color:#8A8578;font-size:12px;margin-right:10px;font-variant-numeric:tabular-nums}' +
+  '.dql .x{color:#55514A;font-size:14px;margin-top:2px}' +
+  'footer{margin-top:56px;padding-top:14px;border-top:1px solid #D8DCE2;font-size:12px;color:#8A8578;line-height:1.8}' +
+  '@media print{body{max-width:none;padding:0}}';
+function buildJournal() {
+  return collectMediaB64().then(function (ms) {
+    var byItem = {};
+    ms.forEach(function (m) { (byItem[m.item] = byItem[m.item] || []).push(m); });
+    var nChecked = Object.keys(S.checks).length;
+    var nPhoto = ms.filter(function (m) { return m.kind === 'photo'; }).length;
+    var nAudio = ms.length - nPhoto;
+    var nNote = Object.keys(S.notes).filter(function (k) { return S.notes[k].text; }).length;
+    var h = [];
+    h.push('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">');
+    h.push('<meta name="viewport" content="width=device-width, initial-scale=1">');
+    h.push('<title>参观志 · ' + esc(MUSEUM.name) + ' · ' + esc(MUSEUM.dateLabel) + '</title>');
+    h.push('<style>' + JCSS + '</style></head><body>');
+    h.push('<header><h1>' + esc(MUSEUM.name) + ' · 参观志</h1>');
+    h.push('<p class="sub">' + esc(MUSEUM.dateLabel) + ' · ' + esc(MUSEUM.hours) + '</p>');
+    h.push('<p class="stats">看过 ' + nChecked + '/' + TOTAL + ' 件 · 反直觉 ' + Object.keys(S.found).length + '/' + MUSEUM.insights.length +
+      ' · 照片 ' + nPhoto + ' 张 · 语音 ' + nAudio + ' 条 · 笔记 ' + nNote + ' 条 · 疑问 ' + S.doubts.length + ' 个</p></header>');
+
+    /* 动线 */
+    var ev = [];
+    Object.keys(S.checks).forEach(function (id) { ev.push({ t:S.checks[id], i:'✓', x:nameOf(id) }); });
+    Object.keys(S.found).forEach(function (rid) {
+      var r = INS_BY_ID[rid];
+      ev.push({ t:S.found[rid], i:'☆', x:(r ? r.nm : rid) + '（反直觉）' });
+    });
+    S.doubts.forEach(function (d) { ev.push({ t:d.t, i:'？', x:d.nm + ' 存疑' }); });
+    ms.forEach(function (m) { ev.push({ t:m.t, i:(m.kind === 'photo' ? '照' : '声'), x:nameOf(m.item) }); });
+    S.custom.forEach(function (x) { ev.push({ t:x.t, i:'＋', x:'新记：' + x.nm }); });
+    ev.sort(function (a, b) { return a.t - b.t; });
+    if (ev.length) {
+      h.push('<h2>动线 · 今天走过的顺序</h2>');
+      ev.forEach(function (e) {
+        h.push('<p class="ev"><time>' + tfmt(e.t) + '</time><i>' + e.i + '</i><span>' + esc(e.x) + '</span></p>');
+      });
+    }
+
+    /* 反直觉收获 */
+    var founds = Object.keys(S.found).map(function (rid) { return { rid:rid, t:S.found[rid] }; })
+      .sort(function (a, b) { return a.t - b.t; });
+    if (founds.length) {
+      h.push('<h2>原来古代已经这样了 · 找到 ' + founds.length + ' 件</h2>');
+      founds.forEach(function (f) {
+        var r = INS_BY_ID[f.rid];
+        if (!r) return;
+        h.push('<div class="insb"><p class="s">' + esc(r.nm) + ' · 3 秒走过：' + esc(r.seem) + '</p>' +
+          '<p class="tw">' + esc(r.twist) + '</p>' +
+          '<p class="tmm">' + tfmt(f.t) + ' 现场验证：' + esc(r.act) + '</p></div>');
+      });
+    }
+
+    /* 条目档案：有照片/语音/笔记/疑问的 */
+    var rich = ORDER.concat(S.custom.map(function (x) { return x.id; })).filter(function (id) {
+      return (byItem[id] && byItem[id].length) || (S.notes[id] && S.notes[id].text) ||
+        S.doubts.some(function (d) { return d.item === id; });
+    });
+    if (rich.length) {
+      h.push('<h2>逐件档案</h2>');
+      rich.forEach(function (id) {
+        h.push('<div class="itb"><h3>' + esc(nameOf(id)) + '</h3>');
+        if (S.checks[id]) h.push('<p class="tm">' + tfmt(S.checks[id]) + ' 看过</p>');
+        (byItem[id] || []).forEach(function (m) {
+          if (m.kind === 'photo') h.push('<img src="' + m.data + '" alt="">');
+          else h.push('<audio controls preload="none" src="' + m.data + '"></audio>');
+        });
+        if (S.notes[id] && S.notes[id].text) h.push('<p class="note">' + esc(S.notes[id].text) + '</p>');
+        S.doubts.filter(function (d) { return d.item === id; }).forEach(function (d) {
+          h.push('<p class="dq">？ ' + tfmt(d.t) + (d.txt ? ' · ' + esc(d.txt) : ' · 存疑待查') + '</p>');
+        });
+        h.push('</div>');
+      });
+    }
+
+    /* 疑问队列 */
+    if (S.doubts.length) {
+      h.push('<h2>疑问队列 · 回家拿去问</h2>');
+      S.doubts.forEach(function (d) {
+        h.push('<div class="dql"><time>' + tfmt(d.t) + '</time>' + esc(d.nm) +
+          (d.txt ? '<p class="x">' + esc(d.txt) + '</p>' : '') + '</div>');
+      });
+    }
+
+    h.push('<footer><p>' + esc(MUSEUM.name) + ' · ' + esc(MUSEUM.dateLabel) +
+      ' · 本文件自包含，照片与录音全部内嵌，不依赖任何服务、账号或网络。</p>' +
+      '<p>文末内嵌当日数据备份（不含媒体），可导回导览工具。</p></footer>');
+    return backupData(false).then(function (bk) {
+      h.push('<script id="backup" type="application/json">' +
+        JSON.stringify(bk).replace(/</g, '\\u003c') + '<\/script>');
+      h.push('</body></html>');
+      return h.join('\n');
+    });
+  });
+}
+function exportJournal() {
+  toast('在打包照片和录音……');
+  buildJournal().then(function (html) {
+    var blob = new Blob([html], { type:'text/html' });
+    var mb = blob.size / 1048576;
+    saveBlob(blob, '参观志-' + MUSEUM.name + '-' + MUSEUM.date + '.html');
+    toast('参观志已生成' + (mb > 1 ? ' · ' + mb.toFixed(1) + ' MB' : ''));
+  }).catch(function () { toast('导出失败——照片太多的话重试一次'); });
+}
+function exportJSON() {
+  toast('在打包数据……');
+  backupData(true).then(function (bk) {
+    var blob = new Blob([JSON.stringify(bk)], { type:'application/json' });
+    saveBlob(blob, '导览备份-' + MUSEUM.name + '-' + MUSEUM.date + '.json');
+    toast('备份已生成');
+  });
+}
+function importJSON(file) {
+  file.text().then(function (txt) {
+    var bk = JSON.parse(txt);
+    if (bk.app !== 'mguide') throw new Error('bad');
+    if (bk.museum && bk.museum.name !== MUSEUM.name &&
+        !confirm('这份备份来自「' + bk.museum.name + '」，仍要导入？')) return;
+    if (!confirm('导入会覆盖当前全部记录，继续？')) return;
+    var stores = ['state', 'notes', 'media', 'doubts', 'custom'];
+    Promise.all(stores.map(dbClear)).then(function () {
+      var jobs = [];
+      jobs.push(dbPut('state', bk.checks || {}, 'checks'));
+      jobs.push(dbPut('state', bk.found || {}, 'found'));
+      jobs.push(dbPut('state', true, 'seen'));
+      Object.keys(bk.notes || {}).forEach(function (k) { jobs.push(dbPut('notes', bk.notes[k])); });
+      (bk.doubts || []).forEach(function (d) { delete d.id; jobs.push(dbPut('doubts', d)); });
+      (bk.custom || []).forEach(function (x) { jobs.push(dbPut('custom', x)); });
+      (bk.media || []).forEach(function (m) {
+        var blob = dataURLBlob(m.data);
+        var rec = { item:m.item, kind:m.kind, blob:blob, mime:m.mime, dur:m.dur, t:m.t };
+        if (m.kind === 'photo') rec.thumb = blob;
+        jobs.push(dbPut('media', rec));
+      });
+      return Promise.all(jobs);
+    }).then(function () { location.reload(); });
+  }).catch(function () { toast('这个文件读不了——要 mguide 的 JSON 备份'); });
+}
+function genSW() {
+  anchorSave(new Blob([SW_SRC], { type:'text/javascript' }), 'sw.js');
+  toast('已生成 sw.js——放到和本页同一目录后刷新');
+}
+
+/* ================= 全局命令 ================= */
+document.addEventListener('click', function (ev) {
+  var el = ev.target.closest('[data-cmd]');
+  if (!el) return;
+  var cmd = el.getAttribute('data-cmd');
+  var item = el.getAttribute('data-item');
+  switch (cmd) {
+    case 'check': toggleCheck(item); break;
+    case 'expand': {
+      var li = el.closest('.it');
+      var open = li.classList.toggle('open');
+      el.setAttribute('aria-expanded', open);
+      break;
+    }
+    case 'zone': {
+      var zone = el.closest('.zone');
+      var closed = zone.classList.toggle('closed');
+      el.setAttribute('aria-expanded', !closed);
+      break;
+    }
+    case 'photo': photoTarget = item; $('#photoIn').click(); break;
+    case 'note': {
+      var wrap = $('.notewrap[data-item="' + item + '"]');
+      wrap.hidden = !wrap.hidden;
+      if (!wrap.hidden) $('textarea', wrap).focus();
+      break;
+    }
+    case 'doubt': addDoubt(item); break;
+    case 'doubtok': {
+      var dw = $('.doubtwrap[data-item="' + item + '"]');
+      doubtText(item, $('input', dw).value.trim());
+      break;
+    }
+    case 'found': toggleFound(el.getAttribute('data-rid')); break;
+    case 'view': openLightbox(parseInt(el.getAttribute('data-mid'), 10)); break;
+    case 'play': playAudio(parseInt(el.getAttribute('data-mid'), 10)); break;
+    case 'delau': {
+      var mid = parseInt(el.getAttribute('data-mid'), 10);
+      var m = S.media.filter(function (x) { return x.id === mid; })[0];
+      if (m && confirm('删掉这条语音？')) {
+        if (playingMid === mid) { player.pause(); markPlaying(null); }
+        if (mediaURL[mid]) { URL.revokeObjectURL(mediaURL[mid]); delete mediaURL[mid]; }
+        S.media = S.media.filter(function (x) { return x.id !== mid; });
+        dbDel('media', mid).then(function () { renderThumbs(m.item); });
+      }
+      break;
+    }
+    case 'xdel': deleteCustom(item); break;
+    case 'sheet': openSheet(el.getAttribute('data-sheet')); break;
+    case 'sheet-ins': openSheet('ins'); break;
+    case 'close': closeSheet(); break;
+    case 'jump': jumpToItem(el.getAttribute('data-id')); break;
+    case 'jumpq': {
+      var qid = el.getAttribute('data-id');
+      closeSheet();
+      openSheet('qref');
+      $('#qrefin').value = qid;
+      filterQref(qid);
+      break;
+    }
+    case 'newcustom': case 'newcustom-here': {
+      if (curSheet !== 'mine') openSheet('mine');
+      var slot = $('#xformslot');
+      if (slot && !$('#xform')) { slot.innerHTML = xformHTML(); $('#xnm').focus(); }
+      else if (slot) { slot.innerHTML = ''; formPending = []; }
+      break;
+    }
+    case 'xphoto': photoTarget = '@form'; $('#photoIn').click(); break;
+    case 'xsave': saveCustom(); break;
+    case 'deldoubt': {
+      var did = parseInt(el.getAttribute('data-did'), 10);
+      var dd = S.doubts.filter(function (x) { return x.id === did; })[0];
+      S.doubts = S.doubts.filter(function (x) { return x.id !== did; });
+      dbDel('doubts', did).then(function () {
+        if (dd) {
+          renderThumbs(dd.item);
+          var btn = $('#it-' + dd.item + ' .a-doubt');
+          if (btn && !S.doubts.some(function (x) { return x.item === dd.item; })) btn.classList.remove('on');
+        }
+        renderMine();
+        updateCounts();
+      });
+      break;
+    }
+    case 'export-journal': exportJournal(); break;
+    case 'export-json': exportJSON(); break;
+    case 'import-json': $('#importIn').click(); break;
+    case 'gen-sw': genSW(); break;
+    case 'banner-ok': {
+      $('#bannerslot').innerHTML = '';
+      dbPut('state', true, 'seen');
+      syncHd();
+      break;
+    }
+    case 'lbclose': closeLightbox(); break;
+    case 'lbdel': lightboxDelete(); break;
+  }
+});
+
+/* 筛选 chips */
+$('#chips').addEventListener('click', function (ev) {
+  var chip = ev.target.closest('.chip');
+  if (!chip) return;
+  var tag = chip.getAttribute('data-tag');
+  if (S.filters[tag]) delete S.filters[tag];
+  else S.filters[tag] = true;
+  chip.setAttribute('aria-pressed', !!S.filters[tag]);
+  applyFilters();
+});
+
+/* 笔记输入 */
+$('#list').addEventListener('input', function (ev) {
+  var ta = ev.target;
+  if (ta.tagName === 'TEXTAREA' && ta.closest('.notewrap')) {
+    saveNote(ta.getAttribute('data-item'), ta.value);
+  }
+});
+
+/* 语音按住 */
+document.addEventListener('pointerdown', function (ev) {
+  var v = ev.target.closest('.a-voice');
+  if (!v) return;
+  ev.preventDefault();
+  if (!CAN_MIC) { toast('语音不可用：' + MIC_WHY); return; }
+  startRec(v.getAttribute('data-item'), v);
+});
+document.addEventListener('pointerup', function () { stopRec(); });
+document.addEventListener('pointercancel', function () { stopRec(); });
+
+/* 文件选择 */
+$('#photoIn').addEventListener('change', function () {
+  onPhotoPicked(this.files);
+  this.value = '';
+});
+$('#importIn').addEventListener('change', function () {
+  if (this.files[0]) importJSON(this.files[0]);
+  this.value = '';
+});
+
+/* 搜索输入 */
+var srchTimer = null;
+$('#srchin').addEventListener('input', function () {
+  clearTimeout(srchTimer);
+  srchTimer = setTimeout(renderSearch, 80);
+});
+$('#qrefin').addEventListener('input', function () {
+  var v = this.value;
+  clearTimeout(srchTimer);
+  srchTimer = setTimeout(function () { filterQref(v); }, 80);
+});
+
+/* 键盘弹出时收起底栏 */
+document.addEventListener('focusin', function (ev) {
+  if (/^(INPUT|TEXTAREA)$/.test(ev.target.tagName) && !ev.target.closest('.sheet')) {
+    document.body.classList.add('kb');
+  }
+});
+document.addEventListener('focusout', function () {
+  setTimeout(function () {
+    var a = document.activeElement;
+    if (!a || !/^(INPUT|TEXTAREA)$/.test(a.tagName)) document.body.classList.remove('kb');
+  }, 80);
+});
+
+/* ================= 灯箱 ================= */
+var lbMid = null;
+function openLightbox(mid) {
+  var m = S.media.filter(function (x) { return x.id === mid; })[0];
+  if (!m) return;
+  lbMid = mid;
+  var url = URL.createObjectURL(m.blob);
+  var img = $('#lbimg');
+  var oldUrl = img.getAttribute('data-url');
+  if (oldUrl) URL.revokeObjectURL(oldUrl);
+  img.src = url;
+  img.setAttribute('data-url', url);
+  $('#lbcap').textContent = nameOf(m.item) + ' · ' + tfmt(m.t);
+  $('#lightbox').hidden = false;
+}
+function closeLightbox() {
+  var img = $('#lbimg');
+  var oldUrl = img.getAttribute('data-url');
+  if (oldUrl) { URL.revokeObjectURL(oldUrl); img.removeAttribute('data-url'); }
+  img.src = '';
+  $('#lightbox').hidden = true;
+  lbMid = null;
+}
+function lightboxDelete() {
+  if (lbMid == null) return;
+  var m = S.media.filter(function (x) { return x.id === lbMid; })[0];
+  if (!m || !confirm('删掉这张照片？')) return;
+  if (mediaURL[lbMid]) { URL.revokeObjectURL(mediaURL[lbMid]); delete mediaURL[lbMid]; }
+  S.media = S.media.filter(function (x) { return x.id !== lbMid; });
+  dbDel('media', lbMid).then(function () {
+    renderThumbs(m.item);
+    closeLightbox();
+  });
+}
+
+/* ================= 头部高度同步 ================= */
+function syncHd() {
+  document.documentElement.style.setProperty('--hdh', $('#hd').offsetHeight + 'px');
+}
+window.addEventListener('resize', syncHd);
+
+/* ================= 启动 ================= */
+function boot() {
+  document.title = MUSEUM.name + ' · 展厅导览';
+  $('#tl-l').textContent = MUSEUM.name + ' · ' + MUSEUM.dateShort;
+  $('#tl-r').textContent = MUSEUM.hours;
+  openDB().then(hydrate).then(function () {
+    buildMinimap();
+    renderList();
+    renderFooter();
+    renderQref();
+    buildIndex();
+    S.doubts.forEach(function (d) {
+      var btn = $('#it-' + d.item + ' .a-doubt');
+      if (btn) btn.classList.add('on');
+    });
+    if (IS_FILE || mem) {
+      var bar = $('#warnbar');
+      bar.hidden = false;
+      $('#warntx').textContent = mem
+        ? '存储不可用：本次记录只在内存里，切走可能就没了——随手导出。'
+        : '本地文件模式：iOS 可能清掉这里存的照片和笔记，逛完务必导出。';
+    }
+    if (!S.seen) {
+      $('#bannerslot').innerHTML = '<div class="banner"><div class="bx">' +
+        '<p>照片、笔记、勾选都只存在这台手机上。用 Safari 打开的话，先点分享 →「添加到主屏幕」，从主屏进来用；' +
+        '相机和麦克风在第一次用到时会各弹一次系统询问，允许就行。逛完在「手记」里导出参观志。</p>' +
+        '<button data-cmd="banner-ok">知道了</button></div></div>';
+    }
+    syncHd();
+    if (navigator.storage && navigator.storage.persist) {
+      navigator.storage.persist().catch(function () {});
+    }
+    if (IS_HTTP && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(function () {
+        swState = 'active';
+      }).catch(function () {
+        swState = 'fail';
+      });
+    }
+  });
+}
+boot();
+
+})();
+</script>
+</body>
+</html>
