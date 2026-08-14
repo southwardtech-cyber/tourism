@@ -285,6 +285,9 @@ const MUSEUM = {
     ]
   },
 
+  /* 拼音首字母表：只覆盖本馆名称字段出现的字，换馆随数据一起换（7.6） */
+  pyRaw: '一y三s上s下x与y丞c严y之z九j云y五w井j人r仓c佛f俑y像x元y兵b具j典d兽s农n凤f出c列l制z勒l北b千q华h单d原y古g史s君j含h周z唐t商s器q国g土t坊f型x城c塔t墓m墙q壳k壶h复f大d天t太t奇q守s安a宝b宫g家j寺s寻x封f小x展z巷x年n并b弥m强q当d形x彩c抹m料l新x明m晨c暑s期q杨y杯b椁g槐h模m橘j永y汉h沉c泥n浸j湾w灯d灶z炉l点d玉y玻b瑞r璃l瓦w甲j的d盂y盉h相x眼y石s磨m福f秦q空k符f类l纹w组z缝f羊y群q胄z胡h腾t舞w荐j莽m萄t葡p董d蓝l虎h蚌b行x裂l西x贝b足z踪z身s这z迷m迹j造z道d那n郡j釉y金j鎏l钟z钦q铁t铜t锺z镜j长c阵z陀t陶t雁y青q餮t饕t饰s首s马m驮t骡l高g鬲l鸟n鼎d齐q',
+
   /* 页脚 */
   notes: [
     '出发前：公众号「西安博物院」确认今天下午的票（周六暑期日限 1.5 万，13:00 时段最热；约不上就到门口扫码现约，旺季不保证）。',
@@ -859,7 +862,7 @@ body.kb .bar { display:none; }
   <div class="panel">
     <button class="grip" data-cmd="close" aria-label="收起"><i></i></button>
     <div class="shead"><h2>搜索</h2><span class="sm">展品 · 反直觉 · 速查，全离线</span></div>
-    <div class="srch"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="M12.5 12.5l4.5 4.5"/></svg><input id="srchin" type="search" placeholder="名称、看点、标签……" autocomplete="off"></div>
+    <div class="srch"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="M12.5 12.5l4.5 4.5"/></svg><input id="srchin" type="search" placeholder="名称、看点、标签 · 拼音首字母（tkm）" autocomplete="off"></div>
     <div class="sbody sres" id="srchbody"><p class="snone">看到一件东西不确定在不在清单上，输进来，三秒有答案。</p></div>
   </div>
 </section>
@@ -1957,8 +1960,24 @@ function renderIns() {
   $('#insbody').innerHTML = out.join('');
 }
 
-/* ================= 搜索 ================= */
+/* ================= 搜索 =================
+   汉字子串匹配全字段；纯字母输入额外匹配名称的拼音首字母（tkm → 腾空马）。 */
 var IDX = [];
+var PYMAP = {};
+(function () {
+  var s = MUSEUM.pyRaw || '';
+  for (var i = 0; i + 1 < s.length; i += 2) PYMAP[s[i]] = s[i + 1];
+})();
+function pyInit(s) {
+  var out = '';
+  s = String(s || '');
+  for (var i = 0; i < s.length; i++) {
+    var ch = s[i];
+    if (PYMAP[ch]) out += PYMAP[ch];
+    else if (/[a-zA-Z0-9]/.test(ch)) out += ch.toLowerCase();
+  }
+  return out;
+}
 function buildIndex() {
   IDX = [];
   ORDER.forEach(function (id) {
@@ -1966,13 +1985,13 @@ function buildIndex() {
     var hay = [it.nm, it.sub, it.era, it.why, it.look, it.twist,
       (it.warn || []).join(' '), (it.tags || []).map(function (t) { return TAGNAME[t]; }).join(' '),
       it.treasure ? '镇馆之宝' : '', it.conf === 'verify' ? '待确认' : ''].join(' ').toLowerCase();
-    IDX.push({ k:'item', id:id, nm:it.nm, hay:hay });
+    IDX.push({ k:'item', id:id, nm:it.nm, hay:hay, pyi:pyInit(it.nm) + ' ' + pyInit(it.sub) });
   });
   S.custom.forEach(function (x) {
-    IDX.push({ k:'item', id:x.id, nm:x.nm, hay:(x.nm + ' 自建').toLowerCase() });
+    IDX.push({ k:'item', id:x.id, nm:x.nm, hay:(x.nm + ' 自建').toLowerCase(), pyi:pyInit(x.nm) });
   });
   MUSEUM.insights.forEach(function (r) {
-    IDX.push({ k:'ins', id:r.id, link:r.link, nm:r.nm, hay:(r.nm + ' ' + r.seem + ' ' + r.twist + ' ' + r.act).toLowerCase() });
+    IDX.push({ k:'ins', id:r.id, link:r.link, nm:r.nm, hay:(r.nm + ' ' + r.seem + ' ' + r.twist + ' ' + r.act).toLowerCase(), pyi:pyInit(r.nm) });
   });
   MUSEUM.quickref.terms.forEach(function (tm) {
     IDX.push({ k:'q', id:tm.t, nm:tm.t, hay:(tm.t + ' ' + tm.py + ' ' + tm.d).toLowerCase(), d:tm.d });
@@ -1997,7 +2016,11 @@ function renderSearch() {
     return;
   }
   var KN = { item:'条目', ins:'反直觉', q:'速查' };
-  var hits = IDX.filter(function (e) { return e.hay.indexOf(q) >= 0; }).slice(0, 40);
+  var isAscii = /^[a-z0-9]+$/.test(q);
+  var hits = IDX.filter(function (e) {
+    if (e.hay.indexOf(q) >= 0) return true;
+    return isAscii && e.pyi && e.pyi.indexOf(q) >= 0;
+  }).slice(0, 40);
   if (!hits.length) {
     body.innerHTML = '<p class="snone">清单里没有——可能真不在展，也可能值得去「手记」里记一件。</p>';
     return;
@@ -2007,9 +2030,10 @@ function renderSearch() {
     if (e.k === 'item') { cmd = 'jump'; data = e.id; }
     else if (e.k === 'ins') { cmd = e.link ? 'jump' : 'sheet-ins'; data = e.link || ''; }
     else { cmd = 'jumpq'; data = e.id; }
+    var snip = snippet(e.hay, q);
     return '<button data-cmd="' + cmd + '" data-id="' + esc(data) + '">' +
       '<span class="rk">' + KN[e.k] + '</span><span class="rn">' + esc(e.nm) + '</span>' +
-      '<span class="rs">' + snippet(e.hay, q) + '</span></button>';
+      (snip ? '<span class="rs">' + snip + '</span>' : '') + '</button>';
   }).join('');
 }
 function visualCollapseItem(id) {
