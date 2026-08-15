@@ -829,6 +829,8 @@ body.lock { overflow:hidden; }
   background:#000; overflow:hidden;
 }
 #intro.leave { background:transparent; pointer-events:none; transition:background .5s ease; }
+#glbg { position:absolute; inset:0; width:100%; height:100%; }
+#intro.leave #glbg { opacity:0; transition:opacity .35s ease; }
 #intro #mm { position:absolute; left:50%; top:11vh; transform:translateX(-50%); height:auto; }
 #mm .gmain { transition:opacity .8s ease; }
 #mm.bg .gmain { opacity:.16; }
@@ -1222,12 +1224,14 @@ function hydrate() {
   return Promise.all([
     dbGet('state', 'checks'), dbGet('state', 'found'), dbGet('state', 'seen'),
     dbAll('notes'), dbAll('media'), dbAll('doubts'), dbAll('custom'),
-    dbGet('state', 'sound')
+    dbGet('state', 'sound'), dbGet('state', 'darkroom'), dbGet('state', 'shake')
   ]).then(function (r) {
     S.checks = r[0] || {};
     S.found = r[1] || {};
     S.seen = !!r[2];
     SOUND.pref = r[7] === 'on' || r[7] === 'off' ? r[7] : null;
+    DARKROOM = r[8] === 'on';
+    SHAKE.pref = r[9] === 'on' ? 'on' : null;
     S.notes = {};
     r[3].forEach(function (n) { S.notes[n.id] = n; });
     S.media = r[4].sort(function (a, b) { return a.t - b.t; });
@@ -1980,6 +1984,51 @@ function setBellPref(v) {
   if (card) card.parentNode.removeChild(card);
 }
 
+/* ================= 摇一摇（7.11）：随机推一件没看的 =================
+   iOS 的动作权限要用户手势才能申请，所以按钮兜底：点了直接推一件，顺手办权限。 */
+var SHAKE = { pref:null, listening:false, lx:null, ly:0, lz:0, cool:0 };
+function shakeRandom() {
+  var pool = ORDER.concat(S.custom.map(function (x) { return x.id; }))
+    .filter(function (id) { return !S.checks[id]; });
+  if (!pool.length) { toast('全看完了——没有可推的了'); return; }
+  var id = pool[Math.floor(Math.random() * pool.length)];
+  toast('下一件：' + nameOf(id));
+  jumpToItem(id);
+}
+function onMotion(e) {
+  var a = e.accelerationIncludingGravity;
+  if (!a || a.x == null) return;
+  if (SHAKE.lx === null) { SHAKE.lx = a.x; SHAKE.ly = a.y; SHAKE.lz = a.z; return; }
+  var d = Math.abs(a.x - SHAKE.lx) + Math.abs(a.y - SHAKE.ly) + Math.abs(a.z - SHAKE.lz);
+  SHAKE.lx = a.x; SHAKE.ly = a.y; SHAKE.lz = a.z;
+  var now = Date.now();
+  if (d > 28 && now - SHAKE.cool > 2200) {
+    SHAKE.cool = now;
+    shakeRandom();
+  }
+}
+function attachShake() {
+  if (SHAKE.listening) return;
+  SHAKE.listening = true;
+  window.addEventListener('devicemotion', onMotion);
+}
+function shakeGo() {
+  shakeRandom();
+  if (SHAKE.pref !== 'on') {
+    SHAKE.pref = 'on';
+    dbPut('state', 'on', 'shake');
+  }
+  var DM = window.DeviceMotionEvent;
+  if (!DM || SHAKE.listening) return;
+  if (DM.requestPermission) {
+    DM.requestPermission().then(function (st) {
+      if (st === 'granted') attachShake();
+    }).catch(function () {});
+  } else {
+    attachShake();
+  }
+}
+
 /* ================= 层栈：返回手势接管 =================
    每开一层（抽屉/灯箱/条目展开）pushState 一条；popstate 关最上层。
    iOS 边缘右滑 = 关当前层，不会退出应用。
@@ -2398,10 +2447,16 @@ function renderMine() {
     });
   }
   out.push('</div>');
-  out.push('<div class="msec"><h3>钟声</h3>' +
+  out.push('<div class="msec"><h3>现场</h3>' +
     '<button class="mrow" data-cmd="bell-toggle"><span>雁塔晨钟：' + (SOUND.pref === 'on' ? '开' : '关') + '</span>' +
-    '<small>打勾轻响一记 · 合成音，零资源</small></button>' +
+    '<small>打勾轻响一记 · 合成音</small></button>' +
+    '<button class="mrow" data-cmd="darkroom-toggle"><span>暗房：' + (DARKROOM ? '开' : '关') + '</span>' +
+    '<small>低照度红光 · 护暗适应</small></button>' +
+    '<button class="mrow" data-cmd="shake-go"><span>下一件看啥</span>' +
+    '<small>摇一摇，或点这里</small></button>' +
     (SOUND.pref === 'on' ? '<p class="mhint">手机侧边的静音拨片开着时，iOS 可能整段不响。</p>' : '') +
+    (window.DeviceMotionEvent && DeviceMotionEvent.requestPermission && !SHAKE.listening
+      ? '<p class="mhint">iOS 第一次点「下一件看啥」会弹动作权限，允许之后摇手机就行。</p>' : '') +
     '</div>');
   var st = offlineStatusText();
   out.push('<div class="msec"><h3>导出 · App 是工具，参观志才是纪念品</h3>' +
@@ -2468,6 +2523,49 @@ function anchorSave(blob, name) {
     a.parentNode.removeChild(a);
   }, 4000);
 }
+function jDur(ms) {
+  var m = Math.round(ms / 60000);
+  if (ms < 60000) return Math.round(ms / 1000) + ' 秒';
+  if (m < 60) return m + ' 分钟';
+  return Math.floor(m / 60) + ' 小时 ' + (m % 60) + ' 分';
+}
+function jItemRich(id, byItem) {
+  var o = [];
+  (byItem[id] || []).forEach(function (m) {
+    if (m.kind === 'photo') o.push('<img src="' + m.data + '" alt="">');
+    else o.push('<audio controls preload="none" src="' + m.data + '"></audio>');
+  });
+  if (S.notes[id] && S.notes[id].text) o.push('<p class="note">' + esc(S.notes[id].text) + '</p>');
+  S.doubts.filter(function (d) { return d.item === id; }).forEach(function (d) {
+    o.push('<p class="dq">？ ' + tfmt(d.t) + (d.txt ? ' · ' + esc(d.txt) : ' · 存疑待查') + '</p>');
+  });
+  return o.join('');
+}
+/* 参观志里的动线回放脚本（7.7）：光点按真实顺序走，卡片同步滚动 */
+var JR_SRC =
+"(function(){" +
+"var el=document.getElementById('route');if(!el)return;" +
+"var D=JSON.parse(el.textContent).stops;" +
+"var dot=document.getElementById('jrdot');" +
+"var btn=document.getElementById('jrplay');" +
+"if(!dot||!btn)return;" +
+"var timer=null,idx=-1,playing=false;" +
+"function move(i){var s=D[i];if(s.x==null)return;" +
+"dot.style.transition='transform '+s.dur+'s ease-in-out';" +
+"dot.style.transform='translate('+s.x+'px,'+s.y+'px)';}" +
+"function mark(i){var p=document.querySelector('.jrcard.cur');if(p)p.classList.remove('cur');" +
+"var c=document.getElementById('jr-'+i);" +
+"if(c){c.classList.add('cur');c.scrollIntoView({block:'center',behavior:'smooth'});}}" +
+"function fin(done){playing=false;clearTimeout(timer);btn.textContent=done?'再看一遍':'播放动线';}" +
+"function step(){idx++;if(idx>=D.length){fin(true);return;}" +
+"move(idx);mark(idx);timer=setTimeout(step,D[idx].dur*1000+400);}" +
+"function play(){if(playing){fin(false);return;}" +
+"playing=true;btn.textContent='停止';idx=-1;" +
+"var s0=null;for(var i=0;i<D.length;i++){if(D[i].x!=null){s0=D[i];break;}}" +
+"if(s0){dot.style.transition='none';dot.style.transform='translate('+s0.x+'px,'+s0.y+'px)';}" +
+"dot.style.opacity=1;void dot.getBoundingClientRect();timer=setTimeout(step,350);}" +
+"btn.addEventListener('click',play);" +
+"})();";
 var JCSS =
   'body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif;background:#FDFCFA;color:#1C1A17;max-width:640px;margin:0 auto;padding:36px 22px 80px;font-size:16px;line-height:1.75;letter-spacing:.01em}' +
   '*{box-sizing:border-box;margin:0;padding:0}' +
@@ -2494,6 +2592,12 @@ var JCSS =
   '.dql time{color:#8A8578;font-size:12px;margin-right:10px;font-variant-numeric:tabular-nums}' +
   '.dql .x{color:#55514A;font-size:14px;margin-top:2px}' +
   'footer{margin-top:56px;padding-top:14px;border-top:1px solid #D8DCE2;font-size:12px;color:#8A8578;line-height:1.8}' +
+  '.route{margin:12px 0 8px;background:#F6F5F1;border-radius:10px;padding:12px}' +
+  '.jrctl{margin:0 0 16px}' +
+  '.jrctl button{border:1px solid #2B4BC8;color:#2B4BC8;background:none;border-radius:8px;padding:9px 22px;font-size:14px;cursor:pointer}' +
+  '.jrcard.cur{border-color:#2B4BC8;box-shadow:0 0 0 2px rgba(43,75,200,.18)}' +
+  '.dwell{font-size:12px;color:#8A8578;margin-left:10px;font-weight:400}' +
+  '.dwell.top{color:#B9893F;font-weight:600}' +
   '@media print{body{max-width:none;padding:0}}';
 function buildJournal() {
   return collectMediaB64().then(function (ms) {
@@ -2512,6 +2616,61 @@ function buildJournal() {
     h.push('<p class="sub">' + esc(MUSEUM.dateLabel) + ' · ' + esc(MUSEUM.hours) + '</p>');
     h.push('<p class="stats">看过 ' + nChecked + '/' + TOTAL + ' 件 · 反直觉 ' + Object.keys(S.found).length + '/' + MUSEUM.insights.length +
       ' · 照片 ' + nPhoto + ' 张 · 语音 ' + nAudio + ' 条 · 笔记 ' + nNote + ' 条 · 疑问 ' + S.doubts.length + ' 个</p></header>');
+
+    /* 动线回放（7.7）：勾选间隔=停留时长；光点按真实顺序走，照片笔记同步滚出 */
+    var seq = Object.keys(S.checks).map(function (id) { return { id:id, t:S.checks[id] }; })
+      .sort(function (a, b) { return a.t - b.t; });
+    if (seq.length) {
+      var stops = seq.map(function (s, i) {
+        var cust = S.custom.filter(function (x) { return x.id === s.id; })[0];
+        var cell = HERO.cells[s.id] || (cust && cust.cell) || null;
+        if (cell) { s.x = colX(cell[0]) + 16; s.y = rowY(cell[1]) + 11; }
+        s.dwell = i ? s.t - seq[i - 1].t : 0;
+        return s;
+      });
+      var topSet = {};
+      stops.map(function (s, i) { return i; })
+        .filter(function (i) { return i > 0; })
+        .sort(function (a, b) { return stops[b].dwell - stops[a].dwell; })
+        .slice(0, 3).forEach(function (i) { topSet[i] = true; });
+      var W2 = colX(HERO.cols - 1) + 32 + 6, H2 = rowY(HERO.rows - 1) + 22 + 6;
+      var P2 = HERO.palace;
+      var axX = (colX(HERO.cols / 2 - 1) + 32 + colX(HERO.cols / 2)) / 2;
+      var sv = [];
+      sv.push('<svg viewBox="0 0 ' + W2 + ' ' + H2 + '" style="width:100%;display:block">');
+      sv.push('<rect x="2.5" y="2.5" width="' + (W2 - 5) + '" height="' + (H2 - 5) + '" fill="none" stroke="#C9CEDA"/>');
+      sv.push('<rect x="' + colX(P2[0]) + '" y="' + rowY(P2[2]) + '" width="' + (colX(P2[1]) + 32 - colX(P2[0])) +
+        '" height="' + (rowY(P2[3]) + 22 - rowY(P2[2])) + '" fill="rgba(43,75,200,.05)" stroke="#C9CEDA"/>');
+      sv.push('<line x1="' + axX + '" y1="' + (rowY(P2[3]) + 22) + '" x2="' + axX + '" y2="' + (H2 - 3) + '" stroke="#C9CEDA"/>');
+      var pts = stops.filter(function (s) { return s.x != null; })
+        .map(function (s) { return s.x + ',' + s.y; });
+      if (pts.length > 1) sv.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="#2B4BC8" stroke-width="1.2" stroke-opacity=".3"/>');
+      stops.forEach(function (s, i) {
+        if (s.x == null) return;
+        if (topSet[i]) sv.push('<circle cx="' + s.x + '" cy="' + s.y + '" r="6" fill="none" stroke="#B9893F" stroke-width="1.5"/>');
+        sv.push('<circle cx="' + s.x + '" cy="' + s.y + '" r="2.6" fill="#2B4BC8" fill-opacity=".55"/>');
+      });
+      sv.push('<circle id="jrdot" cx="0" cy="0" r="5" fill="#2B4BC8" style="opacity:0"/>');
+      sv.push('</svg>');
+      h.push('<h2>动线回放 · 你在哪儿走不动了</h2>');
+      h.push('<div class="route">' + sv.join('') + '</div>');
+      h.push('<div class="jrctl"><button id="jrplay" type="button">播放动线</button></div>');
+      stops.forEach(function (s, i) {
+        var dw = i ? '<span class="dwell' + (topSet[i] ? ' top' : '') + '">停留 ' + jDur(s.dwell) +
+          (topSet[i] ? ' · 走不动了' : '') + '</span>' : '';
+        h.push('<div class="itb jrcard" id="jr-' + i + '"><h3>' + (i + 1) + ' · ' + esc(nameOf(s.id)) + dw + '</h3>');
+        h.push('<p class="tm">' + tfmt(s.t) + ' 看过</p>');
+        h.push(jItemRich(s.id, byItem));
+        h.push('</div>');
+      });
+      var rd = stops.map(function (s, i) {
+        return { x: s.x == null ? null : s.x, y: s.y == null ? null : s.y,
+          dur: i === 0 ? 1 : Math.min(3, Math.max(0.6, 0.5 + Math.log(1 + s.dwell / 60000) * 1.1)) };
+      });
+      h.push('<script id="route" type="application/json">' +
+        JSON.stringify({ stops: rd }).replace(/</g, '\\u003c') + '<\/script>');
+      h.push('<script>' + JR_SRC + '<\/script>');
+    }
 
     /* 动线 */
     var ev = [];
@@ -2545,25 +2704,16 @@ function buildJournal() {
       });
     }
 
-    /* 条目档案：有照片/语音/笔记/疑问的 */
+    /* 档案：没打勾但留了记录的（打过勾的已在回放卡片里） */
     var rich = ORDER.concat(S.custom.map(function (x) { return x.id; })).filter(function (id) {
-      return (byItem[id] && byItem[id].length) || (S.notes[id] && S.notes[id].text) ||
-        S.doubts.some(function (d) { return d.item === id; });
+      return !S.checks[id] && ((byItem[id] && byItem[id].length) ||
+        (S.notes[id] && S.notes[id].text) ||
+        S.doubts.some(function (d) { return d.item === id; }));
     });
     if (rich.length) {
-      h.push('<h2>逐件档案</h2>');
+      h.push('<h2>档案 · 没打勾但留了记录</h2>');
       rich.forEach(function (id) {
-        h.push('<div class="itb"><h3>' + esc(nameOf(id)) + '</h3>');
-        if (S.checks[id]) h.push('<p class="tm">' + tfmt(S.checks[id]) + ' 看过</p>');
-        (byItem[id] || []).forEach(function (m) {
-          if (m.kind === 'photo') h.push('<img src="' + m.data + '" alt="">');
-          else h.push('<audio controls preload="none" src="' + m.data + '"></audio>');
-        });
-        if (S.notes[id] && S.notes[id].text) h.push('<p class="note">' + esc(S.notes[id].text) + '</p>');
-        S.doubts.filter(function (d) { return d.item === id; }).forEach(function (d) {
-          h.push('<p class="dq">？ ' + tfmt(d.t) + (d.txt ? ' · ' + esc(d.txt) : ' · 存疑待查') + '</p>');
-        });
-        h.push('</div>');
+        h.push('<div class="itb"><h3>' + esc(nameOf(id)) + '</h3>' + jItemRich(id, byItem) + '</div>');
       });
     }
 
@@ -2728,6 +2878,8 @@ document.addEventListener('click', function (ev) {
       });
       break;
     }
+    case 'darkroom-toggle': setDarkroom(!DARKROOM); renderMine(); break;
+    case 'shake-go': shakeGo(); break;
     case 'bell-yes': setBellPref('on'); soundCtx(); bellCheck(); break;
     case 'bell-no': setBellPref('off'); break;
     case 'bell-toggle': {
@@ -2900,22 +3052,120 @@ function mixHex(a, b, t) {
   return s;
 }
 var tcMeta = document.querySelector('meta[name="theme-color"]');
+/* 暗房（7.8）：低照度红光，保暗适应。开着时时钟配色让位。 */
+var DARKROOM = false;
+var DR_PAL = { bg:'#150807', card:'#1E0D0B', 'float':'#27110F',
+  ink:'#C67B66', ink2:'#9A5B4B', ink3:'#6E3D32',
+  silver:'#A06A58', amber:'#A96A3F',
+  cobalt:'#C2503A', 'cobalt-hi':'#D46A50', must:'#C67B66' };
 function applyClock() {
-  var d = new Date();
-  var t = coolness(d.getHours() + d.getMinutes() / 60);
   var st = document.documentElement.style;
-  for (var k in DAYNIGHT.warm) {
-    st.setProperty('--' + k, mixHex(DAYNIGHT.warm[k], DAYNIGHT.deep[k], t));
+  var pick;
+  if (DARKROOM) {
+    pick = function (k) { return DR_PAL[k]; };
+  } else {
+    var d = new Date();
+    var t = coolness(d.getHours() + d.getMinutes() / 60);
+    pick = function (k) { return mixHex(DAYNIGHT.warm[k], DAYNIGHT.deep[k], t); };
   }
-  var ink = hexRGB(mixHex(DAYNIGHT.warm.ink, DAYNIGHT.deep.ink, t));
+  for (var k in DAYNIGHT.warm) st.setProperty('--' + k, pick(k));
+  var ink = hexRGB(pick('ink'));
   st.setProperty('--lift', 'rgba(' + ink.join(',') + ',.055)');
   st.setProperty('--lift2', 'rgba(' + ink.join(',') + ',.10)');
-  var sv = hexRGB(mixHex(DAYNIGHT.warm.silver, DAYNIGHT.deep.silver, t));
+  var sv = hexRGB(pick('silver'));
   st.setProperty('--grid', 'rgba(' + sv.join(',') + ',.34)');
-  if (tcMeta) tcMeta.setAttribute('content', mixHex(DAYNIGHT.warm.bg, DAYNIGHT.deep.bg, t));
+  if (tcMeta) tcMeta.setAttribute('content', pick('bg'));
 }
 applyClock();
 setInterval(applyClock, 60000);
+function setDarkroom(on) {
+  DARKROOM = on;
+  dbPut('state', on ? 'on' : 'off', 'darkroom');
+  applyClock();
+}
+
+/* ================= 釉面 shader（7.4，只在序里跑，进馆即销毁） =================
+   手写 GLSL：simplex 两层极低频流动，钴蓝压在近黑底上，像釉面下的窑变。 */
+var GLBG = { cv:null, gl:null, raf:0 };
+var GL_FRAG = [
+  'precision mediump float;',
+  'uniform float t;uniform vec2 r;',
+  'vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}',
+  'float snoise(vec2 v){',
+  'const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);',
+  'vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);',
+  'vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);',
+  'vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);',
+  'vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));',
+  'vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);',
+  'm=m*m;m=m*m;',
+  'vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;',
+  'm*=1.79284291400159-0.85373472095314*(a0*a0+h*h);',
+  'vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;',
+  'return 130.0*dot(m,g);}',
+  'void main(){',
+  'vec2 uv=gl_FragCoord.xy/r;',
+  'vec2 p=uv*vec2(r.x/r.y,1.0)*1.7;',
+  'float n=snoise(p*1.1+vec2(t*0.7,t*0.45))*0.6+snoise(p*2.4-vec2(t*0.35,t*0.6))*0.4;',
+  'n=smoothstep(-0.3,0.9,n);',
+  'float vg=smoothstep(1.3,0.35,distance(uv,vec2(0.5,0.45)));',
+  'vec3 col=vec3(0.243,0.4,0.918)*n*0.14*vg;',
+  'gl_FragColor=vec4(col,1.0);}'
+].join('\n');
+function startShader() {
+  if (RM_Q && RM_Q.matches) return;
+  try {
+    var cv = document.createElement('canvas');
+    cv.id = 'glbg';
+    var gl = cv.getContext('webgl', { alpha:false, antialias:false, powerPreference:'low-power' });
+    if (!gl) return;
+    function sh(type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error('shader');
+      return s;
+    }
+    var prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, GL_FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error('link');
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'a');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var uT = gl.getUniformLocation(prog, 't');
+    var uR = gl.getUniformLocation(prog, 'r');
+    var w = Math.max(2, Math.floor(window.innerWidth / 2));
+    var h = Math.max(2, Math.floor(window.innerHeight / 2));   // 半分辨率足够
+    cv.width = w; cv.height = h;
+    gl.viewport(0, 0, w, h);
+    gl.uniform2f(uR, w, h);
+    introEl.insertBefore(cv, introEl.firstChild);
+    GLBG.cv = cv; GLBG.gl = gl;
+    var t0 = performance.now();
+    (function loop() {
+      if (!GLBG.gl) return;
+      gl.uniform1f(uT, (performance.now() - t0) / 1000 * 0.05);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      GLBG.raf = requestAnimationFrame(loop);
+    })();
+  } catch (e) { stopShader(); }
+}
+function stopShader() {
+  if (GLBG.raf) cancelAnimationFrame(GLBG.raf);
+  GLBG.raf = 0;
+  if (GLBG.gl) {
+    var ext = GLBG.gl.getExtension('WEBGL_lose_context');
+    if (ext) ext.loseContext();
+  }
+  if (GLBG.cv && GLBG.cv.parentNode) GLBG.cv.parentNode.removeChild(GLBG.cv);
+  GLBG.cv = null;
+  GLBG.gl = null;
+}
 
 /* ================= 序 · 开场 + FLIP 转场（7.13 第 8 项） =================
    只在零勾选时播（地铁上/排队时=还没开始逛）；馆内重开秒进展厅。
@@ -3000,6 +3250,7 @@ function setupIntro() {
     '<button class="skip" aria-label="跳过开场动画">跳过</button>';
   document.body.appendChild(introEl);
   introEl.insertBefore(mmEl, introEl.firstChild);
+  startShader();
   mmEl.classList.add('cine');
   prepDraw();
   buildMarks();
@@ -3050,6 +3301,7 @@ function morphHandoff() {
 function finalizeHall() {
   if (hallDone) return;
   hallDone = true;
+  stopShader();
   mmEl.classList.remove('fly');
   mmEl.style.cssText = '';
   $('#mmslot').appendChild(mmEl);
@@ -3110,6 +3362,8 @@ function boot() {
   $('#tl-l').textContent = MUSEUM.name + ' · ' + MUSEUM.dateShort;
   $('#tl-r').textContent = MUSEUM.hours;
   openDB().then(hydrate).then(function () {
+    if (DARKROOM) applyClock();
+    if (SHAKE.pref === 'on' && window.DeviceMotionEvent && !DeviceMotionEvent.requestPermission) attachShake();
     buildMinimap();
     renderList();
     renderFooter();
