@@ -831,7 +831,7 @@ body.lock { overflow:hidden; }
 #intro.leave { background:transparent; pointer-events:none; transition:background .5s ease; }
 #glbg { position:absolute; inset:0; width:100%; height:100%; }
 #intro.leave #glbg { opacity:0; transition:opacity .35s ease; }
-#intro #mm { position:absolute; left:50%; top:11vh; transform:translateX(-50%); height:auto; }
+#intro #mm { position:absolute; left:50%; top:9%; transform:translateX(-50%); height:auto; }
 #mm .gmain { transition:opacity .8s ease; }
 #mm.bg .gmain { opacity:.16; }
 #mm .marks { transition:opacity .4s ease; }
@@ -862,7 +862,7 @@ body.lock { overflow:hidden; }
 
 /* 分镜 5：腾空马线稿自绘，袍子最后填钴蓝 */
 #horse {
-  position:absolute; left:50%; top:29vh;
+  position:absolute; left:50%; top:27%;
   width:min(78vw, 300px); height:calc(min(78vw, 300px) * .7619);
   transform:translateX(-50%) rotate(-7deg);
   transition:opacity .55s ease, transform .6s ease;
@@ -873,22 +873,29 @@ body.lock { overflow:hidden; }
 @keyframes draw { to { stroke-dashoffset:0; } }
 @keyframes robein { to { fill-opacity:.92; } }
 
-/* 分镜 6-7：标题字距收拢 + 进馆 */
+/* 分镜 6-7：标题字距收拢 + 进馆
+   底部锚定的流式组：标题/副题/按钮排成一列，
+   不管 iOS 工具栏怎么伸缩、vh 怎么算，三者物理上不可能重叠。 */
+.ibot {
+  position:absolute; left:0; right:0;
+  bottom:calc(4% + env(safe-area-inset-bottom, 0px));
+  display:flex; flex-direction:column; align-items:center;
+  padding:0 16px; text-align:center;
+}
 .ititle {
-  position:absolute; left:0; right:0; top:67vh;
-  text-align:center; font-size:20px; font-weight:400; color:#E8E2D3;
+  font-size:20px; font-weight:400; color:#E8E2D3;
   letter-spacing:.08em; white-space:nowrap;
   animation:titlein 1.15s cubic-bezier(.2,.6,.2,1) 11s both;
 }
 @keyframes titlein { from { opacity:0; letter-spacing:.55em; } to { opacity:1; letter-spacing:.08em; } }
 .isub {
-  position:absolute; left:0; right:0; top:calc(67vh + 44px);
-  text-align:center; font-size:13px; letter-spacing:.42em; text-indent:.42em; color:#6E6759;
+  margin-top:12px;
+  font-size:13px; letter-spacing:.42em; text-indent:.42em; color:#6E6759;
   animation:fadein .8s ease 11.7s both;
 }
 @keyframes fadein { from { opacity:0; } to { opacity:1; } }
 .enter {
-  position:absolute; left:50%; bottom:calc(6vh + env(safe-area-inset-bottom, 0px));
+  margin-top:28px;
   width:176px; min-height:52px;
   display:flex; align-items:center; justify-content:center;
   border-radius:var(--r-card);
@@ -897,8 +904,8 @@ body.lock { overflow:hidden; }
   animation:btnin .7s cubic-bezier(.2,.7,.3,1) 11.85s both;
 }
 @keyframes btnin {
-  from { opacity:0; visibility:hidden; transform:translate(-50%, 14px); }
-  to   { opacity:1; visibility:visible; transform:translate(-50%, 0); }
+  from { opacity:0; visibility:hidden; transform:translateY(14px); }
+  to   { opacity:1; visibility:visible; transform:translateY(0); }
 }
 .skip {
   position:absolute; top:calc(8px + env(safe-area-inset-top, 0px)); right:8px;
@@ -916,7 +923,7 @@ body.lock { overflow:hidden; }
 #intro.settle #horse .robe { fill-opacity:.92 !important; }
 #intro.settle .ititle { animation:none !important; opacity:1; letter-spacing:.08em; }
 #intro.settle .isub { animation:none !important; opacity:1; }
-#intro.settle .enter { animation:none !important; opacity:1; visibility:visible; transform:translate(-50%, 0); }
+#intro.settle .enter { animation:none !important; opacity:1; visibility:visible; transform:none; }
 
 /* 转场：同一个 SVG 连续变形收进顶栏（FLIP，只动 transform） */
 #mm.fly { transition:transform .56s cubic-bezier(.3,.75,.25,1); }
@@ -3217,7 +3224,7 @@ function buildHorse() {
     if (j === paths.length - 1) p.setAttribute('class', 'robe');
     horse.appendChild(p);
   });
-  introEl.insertBefore(horse, introEl.querySelector('.ititle'));
+  introEl.insertBefore(horse, introEl.querySelector('.ibot'));
   var RM = RM_Q && RM_Q.matches;
   $$('path', horse).forEach(function (p, j) {
     var L = Math.ceil(p.getTotalLength());
@@ -3244,9 +3251,11 @@ function setupIntro() {
   introEl = document.createElement('div');
   introEl.id = 'intro';
   introEl.innerHTML =
-    '<p class="ititle">' + esc(HERO.intro.title) + '</p>' +
-    '<p class="isub">' + esc(HERO.intro.sub) + '</p>' +
-    '<button class="enter">进馆</button>' +
+    '<div class="ibot">' +
+      '<p class="ititle">' + esc(HERO.intro.title) + '</p>' +
+      '<p class="isub">' + esc(HERO.intro.sub) + '</p>' +
+      '<button class="enter">进馆</button>' +
+    '</div>' +
     '<button class="skip" aria-label="跳过开场动画">跳过</button>';
   document.body.appendChild(introEl);
   introEl.insertBefore(mmEl, introEl.firstChild);
